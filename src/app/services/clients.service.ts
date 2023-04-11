@@ -1,17 +1,20 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { ClientList } from '../models/clientList.model';
+import { HttpService } from './http.service';
+
+export interface HttpServiceResponse<T> {
+  data: T;
+  status: number;
+}
 
 @Injectable({
   providedIn: 'root',
 })
 export class ClientsService {
-  path: string = 'https://localhost:44336/';
+  constructor(private http: HttpService) {}
 
-  constructor(private http: HttpClient) {}
-
-  getClients() {
-    this.http.get(this.path + 'clients').subscribe((x) => {
-      console.log(x);
-    });
+  async getAllClients() {
+    const response: ClientList[] = await this.http.get<ClientList>('/clients');
+    return response;
   }
 }
