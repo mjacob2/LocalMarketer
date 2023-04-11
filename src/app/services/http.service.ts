@@ -23,10 +23,12 @@ export class HttpService {
           'Content-Type': 'application/json',
         },
       });
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
+
       const data: ApiResponse<T> = await response.json();
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Message: ${data.error}`);
+      }
 
       return data.responseData;
     } catch (error) {

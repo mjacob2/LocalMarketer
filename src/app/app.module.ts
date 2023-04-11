@@ -4,7 +4,6 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login/login.component';
 import { ClientsModule } from './clients/clients.module';
 import { ToDosModule } from './to-dos/to-dos.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -14,9 +13,10 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatListModule } from '@angular/material/list';
+import { AuthModule } from './auth/login.module';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -30,6 +30,7 @@ import { MatListModule } from '@angular/material/list';
     MatNativeDateModule,
     MatListModule,
     HttpClientModule,
+    AuthModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

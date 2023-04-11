@@ -1,0 +1,23 @@
+<form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
+    <div class="example-container">
+        <mat-form-field appearance="fill">
+            <mat-label>E-mail</mat-label>
+            <input matInput ngModel name="email" placeholder="pat@example.com" type="email">
+            <mat-error *ngIf="email.invalid">{{"wpisz prawodłowy e-mail"}}</mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field appearance="fill">
+            <mat-label>Hasło</mat-label>
+            <input required matInput ngModel name="password" [type]="hide ? 'password' : 'text'">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" type="submit">Zaloguj</button>
+
+    </div>
+
+</form>
