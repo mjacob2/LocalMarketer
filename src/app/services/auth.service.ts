@@ -25,13 +25,10 @@ export class AuthService {
     });
   }
 
-  login(email: string, password: string) {
-    let hh = this.http.post<User>('/login', {
+  async login(email: string, password: string) {
+    await this.http.post<User>('/login', {
       email: email,
       password: password,
     });
-
-    console.log(hh);
-    return hh;
   }
 }

@@ -1,5 +1,5 @@
-<form #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
-    <div class="example-container">
+<form style="width: 300px; margin: 150px auto;" #authForm="ngForm" (ngSubmit)="onSubmit(authForm)">
+    <div class="loginContainer">
         <mat-form-field appearance="fill">
             <mat-label>E-mail</mat-label>
             <input matInput ngModel name="email" placeholder="pat@example.com" type="email">
@@ -10,14 +10,18 @@
         <mat-form-field appearance="fill">
             <mat-label>Hasło</mat-label>
             <input required matInput ngModel name="password" [type]="hide ? 'password' : 'text'">
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+            <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                 [attr.aria-pressed]="hide">
                 <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
         </mat-form-field>
 
+        <mat-card class="errorCard" *ngIf="errorMessage">
+            <mat-card-content style="color: aliceblue;">{{errorMessage}}</mat-card-content>
+        </mat-card>
+
         <button mat-raised-button color="primary" type="submit">Zaloguj</button>
 
-    </div>
 
+    </div>
 </form>

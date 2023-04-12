@@ -11,6 +11,7 @@ export class LoginComponent {
   constructor(private authhttp: AuthService) {}
   hide = true;
   email = new FormControl('', [Validators.required, Validators.email]);
+  errorMessage: string = '';
 
   getErrorMessage() {
     if (this.email.hasError('required')) {
@@ -24,6 +25,14 @@ export class LoginComponent {
     const email = form.value.email;
     const password = form.value.password;
 
-    this.authhttp.login(email, password);
+    this.authhttp
+      .login(email, password)
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        this.errorMessage = error.message;
+        console.log(error.message);
+      });
   }
 }

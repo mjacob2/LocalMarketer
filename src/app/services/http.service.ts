@@ -15,25 +15,21 @@ export class HttpService {
   constructor() {}
 
   async request<T>(method: string, url: string, body?: any): Promise<T[]> {
-    try {
-      const response = await fetch(`${this.baseUrl}${url}`, {
-        method,
-        body: body ? JSON.stringify(body) : undefined,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+    const response = await fetch(`${this.baseUrl}${url}`, {
+      method,
+      body: body ? JSON.stringify(body) : undefined,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
 
-      const data: ApiResponse<T> = await response.json();
+    const data: ApiResponse<T> = await response.json();
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! Message: ${data.error}`);
-      }
-
-      return data.responseData;
-    } catch (error) {
-      throw new Error(`Failed to fetch data: ${error}`);
+    if (!response.ok) {
+      throw new Error(`${data.error}`);
     }
+
+    return data.responseData;
   }
 
   async get<T>(url: string): Promise<T[]> {
