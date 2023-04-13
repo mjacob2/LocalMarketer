@@ -5,7 +5,7 @@ import { AuthService } from './services/auth.service';
 @Component({
   selector: 'app-root',
   template: ` <router-outlet></router-outlet> `,
-  styleUrls: ['./app.component.scss'],
+  styleUrls: [],
 })
 export class AppComponent implements OnDestroy {
   title = 'LocalMarketer';

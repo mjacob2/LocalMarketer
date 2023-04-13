@@ -13,6 +13,11 @@ const routes: Routes = [
     component: TaskBarLayoutComponent,
     children: [
       {
+        path: '',
+        redirectTo: '/clients',
+        pathMatch: 'full',
+      },
+      {
         path: 'clients',
         component: ClientsTableComponent,
       },
