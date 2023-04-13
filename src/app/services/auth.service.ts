@@ -1,11 +1,19 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Roles, User } from '../models/user.model';
+import { User } from '../models/user.model';
 import { HttpService } from './http.service';
+import { LocalStorageService } from './local-storage.service';
+import { Buffer } from 'buffer';
+import { Router } from '@angular/router';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  constructor(private http: HttpService) {}
+  user: User | null = {};
+
+  constructor(
+    private http: HttpService,
+    private localStorage: LocalStorageService,
+    private router: Router
+  ) {}
 
   addUser(
     lastName: string,
@@ -13,7 +21,7 @@ export class AuthService {
     email: string,
     phone: string,
     password: string,
-    role: Roles
+    role: string
   ) {
     return this.http.post<User>('/', {
       firstName: firstName,
@@ -26,9 +34,17 @@ export class AuthService {
   }
 
   async login(email: string, password: string) {
-    await this.http.post<User>('/login', {
+    this.user = await this.http.post<User>('/login', {
       email: email,
       password: password,
     });
+    this.user.authData = Buffer.from(`${email}:${password}`).toString('base64');
+    await this.localStorage.setItem('user', this.user);
+  }
+
+  async logout(): Promise<void> {
+    this.user = null;
+    await this.localStorage.removeItem('user');
+    this.router.navigateByUrl('/login');
   }
 }

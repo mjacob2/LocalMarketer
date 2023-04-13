@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { ClientList } from '../models/clientList.model';
-import { HttpResponse } from '@angular/common/http';
+import { LocalStorageService } from './local-storage.service';
+import { User } from '../models/user.model';
 
 interface ApiResponse<T> {
-  responseData: T[];
+  responseData: T;
   error: string | null;
 }
 
@@ -12,14 +12,23 @@ interface ApiResponse<T> {
 })
 export class HttpService {
   baseUrl: string = 'https://localhost:44336';
-  constructor() {}
+  constructor(private localStorage: LocalStorageService) {}
 
-  async request<T>(method: string, url: string, body?: any): Promise<T[]> {
+  async request<T>(method: string, url: string, body?: any): Promise<T> {
+    let authHeader: string = '';
+
+    const user = await this.localStorage.getItem<User>('user');
+
+    if (user != null) {
+      authHeader = `Basic ${`${user.authData}`}`;
+    }
+
     const response = await fetch(`${this.baseUrl}${url}`, {
       method,
       body: body ? JSON.stringify(body) : undefined,
       headers: {
         'Content-Type': 'application/json',
+        Authorization: authHeader,
       },
     });
 
@@ -32,23 +41,23 @@ export class HttpService {
     return data.responseData;
   }
 
-  async get<T>(url: string): Promise<T[]> {
+  async get<T>(url: string): Promise<T> {
     return this.request<T>('GET', url);
   }
 
-  async post<T>(url: string, body: any): Promise<T[]> {
+  async post<T>(url: string, body: any): Promise<T> {
     return this.request<T>('POST', url, body);
   }
 
-  async put<T>(url: string, body: any): Promise<T[]> {
+  async put<T>(url: string, body: any): Promise<T> {
     return this.request<T>('PUT', url, body);
   }
 
-  async patch<T>(url: string, body: any): Promise<T[]> {
+  async patch<T>(url: string, body: any): Promise<T> {
     return this.request<T>('PATCH', url, body);
   }
 
-  async delete<T>(url: string): Promise<T[]> {
+  async delete<T>(url: string): Promise<T> {
     return this.request<T>('DELETE', url);
   }
 }

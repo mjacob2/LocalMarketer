@@ -14,9 +14,10 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatListModule } from '@angular/material/list';
 import { AuthModule } from './auth/login.module';
+import { BaseComponent } from './base.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, BaseComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

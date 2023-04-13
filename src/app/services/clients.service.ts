@@ -9,6 +9,6 @@ export class ClientsService {
   constructor(private http: HttpService) {}
 
   async getAllClients() {
-    return await this.http.get<ClientList>('/clients');
+    return await this.http.get<ClientList[]>('/clients');
   }
 }
