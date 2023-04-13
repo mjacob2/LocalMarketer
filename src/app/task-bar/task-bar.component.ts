@@ -1,13 +1,13 @@
+import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
+import { AuthService } from '../services/auth.service';
 import { MediaMatcher } from '@angular/cdk/layout';
-import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
-import { AuthService } from './services/auth.service';
 
 @Component({
-  selector: 'app-root',
-  template: ` <router-outlet></router-outlet> `,
-  styleUrls: ['./app.component.scss'],
+  selector: 'app-task-bar',
+  templateUrl: './task-bar.component.html',
+  styleUrls: ['./task-bar.component.scss'],
 })
-export class AppComponent implements OnDestroy {
+export class TaskBarLayoutComponent implements OnDestroy {
   title = 'LocalMarketer';
 
   mobileQuery: MediaQueryList;

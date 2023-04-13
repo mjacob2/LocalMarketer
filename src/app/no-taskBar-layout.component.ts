@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-base',
+  selector: 'no-taskBar-layout',
   template: ` <router-outlet></router-outlet> `,
-  styleUrls: [],
+  styles: [],
 })
-export class BaseComponent {}
+export class NoTaskBarLayoutComponent {}

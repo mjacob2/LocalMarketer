@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent } from './login/login.component';
+import { ClientsTableComponent } from '../clients/clients-table/clients-table.component';
 
-const authsRoutes: Routes = [{ path: 'login', component: LoginComponent }];
+const authsRoutes: Routes = [
+  { path: 'login', component: ClientsTableComponent },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(authsRoutes)],
