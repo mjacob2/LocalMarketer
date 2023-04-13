@@ -1,5 +1,51 @@
-<p>clients-table works!</p>
+<div class="example-container mat-elevation-z8">
+    <mat-form-field>
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Wpisz czego szukasz" #input>
+    </mat-form-field>
 
-<ul>
-    <li *ngFor="let client of clients">{{ client.firstName }}</li>
-</ul>
+    <mat-table [dataSource]="dataSource" matSort>
+
+        <!-- FirstName Column -->
+        <ng-container matColumnDef="firstName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Imię </mat-header-cell>
+            <mat-cell *matCellDef="let client"> {{client.firstName}} </mat-cell>
+        </ng-container>
+
+        <!-- LastName Column -->
+        <ng-container matColumnDef="lastName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Nazwisko </mat-header-cell>
+            <mat-cell *matCellDef="let client"> {{client.lastName}} </mat-cell>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="phone">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Telefon </mat-header-cell>
+            <mat-cell *matCellDef="let client"> {{client.phone}} </mat-cell>
+        </ng-container>
+
+        <!-- Color Column -->
+        <ng-container matColumnDef="email">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+            <mat-cell *matCellDef="let client"> {{client.email}} </mat-cell>
+        </ng-container>
+
+        <!-- Source Column -->
+        <ng-container matColumnDef="source">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Źródło </mat-header-cell>
+            <mat-cell *matCellDef="let client"> {{client.source}} </mat-cell>
+        </ng-container>
+
+        <!-- CreatorId Column -->
+        <ng-container matColumnDef="creatorId">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Kreator </mat-header-cell>
+            <mat-cell *matCellDef="let client"> {{client.creatorId}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;">
+        </mat-row>
+    </mat-table>
+
+    <mat-paginator></mat-paginator>
+</div>

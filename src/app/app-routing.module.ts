@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AppComponent } from './app.component';
 import { ClientsTableComponent } from './clients/clients-table/clients-table.component';
 import { NoTaskBarLayoutComponent } from './no-taskBar-layout.component';
 import { LoginComponent } from './auth/login/login.component';
