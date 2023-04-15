@@ -15,7 +15,7 @@ export class HttpService {
   constructor(private localStorage: LocalStorageService) {}
 
   async request<T>(method: string, url: string, body?: any): Promise<T> {
-    let authHeader: string = '';
+    let authHeader: string = 'Basic';
 
     const user = await this.localStorage.getItem<User>('user');
 
@@ -23,7 +23,7 @@ export class HttpService {
       authHeader = `Basic ${`${user.authData}`}`;
     }
 
-    const response = await fetch(`${this.baseUrl}${url}`, {
+    let response = await fetch(`${this.baseUrl}${url}`, {
       method,
       body: body ? JSON.stringify(body) : undefined,
       headers: {

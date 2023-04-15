@@ -47,4 +47,8 @@ export class AuthService {
     await this.localStorage.removeItem('user');
     this.router.navigateByUrl('/login');
   }
+
+  async initialize() {
+    this.user = await this.localStorage.getItem<User>('user');
+  }
 }
