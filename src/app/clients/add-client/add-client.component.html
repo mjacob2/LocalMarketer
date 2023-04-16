@@ -1,0 +1,41 @@
+<h2>Dodaj nowego klienta</h2>
+<form class="example-form" #addClientform="ngForm" (ngSubmit)="onSubmit(addClientform)">
+    <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Imię</mat-label>
+        <input matInput ngModel name="firstName" type="text">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Nazwisko</mat-label>
+        <input matInput ngModel name="lastName" type="text">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Telefon</mat-label>
+        <span matPrefix>+48 &nbsp;</span>
+        <input matInput ngModel name="phone" type="tel">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>E-mail</mat-label>
+        <input matInput ngModel name="email" type="email">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Źródło</mat-label>
+        <input matInput ngModel name="source" type="text">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Opis</mat-label>
+        <textarea matInput ngModel name="description" type="text"></textarea>
+    </mat-form-field>
+    <div class="example-button-row">
+        <button mat-raised-button color="primary" type="submit">Dodaj</button>
+        <button type="button" (click)="close()" style="margin-left: 16px;" mat-button>Anuluj</button>
+    </div>
+</form>
+<mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+<mat-card class="errorCard" *ngIf="errorMessage">
+    <mat-card-content style="color: aliceblue;">{{errorMessage}}</mat-card-content>
+</mat-card>

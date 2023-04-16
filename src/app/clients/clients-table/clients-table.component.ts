@@ -4,13 +4,18 @@ import { ClientList } from 'src/app/models/clientList.model';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { AddClientComponent } from '../add-client/add-client.component';
+import {
+  MatBottomSheet,
+  MatBottomSheetRef,
+} from '@angular/material/bottom-sheet';
 
 @Component({
   selector: 'app-clients-table',
   templateUrl: './clients-table.component.html',
   styleUrls: ['./clients-table.component.scss'],
 })
-export class ClientsTableComponent implements OnInit {
+export class ClientsTableComponent {
   displayedColumns = [
     'firstName',
     'lastName',
@@ -28,7 +33,10 @@ export class ClientsTableComponent implements OnInit {
   paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private clientsService: ClientsService) {}
+  constructor(
+    private clientsService: ClientsService,
+    private _bottomSheet: MatBottomSheet
+  ) {}
 
   async ngOnInit() {
     this.clients = await this.clientsService.getAllClients();
@@ -44,5 +52,19 @@ export class ClientsTableComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  openAddClientBottomSheet() {
+    const bottomSheetRef: MatBottomSheetRef = this._bottomSheet.open(
+      AddClientComponent,
+      {
+        disableClose: true,
+      }
+    );
+
+    bottomSheetRef.afterDismissed().subscribe(async () => {
+      this.clients = await this.clientsService.getAllClients();
+      this.dataSource = new MatTableDataSource(this.clients);
+    });
   }
 }

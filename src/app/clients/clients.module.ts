@@ -7,9 +7,14 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { AddClientComponent } from './add-client/add-client.component';
+import { MatCardModule } from '@angular/material/card';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 
 @NgModule({
-  declarations: [ClientsTableComponent],
+  declarations: [ClientsTableComponent, AddClientComponent],
   imports: [
     CommonModule,
     MatTableModule,
@@ -18,6 +23,11 @@ import { MatButtonModule } from '@angular/material/button';
     MatInputModule,
     MatIconModule,
     MatButtonModule,
+    MatCardModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatProgressBarModule,
+    MatBottomSheetModule,
   ],
 })
 export class ClientsModule {}
