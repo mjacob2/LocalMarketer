@@ -18,6 +18,7 @@ import { NoTaskBarLayoutComponent } from './no-taskBar-layout.component';
 import { TaskBarLayoutComponent } from './task-bar/task-bar.component';
 import { ConfirmDeleteDialogComponent } from './shared/confirm-delete-dialog/confirm-delete-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     HttpClientModule,
     AuthModule,
     MatDialogModule,
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -30,8 +30,5 @@
             <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
         </mat-card-footer>
     </mat-card>
-
-    <mat-card class="errorCard" *ngIf="errorMessage">
-        <mat-card-content style="color: aliceblue;">{{errorMessage}}</mat-card-content>
-    </mat-card>
+    <app-error-card *ngIf="errorMessage" errorMessage="{{errorMessage}}"></app-error-card>
 </form>

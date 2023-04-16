@@ -35,7 +35,5 @@
         <button type="button" (click)="close()" style="margin-left: 16px;" mat-button>Anuluj</button>
     </div>
 </form>
+<app-error-card *ngIf="errorMessage" errorMessage="{{errorMessage}}"></app-error-card>
 <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
-<mat-card class="errorCard" *ngIf="errorMessage">
-    <mat-card-content style="color: aliceblue;">{{errorMessage}}</mat-card-content>
-</mat-card>

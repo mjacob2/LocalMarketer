@@ -9,6 +9,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { ErrorCardComponent } from '../shared/error-card/error-card.component';
 
 @NgModule({
   declarations: [LoginComponent],
@@ -23,6 +24,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatButtonModule,
     MatDividerModule,
     MatProgressBarModule,
+    ErrorCardComponent,
   ],
 })
 export class AuthModule {}

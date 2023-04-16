@@ -8,11 +8,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { AddClientComponent } from './add-client/add-client.component';
-import { MatCardModule } from '@angular/material/card';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { ClientDetailsComponent } from './client-details/client-details.component';
+import { ErrorCardComponent } from '../shared/error-card/error-card.component';
 
 @NgModule({
   declarations: [
@@ -28,11 +28,11 @@ import { ClientDetailsComponent } from './client-details/client-details.componen
     MatInputModule,
     MatIconModule,
     MatButtonModule,
-    MatCardModule,
     FormsModule,
     ReactiveFormsModule,
     MatProgressBarModule,
     MatBottomSheetModule,
+    ErrorCardComponent,
   ],
 })
 export class ClientsModule {}
