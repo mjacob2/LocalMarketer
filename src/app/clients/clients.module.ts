@@ -15,7 +15,11 @@ import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { ClientDetailsComponent } from './client-details/client-details.component';
 
 @NgModule({
-  declarations: [ClientsTableComponent, AddClientComponent, ClientDetailsComponent],
+  declarations: [
+    ClientsTableComponent,
+    AddClientComponent,
+    ClientDetailsComponent,
+  ],
   imports: [
     CommonModule,
     MatTableModule,

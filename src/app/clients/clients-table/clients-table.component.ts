@@ -71,7 +71,6 @@ export class ClientsTableComponent {
   }
 
   openClientDetailsPage(id: string) {
-    //console.log(`/clients/${id}`);
     this.router.navigateByUrl(`/clients/${id}`);
   }
 }

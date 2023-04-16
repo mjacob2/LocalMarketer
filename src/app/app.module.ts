@@ -16,12 +16,15 @@ import { MatListModule } from '@angular/material/list';
 import { AuthModule } from './auth/login.module';
 import { NoTaskBarLayoutComponent } from './no-taskBar-layout.component';
 import { TaskBarLayoutComponent } from './task-bar/task-bar.component';
+import { ConfirmDeleteDialogComponent } from './shared/confirm-delete-dialog/confirm-delete-dialog.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
     AppComponent,
     NoTaskBarLayoutComponent,
     TaskBarLayoutComponent,
+    ConfirmDeleteDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,6 +40,7 @@ import { TaskBarLayoutComponent } from './task-bar/task-bar.component';
     MatListModule,
     HttpClientModule,
     AuthModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,7 +1,8 @@
-<div class="example-container mat-elevation-z8">
+<mat-progress-bar *ngIf="!dataSource" mode="indeterminate"></mat-progress-bar>
+<div *ngIf="dataSource" class="example-container mat-elevation-z8">
     <mat-form-field>
-        <mat-label>Filter</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Wpisz czego szukasz" #input>
+        <mat-label>Wyszukaj...</mat-label>
+        <input matInput (keyup)="applyFilter($event)" #input>
     </mat-form-field>
 
     <mat-table [dataSource]="dataSource" matSort>
