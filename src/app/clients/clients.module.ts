@@ -12,9 +12,10 @@ import { MatCardModule } from '@angular/material/card';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { ClientDetailsComponent } from './client-details/client-details.component';
 
 @NgModule({
-  declarations: [ClientsTableComponent, AddClientComponent],
+  declarations: [ClientsTableComponent, AddClientComponent, ClientDetailsComponent],
   imports: [
     CommonModule,
     MatTableModule,

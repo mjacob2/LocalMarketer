@@ -5,7 +5,7 @@ import { NoTaskBarLayoutComponent } from './no-taskBar-layout.component';
 import { LoginComponent } from './auth/login/login.component';
 import { TaskBarLayoutComponent } from './task-bar/task-bar.component';
 import { TodosTableComponent } from './to-dos/todos-table/todos-table.component';
-import { AddClientComponent } from './clients/add-client/add-client.component';
+import { ClientDetailsComponent } from './clients/client-details/client-details.component';
 
 const routes: Routes = [
   {
@@ -22,8 +22,8 @@ const routes: Routes = [
         component: ClientsTableComponent,
       },
       {
-        path: 'clients/add',
-        component: AddClientComponent,
+        path: 'clients/:id',
+        component: ClientDetailsComponent,
       },
       {
         path: 'todos',

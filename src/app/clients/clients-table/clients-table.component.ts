@@ -9,6 +9,7 @@ import {
   MatBottomSheet,
   MatBottomSheetRef,
 } from '@angular/material/bottom-sheet';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-clients-table',
@@ -35,7 +36,8 @@ export class ClientsTableComponent {
 
   constructor(
     private clientsService: ClientsService,
-    private _bottomSheet: MatBottomSheet
+    private bottomSheet: MatBottomSheet,
+    private router: Router
   ) {}
 
   async ngOnInit() {
@@ -55,7 +57,7 @@ export class ClientsTableComponent {
   }
 
   openAddClientBottomSheet() {
-    const bottomSheetRef: MatBottomSheetRef = this._bottomSheet.open(
+    const bottomSheetRef: MatBottomSheetRef = this.bottomSheet.open(
       AddClientComponent,
       {
         disableClose: true,
@@ -66,5 +68,10 @@ export class ClientsTableComponent {
       this.clients = await this.clientsService.getAllClients();
       this.dataSource = new MatTableDataSource(this.clients);
     });
+  }
+
+  openClientDetailsPage(id: string) {
+    //console.log(`/clients/${id}`);
+    this.router.navigateByUrl(`/clients/${id}`);
   }
 }
