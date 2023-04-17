@@ -1,10 +1,12 @@
 export class Client {
   constructor(
-    public firstName?: string,
-    public lastName?: string,
-    public phone?: string,
-    public email?: string,
-    public source?: string,
-    public description?: string
+    public firstName: string,
+    public lastName: string,
+    public phone: string,
+    public email: string,
+    public source: string,
+    public description: string,
+    public id?: number,
+    public creationDate?: Date
   ) {}
 }

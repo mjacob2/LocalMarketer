@@ -20,4 +20,8 @@ export class ClientsService {
   async deleteClientById(id: number) {
     return await this.http.delete<Client>(`/clients/${id}`);
   }
+
+  async updateClientById(client: Client) {
+    return await this.http.put<Client>(`/clients/${client.id}`, client);
+  }
 }

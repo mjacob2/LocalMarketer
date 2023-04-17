@@ -1,4 +1,4 @@
-<form class="client-details-form" #clientDetailsForm="ngForm" (ngSubmit)="onSubmit(clientDetailsForm)">
+<form class="client-details-form" #clientDetailsForm="ngForm" (ngSubmit)="saveChanges(clientDetailsForm)">
     <mat-form-field appearance="outline" class="example-full-width">
         <mat-label>Imię</mat-label>
         <input [(ngModel)]="firstName" name="firstName" matInput type="text" required>
@@ -22,17 +22,19 @@
 
     <mat-form-field appearance="outline" class="example-full-width">
         <mat-label>Źródło</mat-label>
-        <input [(ngModel)]="source" name="source" matInput required>
+        <input [(ngModel)]="source" name="source" matInput>
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="example-full-width">
         <mat-label>Opis</mat-label>
         <textarea [(ngModel)]="description" name="description" matInput></textarea>
     </mat-form-field>
+    <p>ID: {{id}}</p>
+    <p>Utworzono: {{creationDate}}</p>
 
     <div class="example-button-row">
         <button mat-raised-button color="primary" type="submit">Zapisz zmiany</button>
-        <button (click)="openconfirmdeleteDialog()" type="button" mat-icon-button color="warn">
+        <button (click)="openConfirmdDleteDialog()" type="button" mat-icon-button color="warn">
             <mat-icon>delete</mat-icon>
         </button>
     </div>

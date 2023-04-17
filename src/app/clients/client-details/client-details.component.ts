@@ -16,21 +16,21 @@ export class ClientDetailsComponent {
   errorMessage: string = '';
   isLoading = false;
 
-  client: Client | undefined;
+  client!: Client;
 
-  firstName: string | undefined;
-  lastName: string | undefined;
-  phone: string | undefined;
-  email: string | undefined;
-  source: string | undefined;
-  description: string | undefined;
-  id: any;
+  firstName: string = '';
+  lastName: string = '';
+  phone: string = '';
+  email: string = '';
+  source: string = '';
+  description: string = '';
+  id: number = 0;
+  creationDate?: Date;
 
   constructor(
     private clientsService: ClientsService,
     private route: ActivatedRoute,
     private router: Router,
-    private http: HttpService,
     public dialog: MatDialog
   ) {}
 
@@ -44,12 +44,20 @@ export class ClientDetailsComponent {
       this.email = this.client.email;
       this.source = this.client.source;
       this.description = this.client.description;
+      this.creationDate = this.client.creationDate;
     });
   }
 
-  onSubmit(form: NgForm) {
-    this.http
-      .post('/clients', this.client)
+  saveChanges(form: NgForm) {
+    this.client.firstName = this.firstName;
+    this.client.lastName = this.lastName;
+    this.client.phone = this.phone;
+    this.client.email = this.email;
+    this.client.source = this.source;
+    this.client.description = this.description;
+
+    this.clientsService
+      .updateClientById(this.client)
       .then(() => {
         this.isLoading = false;
       })
@@ -64,7 +72,7 @@ export class ClientDetailsComponent {
     this.router.navigateByUrl('/clients');
   }
 
-  openconfirmdeleteDialog() {
+  openConfirmdDleteDialog() {
     const dialogRef = this.dialog.open(ConfirmDeleteDialogComponent);
     dialogRef.componentInstance.onDelete.subscribe(() => {
       this.deleteClient();
