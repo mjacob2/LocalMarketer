@@ -3,9 +3,9 @@ import { NgForm } from '@angular/forms';
 import { ClientsService } from 'src/app/services/clients.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Client } from 'src/app/models/client.model';
-import { HttpService } from 'src/app/services/http.service';
 import { ConfirmDeleteDialogComponent } from 'src/app/shared/confirm-delete-dialog/confirm-delete-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-client-details',
@@ -31,7 +31,8 @@ export class ClientDetailsComponent {
     private clientsService: ClientsService,
     private route: ActivatedRoute,
     private router: Router,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) {}
 
   async ngOnInit() {
@@ -59,6 +60,10 @@ export class ClientDetailsComponent {
     this.clientsService
       .updateClientById(this.client)
       .then(() => {
+        this.snackBar.open('Zmiany zostały zapisane', 'ok', {
+          duration: 2000,
+          panelClass: ['success-snackbar'],
+        });
         this.isLoading = false;
       })
       .catch((error) => {
