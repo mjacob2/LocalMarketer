@@ -1,3 +1,5 @@
+import { ProfileGeneral } from './profileGeneral.model';
+
 export class Client {
   constructor(
     public firstName: string,
@@ -7,6 +9,7 @@ export class Client {
     public source: string,
     public description: string,
     public id?: number,
-    public creationDate?: Date
+    public creationDate?: Date,
+    public profiles?: ProfileGeneral[]
   ) {}
 }

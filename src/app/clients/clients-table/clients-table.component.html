@@ -1,6 +1,6 @@
 <mat-progress-bar *ngIf="!dataSource" mode="indeterminate"></mat-progress-bar>
-<div *ngIf="dataSource" class="example-container mat-elevation-z8">
-    <mat-form-field>
+<div *ngIf="dataSource" class="example-container mat-elevation-z0">
+    <mat-form-field appearance="outline" style="max-width: 250px;">
         <mat-label>Wyszukaj...</mat-label>
         <input matInput (keyup)="applyFilter($event)" #input>
     </mat-form-field>

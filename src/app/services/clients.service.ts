@@ -24,4 +24,8 @@ export class ClientsService {
   async updateClientById(client: Client) {
     return await this.http.put<Client>(`/clients/${client.id}`, client);
   }
+
+  async addClient(client: Client) {
+    return await this.http.post<Client>(`/clients`, client);
+  }
 }

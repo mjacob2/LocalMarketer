@@ -1,4 +1,8 @@
+@import '/src/colors.scss';
+
 .example-container {
+  margin: 10px;
+  padding: 10px;
     display: flex;
     flex-direction: column;
     min-width: 300px;
@@ -14,13 +18,12 @@
     width: 100%;
   }
   
-  .mat-table {
-    overflow: auto;
-    max-height: 500px;
+  mat-table {
+    background-color: $clients;
   }
 
-  .mat-mdc-row:hover .mat-mdc-cell {
-    background-color: lightgray;
+  .mat-mdc-row:hover {
+    background-color: $clients-dark !important;
   }
   
   .bottom-right{
@@ -28,3 +31,24 @@
     right: 2em;
     bottom: 2em;
   }
+
+  .mat-mdc-row{
+    padding-left: 15px;
+    margin-top: 15px;
+    border-radius: 26px;
+    background-color: white;
+    border: none !important;
+   }
+
+   .mat-mdc-cell{
+    border-radius: 26px;
+    border: none !important;
+   }
+
+   mat-paginator{
+    background-color: $clients;
+   }
+
+
+  
+

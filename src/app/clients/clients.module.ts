@@ -13,12 +13,18 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { ClientDetailsComponent } from './client-details/client-details.component';
 import { ErrorCardComponent } from '../shared/error-card/error-card.component';
+import { MatCardModule } from '@angular/material/card';
+import { ClientDetailsProfilesComponent } from './client-details/client-details-profiles/client-details-profiles.component';
+import { MatListModule } from '@angular/material/list';
+import { AddProfileComponent } from './add-profile/add-profile.component';
 
 @NgModule({
   declarations: [
     ClientsTableComponent,
     AddClientComponent,
     ClientDetailsComponent,
+    ClientDetailsProfilesComponent,
+    AddProfileComponent,
   ],
   imports: [
     CommonModule,
@@ -33,6 +39,8 @@ import { ErrorCardComponent } from '../shared/error-card/error-card.component';
     MatProgressBarModule,
     MatBottomSheetModule,
     ErrorCardComponent,
+    MatCardModule,
+    MatListModule,
   ],
 })
 export class ClientsModule {}

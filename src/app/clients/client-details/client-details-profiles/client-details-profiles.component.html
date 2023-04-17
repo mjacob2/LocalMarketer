@@ -1,0 +1,12 @@
+<mat-card class="client-details-profiles">
+    <mat-card-header>
+        <mat-card-title>Profile</mat-card-title>
+    </mat-card-header>
+    <mat-selection-list role="list" *ngFor="let profile of profiles">
+
+        <mat-list-item role="listitem">{{profile.name}}</mat-list-item>
+    </mat-selection-list>
+    <mat-card-actions align="end">
+        <button (click)="openAddProfileBottomSheet()" mat-raised-button>Utwórz nowy profil</button>
+    </mat-card-actions>
+</mat-card>

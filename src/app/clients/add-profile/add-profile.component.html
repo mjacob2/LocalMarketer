@@ -1,0 +1,18 @@
+<h2>Utwórz nowy profil</h2>
+<form class="example-form" #addProfileForm="ngForm" (ngSubmit)="onSubmit(addProfileForm)">
+    <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Nazwa profilu</mat-label>
+        <input matInput ngModel name="name" type="text">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Opis</mat-label>
+        <textarea matInput ngModel name="description" type="text"></textarea>
+    </mat-form-field>
+    <div class="example-button-row">
+        <button mat-raised-button color="primary" type="submit">Dodaj</button>
+        <button type="button" (click)="close()" style="margin-left: 16px;" mat-button>Anuluj</button>
+    </div>
+</form>
+<app-error-card *ngIf="errorMessage" errorMessage="{{errorMessage}}"></app-error-card>
+<mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>

@@ -1,6 +1,10 @@
 .client-details-form{
     margin: 2em;
-    max-width: 540px;
     display: flex;
     flex-direction: column;
+}
+
+.client-details-card-personalInfo{
+    width: 440px;
+    margin: 1em;
 }

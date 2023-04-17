@@ -1,42 +1,57 @@
-<form class="client-details-form" #clientDetailsForm="ngForm" (ngSubmit)="saveChanges(clientDetailsForm)">
-    <mat-form-field appearance="outline" class="example-full-width">
-        <mat-label>Imię</mat-label>
-        <input [(ngModel)]="firstName" name="firstName" matInput type="text" required>
-    </mat-form-field>
+<div class="row-flex">
+    <mat-progress-bar *ngIf="!client" mode="indeterminate"></mat-progress-bar>
+    <mat-card class="client-details-card-personalInfo">
+        <mat-card-header>
+            <mat-card-title>Dane kontaktowe</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form class="client-details-form" #clientDetailsForm="ngForm" (ngSubmit)="saveChanges(clientDetailsForm)">
+                <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>Imię</mat-label>
+                    <input [(ngModel)]="firstName" name="firstName" matInput type="text" required>
+                </mat-form-field>
 
-    <mat-form-field appearance="outline" class="example-full-width">
-        <mat-label>Nazwisko</mat-label>
-        <input [(ngModel)]="lastName" name="lastName" matInput type="text" required>
-    </mat-form-field>
+                <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>Nazwisko</mat-label>
+                    <input [(ngModel)]="lastName" name="lastName" matInput type="text" required>
+                </mat-form-field>
 
-    <mat-form-field appearance="outline" class="example-full-width">
-        <mat-label>Telefon</mat-label>
-        <span matPrefix>&nbsp; +48 &nbsp;</span>
-        <input [(ngModel)]="phone" name="phone" matInput required>
-    </mat-form-field>
+                <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>Telefon</mat-label>
+                    <span matPrefix>&nbsp; +48 &nbsp;</span>
+                    <input [(ngModel)]="phone" name="phone" matInput required>
+                </mat-form-field>
 
-    <mat-form-field appearance="outline" class="example-full-width">
-        <mat-label>E-mail</mat-label>
-        <input [(ngModel)]="email" name="email" matInput required>
-    </mat-form-field>
+                <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>E-mail</mat-label>
+                    <input [(ngModel)]="email" name="email" matInput required>
+                </mat-form-field>
 
-    <mat-form-field appearance="outline" class="example-full-width">
-        <mat-label>Źródło</mat-label>
-        <input [(ngModel)]="source" name="source" matInput>
-    </mat-form-field>
+                <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>Źródło</mat-label>
+                    <input [(ngModel)]="source" name="source" matInput>
+                </mat-form-field>
 
-    <mat-form-field appearance="outline" class="example-full-width">
-        <mat-label>Opis</mat-label>
-        <textarea [(ngModel)]="description" name="description" matInput></textarea>
-    </mat-form-field>
-    <p>ID: {{id}}</p>
-    <p>Utworzono: {{creationDate}}</p>
+                <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>Opis</mat-label>
+                    <textarea [(ngModel)]="description" name="description" matInput></textarea>
+                </mat-form-field>
+                <p>ID: {{id}}</p>
+                <p>Utworzono: {{creationDate}}</p>
 
-    <div class="example-button-row">
-        <button mat-raised-button color="primary" type="submit">Zapisz zmiany</button>
-        <button (click)="openConfirmdDleteDialog()" type="button" mat-icon-button color="warn">
-            <mat-icon>delete</mat-icon>
-        </button>
-    </div>
-</form>
-<mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+                <mat-card-actions>
+                    <button mat-raised-button color="primary" type="submit">Zapisz zmiany</button>
+                    <button (click)="openConfirmdDleteDialog()" type="button" mat-icon-button color="warn">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </mat-card-actions>
+
+                <app-error-card *ngIf="errorMessage" errorMessage="{{errorMessage}}"></app-error-card>
+
+            </form>
+        </mat-card-content>
+        <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+    </mat-card>
+
+    <app-client-details-profiles [profiles]="profiles"></app-client-details-profiles>
+</div>

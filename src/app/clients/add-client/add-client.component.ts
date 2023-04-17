@@ -3,7 +3,8 @@ import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { Router } from '@angular/router';
 import { Client } from 'src/app/models/client.model';
 import { HttpService } from 'src/app/services/http.service';
-import { FormControl, NgForm, Validators } from '@angular/forms';
+import { NgForm } from '@angular/forms';
+import { ClientsService } from 'src/app/services/clients.service';
 
 @Component({
   selector: 'app-add-client',
@@ -13,7 +14,7 @@ import { FormControl, NgForm, Validators } from '@angular/forms';
 export class AddClientComponent {
   constructor(
     private _bottomSheetRef: MatBottomSheetRef<AddClientComponent>,
-    private http: HttpService,
+    private http: ClientsService,
     private router: Router
   ) {}
   errorMessage: string = '';
@@ -39,7 +40,7 @@ export class AddClientComponent {
     );
 
     this.http
-      .post('/clients', clientToAdd)
+      .addClient(clientToAdd)
       .then(() => {
         this._bottomSheetRef.dismiss();
         this.router.navigateByUrl('/clients');

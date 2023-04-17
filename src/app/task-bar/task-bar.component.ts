@@ -1,6 +1,7 @@
-import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { MediaMatcher } from '@angular/cdk/layout';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-task-bar',
@@ -9,6 +10,7 @@ import { MediaMatcher } from '@angular/cdk/layout';
 })
 export class TaskBarLayoutComponent implements OnDestroy {
   title = 'LocalMarketer';
+  ds = '';
 
   mobileQuery: MediaQueryList;
 
@@ -17,11 +19,20 @@ export class TaskBarLayoutComponent implements OnDestroy {
   constructor(
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
     this.mobileQuery.addListener(this._mobileQueryListener);
+    router.events.subscribe(() => {
+      let path = this.router.url;
+      if (path.includes('clients')) {
+        this.ds = 'clients-color';
+      } else {
+        this.ds = '';
+      }
+    });
   }
 
   onLogout() {

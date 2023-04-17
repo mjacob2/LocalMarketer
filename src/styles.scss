@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'src/LM-theme.scss';
+@import 'src/colors.scss';
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
@@ -9,4 +11,19 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
       --mat-mdc-snack-bar-button-color: #fff;
       --mdc-snackbar-supporting-text-color: #fff;
     }
+  }
+
+  .row-flex{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .clients-color{
+    background-color: $clients;
+  }
+
+
+  .mat-sidenav{
+    border-right: none;
   }

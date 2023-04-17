@@ -6,6 +6,7 @@ import { Client } from 'src/app/models/client.model';
 import { ConfirmDeleteDialogComponent } from 'src/app/shared/confirm-delete-dialog/confirm-delete-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { ProfileGeneral } from 'src/app/models/profileGeneral.model';
 
 @Component({
   selector: 'app-client-details',
@@ -17,6 +18,7 @@ export class ClientDetailsComponent {
   isLoading = false;
 
   client!: Client;
+  profiles?: ProfileGeneral[] = [];
 
   firstName: string = '';
   lastName: string = '';
@@ -39,6 +41,7 @@ export class ClientDetailsComponent {
     this.route.params.subscribe(async (params: Params) => {
       this.id = params['id'];
       this.client = await this.clientsService.getClientById(this.id);
+      this.profiles = this.client.profiles;
       this.firstName = this.client.firstName;
       this.lastName = this.client.lastName;
       this.phone = this.client.phone;
@@ -50,6 +53,7 @@ export class ClientDetailsComponent {
   }
 
   saveChanges(form: NgForm) {
+    this.isLoading = true;
     this.client.firstName = this.firstName;
     this.client.lastName = this.lastName;
     this.client.phone = this.phone;
@@ -60,11 +64,12 @@ export class ClientDetailsComponent {
     this.clientsService
       .updateClientById(this.client)
       .then(() => {
-        this.snackBar.open('Zmiany zostały zapisane', 'ok', {
+        this.errorMessage = '';
+        this.isLoading = false;
+        this.snackBar.open('Zmiany zostały zapisane', 'Ok', {
           duration: 2000,
           panelClass: ['success-snackbar'],
         });
-        this.isLoading = false;
       })
       .catch((error) => {
         this.isLoading = false;
