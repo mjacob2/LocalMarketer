@@ -1,15 +1,14 @@
 <mat-progress-bar *ngIf="!dataSource" mode="indeterminate"></mat-progress-bar>
 <div *ngIf="dataSource" class="example-container mat-elevation-z0">
-    <mat-form-field appearance="outline" style="max-width: 250px;">
-        <mat-label>Wyszukaj...</mat-label>
-        <input matInput (keyup)="applyFilter($event)" #input>
+    <mat-form-field style="max-width: 250px;">
+        <input placeholder="wyszukaj..." matInput (keyup)="applyFilter($event)" #input>
     </mat-form-field>
 
     <mat-table [dataSource]="dataSource" matSort>
 
         <!-- FirstName Column -->
         <ng-container matColumnDef="firstName">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Imię </mat-header-cell>
+            <mat-header-cell style="margin-left: 15px;" *matHeaderCellDef mat-sort-header> Imię </mat-header-cell>
             <mat-cell *matCellDef="let client"> {{client.firstName}}
             </mat-cell>
         </ng-container>

@@ -19,11 +19,11 @@
   }
   
   mat-table {
-    background-color: $clients;
+    background-color: $profiles;
   }
 
   .mat-mdc-row:hover {
-    background-color: $clients-dark !important;
+    background-color: $profiles-dark !important;
   }
   
   .bottom-right{
@@ -46,7 +46,7 @@
    }
 
    mat-paginator{
-    background-color: $clients;
+    background-color: $profiles;
    }
 
    mat-header-row{
@@ -58,4 +58,3 @@
     border-bottom-style:none;
    }
   
-

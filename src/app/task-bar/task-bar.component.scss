@@ -36,16 +36,28 @@
     flex: 1 0 auto;
   }
   
-  .active-link-clients {
+.active-link-clients{
     background-color: $clients;
+    --mdc-list-list-item-label-text-color: white;
+    --mdc-list-list-item-focus-label-text-color: white;
+    --mdc-list-list-item-hover-label-text-color: white;
 }
 
-.active-link-todos {
-    background-color: rgb(75, 83, 136);
+ .active-link-todos{
+  background-color: $todos;
+  --mdc-list-list-item-label-text-color: white;
+  --mdc-list-list-item-focus-label-text-color: white;
+  --mdc-list-list-item-hover-label-text-color: white;
+}
+
+.active-link-profiles{
+  background-color: $profiles;
+  --mdc-list-list-item-label-text-color: white;
+  --mdc-list-list-item-focus-label-text-color: white;
+  --mdc-list-list-item-hover-label-text-color: white;
 }
 
 .mat-elevation-z2 {
   position: relative;
   z-index: 2;
 }
-

@@ -5,8 +5,8 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-.mat-mdc-snack-bar-container {
-    &.success-snackbar {
+.mat-mdc-snack-bar-container{
+    &.success-snackbar{
       --mdc-snackbar-container-color: #3b904a;
       --mat-mdc-snack-bar-button-color: #fff;
       --mdc-snackbar-supporting-text-color: #fff;
@@ -21,9 +21,18 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
   .clients-color{
     background-color: $clients;
+
   }
 
+  .profiles-color{
+    background-color: $profiles;
+  }
 
+  .todos-color{
+    background-color: $todos;
+  }
+  
   .mat-sidenav{
     border-right: none;
   }
+

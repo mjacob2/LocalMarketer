@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class TaskBarLayoutComponent implements OnDestroy {
   title = 'LocalMarketer';
-  ds = '';
+  color = '';
 
   mobileQuery: MediaQueryList;
 
@@ -28,9 +28,13 @@ export class TaskBarLayoutComponent implements OnDestroy {
     router.events.subscribe(() => {
       let path = this.router.url;
       if (path.includes('clients')) {
-        this.ds = 'clients-color';
+        this.color = 'clients-color';
+      } else if (path.includes('profiles')) {
+        this.color = 'profiles-color';
+      } else if (path.includes('todos')) {
+        this.color = 'todos-color';
       } else {
-        this.ds = '';
+        this.color = '';
       }
     });
   }

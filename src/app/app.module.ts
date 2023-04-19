@@ -4,6 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ClientsModule } from './clients/clients.module';
+import { ProfilesModule } from './profiles/profiles.module';
 import { ToDosModule } from './to-dos/to-dos.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -29,6 +30,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
   ],
   imports: [
     BrowserModule,
+    ProfilesModule,
     AppRoutingModule,
     ClientsModule,
     ToDosModule,

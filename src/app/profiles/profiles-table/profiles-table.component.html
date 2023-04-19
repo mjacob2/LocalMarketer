@@ -1,0 +1,46 @@
+<mat-progress-bar *ngIf="!dataSource" mode="indeterminate"></mat-progress-bar>
+<div *ngIf="dataSource" class="example-container mat-elevation-z0">
+    <mat-form-field style="max-width: 250px;">
+        <input placeholder="wyszukaj..." matInput (keyup)="applyFilter($event)" #input>
+    </mat-form-field>
+
+    <mat-table [dataSource]="dataSource" matSort>
+
+        <!-- FirstName Column -->
+        <ng-container matColumnDef="name">
+            <mat-header-cell style="margin-left: 15px;" *matHeaderCellDef mat-sort-header> Nazwa </mat-header-cell>
+            <mat-cell *matCellDef="let profile"> {{profile.name}}
+            </mat-cell>
+        </ng-container>
+
+        <!-- LastName Column -->
+        <ng-container matColumnDef="city">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Miasto </mat-header-cell>
+            <mat-cell *matCellDef="let profile"> {{profile.city}} </mat-cell>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="clientId">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Klient </mat-header-cell>
+            <mat-cell *matCellDef="let profile"> {{profile.clientId}} </mat-cell>
+        </ng-container>
+
+        <!-- Color Column -->
+        <ng-container matColumnDef="userId">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Użytkownik </mat-header-cell>
+            <mat-cell *matCellDef="let profile"> {{profile.userId}} </mat-cell>
+        </ng-container>
+
+        <!-- Source Column -->
+        <ng-container matColumnDef="source">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Źródło </mat-header-cell>
+            <mat-cell *matCellDef="let profile"> {{profile.source}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row (click)="openClientDetailsPage(row.id)" *matRowDef="let row; columns: displayedColumns;">
+        </mat-row>
+    </mat-table>
+
+    <mat-paginator></mat-paginator>
+</div>
