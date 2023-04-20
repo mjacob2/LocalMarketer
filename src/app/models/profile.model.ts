@@ -1,12 +1,6 @@
 import { DealGeneral } from './dealGeneral.mode';
 import { ToDoGeneral } from './todoGeneral.model';
 
-enum CustomerServices {
-  LocalOnly = 0,
-  AwayOnly = 1,
-  Combined = 3,
-}
-
 export class Profile {
   public name?: string; //
   public creatorId?: number;

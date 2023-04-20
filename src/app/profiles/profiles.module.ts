@@ -12,9 +12,15 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ErrorCardComponent } from '../shared/error-card/error-card.component';
 import { MatCardModule } from '@angular/material/card';
 import { ProfileDetailsComponent } from './profile-details/profile-details.component';
+import { ProfileDetailsDealsComponent } from './profile-details/profile-details-deals/profile-details-deals.component';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
-  declarations: [ProfilesTableComponent, ProfileDetailsComponent],
+  declarations: [
+    ProfilesTableComponent,
+    ProfileDetailsComponent,
+    ProfileDetailsDealsComponent,
+  ],
   imports: [
     CommonModule,
     MatTableModule,
@@ -28,6 +34,7 @@ import { ProfileDetailsComponent } from './profile-details/profile-details.compo
     ErrorCardComponent,
     FormsModule,
     ReactiveFormsModule,
+    MatListModule,
   ],
 })
 export class ProfilesModule {}

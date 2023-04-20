@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { ClientsService } from 'src/app/services/clients.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Client } from 'src/app/models/client.model';
@@ -15,7 +14,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class ClientDetailsComponent {
   errorMessage: string = '';
   isLoading = false;
-
   client: Client = new Client();
   clientId!: number;
 

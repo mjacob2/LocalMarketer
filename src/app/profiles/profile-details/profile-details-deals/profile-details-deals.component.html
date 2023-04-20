@@ -1,0 +1,11 @@
+<mat-card class="profile-details-deals">
+    <mat-card-header>
+        <mat-card-title>Umowy</mat-card-title>
+    </mat-card-header>
+    <mat-selection-list role="list" *ngFor="let deal of deals">
+        <mat-list-item (click)="goToDeal(deal.id)" role="listitem">{{deal.name}}</mat-list-item>
+    </mat-selection-list>
+    <mat-card-actions align="end">
+        <button (click)="openAddDealBottomSheet()" mat-raised-button>Utwórz nową umowę</button>
+    </mat-card-actions>
+</mat-card>

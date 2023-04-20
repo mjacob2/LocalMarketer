@@ -5,7 +5,7 @@ import {
 } from '@angular/material/bottom-sheet';
 import { ProfileGeneral } from 'src/app/models/profileGeneral.model';
 import { AddProfileComponent } from '../../add-profile/add-profile.component';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-client-details-profiles',

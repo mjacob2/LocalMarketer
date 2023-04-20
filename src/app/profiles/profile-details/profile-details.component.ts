@@ -4,7 +4,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { DealGeneral } from 'src/app/models/dealGeneral.mode';
 import { Profile } from 'src/app/models/profile.model';
-import { ToDoGeneral } from 'src/app/models/todoGeneral.model';
 import { ProfilesService } from 'src/app/services/profiles.service';
 
 @Component({
@@ -16,14 +15,11 @@ export class ProfileDetailsComponent {
   errorMessage: string = '';
   isLoading = false;
   profile: Profile = new Profile();
-  //todos?: ToDoGeneral[] = [];
-  //deals?: DealGeneral[] = [];
-  id!: number;
+  profileId!: number;
 
   constructor(
     private service: ProfilesService,
     private route: ActivatedRoute,
-    private router: Router,
     public dialog: MatDialog,
     private snackBar: MatSnackBar
   ) {}
@@ -32,9 +28,12 @@ export class ProfileDetailsComponent {
     this.isLoading = true;
 
     this.route.params.subscribe(async (params: Params) => {
-      this.id = params['id'];
-      this.profile = await this.service.getProfileById(this.id);
+      this.profileId = params['id'];
+
+      this.profile = await this.service.getProfileById(this.profileId);
+
       console.log(this.profile);
+
       this.isLoading = false;
     });
   }
