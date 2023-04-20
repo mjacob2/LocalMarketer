@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Inject, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { ProfilesService } from 'src/app/services/profiles.service';
 import { ProfileGeneral } from '../../models/profileGeneral.model';
+import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 
 @Component({
   selector: 'app-add-profile',
@@ -15,21 +16,22 @@ export class AddProfileComponent {
 
   constructor(
     private _bottomSheetRef: MatBottomSheetRef<AddProfileComponent>,
-    private http: ProfilesService
+    private http: ProfilesService,
+    @Inject(MAT_BOTTOM_SHEET_DATA) public clientId: number
   ) {}
+
   onSubmit(form: NgForm) {
     this.isLoading = true;
 
     const name = form.value.name;
     const description = form.value.description;
 
-    const profile = new ProfileGeneral(2, name, description);
+    const profile = new ProfileGeneral(this.clientId, name, description);
 
     this.http
       .addProfile(profile)
       .then(() => {
         this._bottomSheetRef.dismiss();
-        //this.router.navigateByUrl('/clients');
         this.isLoading = false;
       })
       .catch((error) => {

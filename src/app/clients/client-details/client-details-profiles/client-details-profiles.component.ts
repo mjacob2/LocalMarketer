@@ -1,9 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import {
   MatBottomSheet,
   MatBottomSheetRef,
 } from '@angular/material/bottom-sheet';
-import { Client } from 'src/app/models/client.model';
 import { ProfileGeneral } from 'src/app/models/profileGeneral.model';
 import { AddProfileComponent } from '../../add-profile/add-profile.component';
 
@@ -14,18 +13,18 @@ import { AddProfileComponent } from '../../add-profile/add-profile.component';
 })
 export class ClientDetailsProfilesComponent {
   constructor(private bottomSheet: MatBottomSheet) {}
+
+  @Input()
+  id?: string | null;
   @Input()
   profiles?: ProfileGeneral[] = [];
-
-  ngOnInit() {
-    console.log(this.profiles);
-  }
 
   openAddProfileBottomSheet() {
     const bottomSheetRef: MatBottomSheetRef = this.bottomSheet.open(
       AddProfileComponent,
       {
         disableClose: true,
+        data: this.id,
       }
     );
   }
