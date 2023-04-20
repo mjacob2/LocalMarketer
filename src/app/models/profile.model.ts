@@ -20,7 +20,7 @@ export class Profile {
   public email?: string; //
   public customerService?: string; //
   public activities?: ToDoGeneral[];
-  public deals?: DealGeneral[];
+  public deals: DealGeneral[] = [];
   public id?: number;
   public creationDate?: Date;
 }

@@ -1,0 +1,11 @@
+<mat-card class="profile-details-todos">
+    <mat-card-header>
+        <mat-card-title>Zadania</mat-card-title>
+    </mat-card-header>
+    <mat-selection-list role="list" *ngFor="let todo of toDos">
+        <mat-list-item (click)="goToTodo(todo.id)" role="listitem">{{todo.title}}</mat-list-item>
+    </mat-selection-list>
+    <mat-card-actions align="end">
+        <button (click)="openAddToDoBottomSheet()" mat-raised-button>Utwórz nowe zadanie</button>
+    </mat-card-actions>
+</mat-card>

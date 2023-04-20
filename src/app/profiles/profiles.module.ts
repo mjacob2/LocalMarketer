@@ -14,12 +14,14 @@ import { MatCardModule } from '@angular/material/card';
 import { ProfileDetailsComponent } from './profile-details/profile-details.component';
 import { ProfileDetailsDealsComponent } from './profile-details/profile-details-deals/profile-details-deals.component';
 import { MatListModule } from '@angular/material/list';
+import { ProfileDetailsTodosComponent } from './profile-details/profile-details-todos/profile-details-todos.component';
 
 @NgModule({
   declarations: [
     ProfilesTableComponent,
     ProfileDetailsComponent,
     ProfileDetailsDealsComponent,
+    ProfileDetailsTodosComponent,
   ],
   imports: [
     CommonModule,

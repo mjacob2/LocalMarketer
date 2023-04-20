@@ -5,6 +5,7 @@ import {
 } from '@angular/material/bottom-sheet';
 import { Router } from '@angular/router';
 import { DealGeneral } from 'src/app/models/dealGeneral.mode';
+import { ToDoGeneral } from 'src/app/models/todoGeneral.model';
 
 @Component({
   selector: 'app-profile-details-deals',
@@ -13,6 +14,7 @@ import { DealGeneral } from 'src/app/models/dealGeneral.mode';
 })
 export class ProfileDetailsDealsComponent {
   constructor(private bottomSheet: MatBottomSheet, private router: Router) {}
+
   @Input()
   deals?: DealGeneral[] = [];
 

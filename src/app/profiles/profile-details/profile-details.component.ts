@@ -5,6 +5,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { DealGeneral } from 'src/app/models/dealGeneral.mode';
 import { Profile } from 'src/app/models/profile.model';
 import { ProfilesService } from 'src/app/services/profiles.service';
+import { ToDoGeneral } from '../../models/todoGeneral.model';
 
 @Component({
   selector: 'app-profile-details',
@@ -16,6 +17,7 @@ export class ProfileDetailsComponent {
   isLoading = false;
   profile: Profile = new Profile();
   profileId!: number;
+  allToDos: ToDoGeneral[] = [];
 
   constructor(
     private service: ProfilesService,
@@ -32,7 +34,20 @@ export class ProfileDetailsComponent {
 
       this.profile = await this.service.getProfileById(this.profileId);
 
-      console.log(this.profile);
+      console.log(this.profile.deals);
+
+      let deals = this.profile.deals;
+      if (deals != undefined) {
+        deals.forEach((deal) => {
+          console.log('deal ' + deal);
+          //if (deal.todos != undefined) {
+          deal.toDos.forEach((todo) => {
+            this.allToDos.push(todo);
+            console.log('todo ' + todo);
+          });
+          //}
+        });
+      }
 
       this.isLoading = false;
     });
