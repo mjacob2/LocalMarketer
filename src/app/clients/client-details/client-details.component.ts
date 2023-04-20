@@ -6,7 +6,6 @@ import { Client } from 'src/app/models/client.model';
 import { ConfirmDeleteDialogComponent } from 'src/app/shared/confirm-delete-dialog/confirm-delete-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ProfileGeneral } from 'src/app/models/profileGeneral.model';
 
 @Component({
   selector: 'app-client-details',
@@ -17,20 +16,11 @@ export class ClientDetailsComponent {
   errorMessage: string = '';
   isLoading = false;
 
-  client!: Client;
-  profiles?: ProfileGeneral[] = [];
-
-  firstName: string = '';
-  lastName: string = '';
-  phone: string = '';
-  email: string = '';
-  source: string = '';
-  description: string = '';
-  id: number = 0;
-  creationDate?: Date;
+  client: Client = new Client();
+  clientId!: number;
 
   constructor(
-    private clientsService: ClientsService,
+    private service: ClientsService,
     private route: ActivatedRoute,
     private router: Router,
     public dialog: MatDialog,
@@ -38,30 +28,18 @@ export class ClientDetailsComponent {
   ) {}
 
   async ngOnInit() {
+    this.isLoading = true;
     this.route.params.subscribe(async (params: Params) => {
-      this.id = params['id'];
-      this.client = await this.clientsService.getClientById(this.id);
-      this.profiles = this.client.profiles;
-      this.firstName = this.client.firstName;
-      this.lastName = this.client.lastName;
-      this.phone = this.client.phone;
-      this.email = this.client.email;
-      this.source = this.client.source;
-      this.description = this.client.description;
-      this.creationDate = this.client.creationDate;
+      this.clientId = params['id'];
+      this.client = await this.service.getClientById(this.clientId);
+      this.isLoading = false;
     });
   }
 
-  saveChanges(form: NgForm) {
+  saveChanges() {
     this.isLoading = true;
-    this.client.firstName = this.firstName;
-    this.client.lastName = this.lastName;
-    this.client.phone = this.phone;
-    this.client.email = this.email;
-    this.client.source = this.source;
-    this.client.description = this.description;
 
-    this.clientsService
+    this.service
       .updateClientById(this.client)
       .then(() => {
         this.errorMessage = '';
@@ -78,7 +56,7 @@ export class ClientDetailsComponent {
   }
 
   deleteClient() {
-    this.clientsService.deleteClientById(this.id);
+    this.service.deleteClientById(this.clientId);
     this.router.navigateByUrl('/clients');
   }
 

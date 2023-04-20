@@ -41,7 +41,7 @@ export class ProfilesTableComponent {
     }
   }
 
-  openClientDetailsPage(id: string) {
-    this.router.navigateByUrl(`/clients/${id}`);
+  openProfileDetailsPage(id: string) {
+    this.router.navigateByUrl(`/profiles/${id}`);
   }
 }

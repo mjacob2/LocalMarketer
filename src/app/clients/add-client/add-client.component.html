@@ -1,5 +1,5 @@
 <h2>Dodaj nowego klienta</h2>
-<form class="example-form" #addClientform="ngForm" (ngSubmit)="onSubmit(addClientform)">
+<form class="example-form" #addClientform="ngForm" (ngSubmit)="onSubmit(addClientform.value)">
     <mat-form-field appearance="outline" class="example-full-width">
         <mat-label>Imię</mat-label>
         <input matInput ngModel name="firstName" type="text">

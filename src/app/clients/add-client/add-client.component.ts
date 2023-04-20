@@ -2,8 +2,6 @@ import { Component } from '@angular/core';
 import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { Router } from '@angular/router';
 import { Client } from 'src/app/models/client.model';
-import { HttpService } from 'src/app/services/http.service';
-import { NgForm } from '@angular/forms';
 import { ClientsService } from 'src/app/services/clients.service';
 
 @Component({
@@ -20,24 +18,9 @@ export class AddClientComponent {
   errorMessage: string = '';
   isLoading = false;
 
-  onSubmit(form: NgForm) {
+  onSubmit(clientToAdd: Client) {
+    console.log(clientToAdd);
     this.isLoading = true;
-
-    const firstName = form.value.firstName;
-    const lastName = form.value.lastName;
-    const phone = form.value.phone;
-    const email = form.value.email;
-    const source = form.value.source;
-    const description = form.value.description;
-
-    const clientToAdd = new Client(
-      firstName,
-      lastName,
-      phone,
-      email,
-      source,
-      description
-    );
 
     this.http
       .addClient(clientToAdd)

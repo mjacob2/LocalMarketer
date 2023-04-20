@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ClientList } from '../models/clientList.model';
 import { HttpService } from './http.service';
-import { Client } from '../models/client.model';
-import { ProfileGeneral } from '../models/profileGeneral.model';
 import { ProfilesList } from '../models/profilesList.model';
+import { Profile } from '../models/profile.model';
+import { AddProfileRequestModel } from '../models/add-profile-request.model';
 
 @Injectable({
   providedIn: 'root',
@@ -11,11 +10,19 @@ import { ProfilesList } from '../models/profilesList.model';
 export class ProfilesService {
   constructor(private http: HttpService) {}
 
-  async addProfile(profile: ProfileGeneral) {
-    return await this.http.post<ProfileGeneral>(`/profiles`, profile);
+  async addProfile(profile: AddProfileRequestModel) {
+    return await this.http.post<AddProfileRequestModel>(`/profiles`, profile);
   }
 
   async getAllProfiles() {
     return await this.http.get<ProfilesList[]>('/profiles');
+  }
+
+  async getProfileById(id: number) {
+    return await this.http.get<Profile>(`/profiles/${id}`);
+  }
+
+  async updateProfileById(profile: Profile) {
+    return await this.http.put<Profile>(`/profiles/${profile.id}`, profile);
   }
 }

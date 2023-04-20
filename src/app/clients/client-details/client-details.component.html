@@ -5,39 +5,39 @@
             <mat-card-title>Dane kontaktowe</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-            <form class="client-details-form" #clientDetailsForm="ngForm" (ngSubmit)="saveChanges(clientDetailsForm)">
+            <form class="client-details-form" #clientDetailsForm="ngForm" (ngSubmit)="saveChanges()">
                 <mat-form-field appearance="outline" class="example-full-width">
                     <mat-label>Imię</mat-label>
-                    <input [(ngModel)]="firstName" name="firstName" matInput type="text" required>
+                    <input [(ngModel)]="client.firstName" name="firstName" matInput type="text" required>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" class="example-full-width">
                     <mat-label>Nazwisko</mat-label>
-                    <input [(ngModel)]="lastName" name="lastName" matInput type="text" required>
+                    <input [(ngModel)]="client.lastName" name="lastName" matInput type="text" required>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" class="example-full-width">
                     <mat-label>Telefon</mat-label>
                     <span matPrefix>&nbsp; +48 &nbsp;</span>
-                    <input [(ngModel)]="phone" name="phone" matInput required>
+                    <input [(ngModel)]="client.phone" name="phone" matInput required>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" class="example-full-width">
                     <mat-label>E-mail</mat-label>
-                    <input [(ngModel)]="email" name="email" matInput required>
+                    <input [(ngModel)]="client.email" name="email" matInput required>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" class="example-full-width">
                     <mat-label>Źródło</mat-label>
-                    <input [(ngModel)]="source" name="source" matInput>
+                    <input [(ngModel)]="client.source" name="source" matInput>
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" class="example-full-width">
                     <mat-label>Opis</mat-label>
-                    <textarea [(ngModel)]="description" name="description" matInput></textarea>
+                    <textarea [(ngModel)]="client.description" name="description" matInput></textarea>
                 </mat-form-field>
-                <p>ID: {{id}}</p>
-                <p>Utworzono: {{creationDate}}</p>
+                <p>ID: {{clientId}}</p>
+                <p>Utworzono: {{client.creationDate}}</p>
 
                 <mat-card-actions>
                     <button mat-raised-button color="primary" type="submit">Zapisz zmiany</button>
@@ -53,5 +53,5 @@
         <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
     </mat-card>
 
-    <app-client-details-profiles [profiles]="profiles"></app-client-details-profiles>
+    <app-client-details-profiles [profiles]="client.profiles" [clientId]="clientId"></app-client-details-profiles>
 </div>

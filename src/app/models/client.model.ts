@@ -1,15 +1,13 @@
 import { ProfileGeneral } from './profileGeneral.model';
 
 export class Client {
-  constructor(
-    public firstName: string,
-    public lastName: string,
-    public phone: string,
-    public email: string,
-    public source: string,
-    public description: string,
-    public id?: number,
-    public creationDate?: Date,
-    public profiles?: ProfileGeneral[]
-  ) {}
+  firstName: string = '';
+  lastName: string = '';
+  phone?: string;
+  email?: string;
+  source?: string;
+  description?: string;
+  id?: number;
+  creationDate?: Date;
+  profiles?: ProfileGeneral[];
 }

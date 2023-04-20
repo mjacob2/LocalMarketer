@@ -2,8 +2,9 @@ import { Component, Inject, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { ProfilesService } from 'src/app/services/profiles.service';
-import { ProfileGeneral } from '../../models/profileGeneral.model';
 import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
+import { AddProfileRequestModel } from 'src/app/models/add-profile-request.model';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-add-profile',
@@ -23,10 +24,11 @@ export class AddProfileComponent {
   onSubmit(form: NgForm) {
     this.isLoading = true;
 
-    const name = form.value.name;
-    const description = form.value.description;
-
-    const profile = new ProfileGeneral(this.clientId, name, description);
+    let profile = new AddProfileRequestModel(
+      this.clientId,
+      form.value.name,
+      form.value.description
+    );
 
     this.http
       .addProfile(profile)

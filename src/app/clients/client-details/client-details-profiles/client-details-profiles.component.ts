@@ -5,6 +5,7 @@ import {
 } from '@angular/material/bottom-sheet';
 import { ProfileGeneral } from 'src/app/models/profileGeneral.model';
 import { AddProfileComponent } from '../../add-profile/add-profile.component';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-client-details-profiles',
@@ -12,20 +13,26 @@ import { AddProfileComponent } from '../../add-profile/add-profile.component';
   styleUrls: ['./client-details-profiles.component.scss'],
 })
 export class ClientDetailsProfilesComponent {
-  constructor(private bottomSheet: MatBottomSheet) {}
+  constructor(private bottomSheet: MatBottomSheet, private router: Router) {}
 
   @Input()
-  id?: string | null;
-  @Input()
   profiles?: ProfileGeneral[] = [];
+
+  @Input()
+  clientId?: number;
 
   openAddProfileBottomSheet() {
     const bottomSheetRef: MatBottomSheetRef = this.bottomSheet.open(
       AddProfileComponent,
       {
         disableClose: true,
-        data: this.id,
+        data: this.clientId,
       }
     );
+  }
+
+  goToProfile(id: number) {
+    console.log(id);
+    this.router.navigateByUrl(`/profiles/${id}`);
   }
 }
