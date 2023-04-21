@@ -31,6 +31,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   .todos-color{
     background-color: $todos;
   }
+
+  .deals-color{
+    background-color: $deals;
+  }
   
   .mat-sidenav{
     border-right: none;

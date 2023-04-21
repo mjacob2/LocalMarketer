@@ -57,6 +57,13 @@
   --mdc-list-list-item-hover-label-text-color: white;
 }
 
+.active-link-deals{
+  background-color: $deals;
+  --mdc-list-list-item-label-text-color: white;
+  --mdc-list-list-item-focus-label-text-color: white;
+  --mdc-list-list-item-hover-label-text-color: white;
+}
+
 .mat-elevation-z2 {
   position: relative;
   z-index: 2;

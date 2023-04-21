@@ -8,6 +8,7 @@ import { TodosTableComponent } from './to-dos/todos-table/todos-table.component'
 import { ClientDetailsComponent } from './clients/client-details/client-details.component';
 import { ProfilesTableComponent } from './profiles/profiles-table/profiles-table.component';
 import { ProfileDetailsComponent } from './profiles/profile-details/profile-details.component';
+import { DealsTableComponent } from './deals/deals-table/deals-table.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,10 @@ const routes: Routes = [
       {
         path: 'profiles/:id',
         component: ProfileDetailsComponent,
+      },
+      {
+        path: 'deals',
+        component: DealsTableComponent,
       },
     ],
   },

@@ -20,6 +20,7 @@ import { ConfirmDeleteDialogComponent } from './shared/confirm-delete-dialog/con
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { DealsModule } from './deals/deals.module';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     AppRoutingModule,
     ClientsModule,
     ToDosModule,
+    DealsModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     MatButtonModule,
