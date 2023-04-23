@@ -18,6 +18,7 @@ import { Router } from '@angular/router';
 })
 export class ClientsTableComponent {
   displayedColumns = [
+    'name',
     'firstName',
     'lastName',
     'phone',

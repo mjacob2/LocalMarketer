@@ -1,57 +1,70 @@
-<div class="row-flex">
-    <mat-progress-bar *ngIf="!client" mode="indeterminate"></mat-progress-bar>
-    <mat-card class="client-details-card-personalInfo">
-        <mat-card-header>
-            <mat-card-title>Dane kontaktowe</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <form class="client-details-form" #clientDetailsForm="ngForm" (ngSubmit)="saveChanges()">
-                <mat-form-field appearance="outline" class="example-full-width">
-                    <mat-label>Imię</mat-label>
-                    <input [(ngModel)]="client.firstName" name="firstName" matInput type="text" required>
-                </mat-form-field>
+<mat-progress-bar *ngIf="!client" mode="indeterminate"></mat-progress-bar>
 
-                <mat-form-field appearance="outline" class="example-full-width">
-                    <mat-label>Nazwisko</mat-label>
-                    <input [(ngModel)]="client.lastName" name="lastName" matInput type="text" required>
-                </mat-form-field>
+<mat-card class="client-details-card-personalInfo">
 
-                <mat-form-field appearance="outline" class="example-full-width">
-                    <mat-label>Telefon</mat-label>
-                    <span matPrefix>&nbsp; +48 &nbsp;</span>
-                    <input [(ngModel)]="client.phone" name="phone" matInput required>
-                </mat-form-field>
+    <mat-card-header>
+        <mat-card-title>Dane klienta</mat-card-title>
+    </mat-card-header>
 
-                <mat-form-field appearance="outline" class="example-full-width">
-                    <mat-label>E-mail</mat-label>
-                    <input [(ngModel)]="client.email" name="email" matInput required>
-                </mat-form-field>
+    <mat-card-content>
+        <form class="client-details-form" #clientDetailsForm="ngForm" (ngSubmit)="saveChanges()">
 
-                <mat-form-field appearance="outline" class="example-full-width">
-                    <mat-label>Źródło</mat-label>
-                    <input [(ngModel)]="client.source" name="source" matInput>
-                </mat-form-field>
+            <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Nazwa</mat-label>
+                <input [(ngModel)]="client.name" name="name" matInput type="text" required>
+            </mat-form-field>
 
-                <mat-form-field appearance="outline" class="example-full-width">
-                    <mat-label>Opis</mat-label>
-                    <textarea [(ngModel)]="client.description" name="description" matInput></textarea>
-                </mat-form-field>
-                <p>ID: {{clientId}}</p>
-                <p>Utworzono: {{client.creationDate}}</p>
+            <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Nr grupy firmowej Google</mat-label>
+                <input [(ngModel)]="client.googleGroupId" name="googleGroupId" matInput type="text" required>
+            </mat-form-field>
 
-                <mat-card-actions>
-                    <button mat-raised-button color="primary" type="submit">Zapisz zmiany</button>
-                    <button (click)="openConfirmdDleteDialog()" type="button" mat-icon-button color="warn">
-                        <mat-icon>delete</mat-icon>
-                    </button>
-                </mat-card-actions>
+            <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Imię</mat-label>
+                <input [(ngModel)]="client.firstName" name="firstName" matInput type="text" required>
+            </mat-form-field>
 
-                <app-error-card *ngIf="errorMessage" errorMessage="{{errorMessage}}"></app-error-card>
+            <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Nazwisko</mat-label>
+                <input [(ngModel)]="client.lastName" name="lastName" matInput type="text" required>
+            </mat-form-field>
 
-            </form>
-        </mat-card-content>
-        <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
-    </mat-card>
+            <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Telefon</mat-label>
+                <span matPrefix>&nbsp; +48 &nbsp;</span>
+                <input [(ngModel)]="client.phone" name="phone" matInput required>
+            </mat-form-field>
 
-    <app-client-details-profiles [profiles]="client.profiles" [clientId]="clientId"></app-client-details-profiles>
-</div>
+            <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>E-mail</mat-label>
+                <input [(ngModel)]="client.email" name="email" matInput required>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Źródło</mat-label>
+                <input [(ngModel)]="client.source" name="source" matInput>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Opis</mat-label>
+                <textarea [(ngModel)]="client.description" name="description" matInput></textarea>
+            </mat-form-field>
+
+            <p>ID: {{clientId}}</p>
+            <p>Utworzono: {{client.creationDate | date: 'dd-MM-yyyy'}}</p>
+
+            <mat-card-actions>
+                <button mat-raised-button color="primary" type="submit">Zapisz zmiany</button>
+                <button (click)="openConfirmdDleteDialog()" type="button" mat-icon-button color="warn">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </mat-card-actions>
+
+            <app-error-card *ngIf="errorMessage" errorMessage="{{errorMessage}}"></app-error-card>
+        </form>
+    </mat-card-content>
+
+    <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+</mat-card>
+
+<app-client-details-profiles [profiles]="client.profiles" [clientId]="clientId"></app-client-details-profiles>

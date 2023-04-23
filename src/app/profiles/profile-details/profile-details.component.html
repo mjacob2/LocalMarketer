@@ -13,6 +13,11 @@
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>Google identyfikator</mat-label>
+                    <input [(ngModel)]="profile.googleProfileId" name="googleProfileId" matInput type="text">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="example-full-width">
                     <mat-label>Telefon</mat-label>
                     <input [(ngModel)]="profile.phone" name="phone" matInput type="text">
                 </mat-form-field>
@@ -20,6 +25,11 @@
                 <mat-form-field appearance="outline" class="example-full-width">
                     <mat-label>E-mail</mat-label>
                     <input [(ngModel)]="profile.email" name="email" matInput type="text">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>Źródło</mat-label>
+                    <input [(ngModel)]="profile.source" name="source" matInput type="text">
                 </mat-form-field>
 
                 <mat-form-field appearance="outline" class="example-full-width">

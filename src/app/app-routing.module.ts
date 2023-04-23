@@ -9,6 +9,7 @@ import { ClientDetailsComponent } from './clients/client-details/client-details.
 import { ProfilesTableComponent } from './profiles/profiles-table/profiles-table.component';
 import { ProfileDetailsComponent } from './profiles/profile-details/profile-details.component';
 import { DealsTableComponent } from './deals/deals-table/deals-table.component';
+import { DealDetailsComponent } from './deals/deal-details/deal-details.component';
 
 const routes: Routes = [
   {
@@ -43,6 +44,10 @@ const routes: Routes = [
       {
         path: 'deals',
         component: DealsTableComponent,
+      },
+      {
+        path: 'deals/:id',
+        component: DealDetailsComponent,
       },
     ],
   },

@@ -13,6 +13,14 @@
             </mat-cell>
         </ng-container>
 
+        <!-- FirstName Column -->
+        <ng-container matColumnDef="googleProfileId">
+            <mat-header-cell style="margin-left: 15px;" *matHeaderCellDef mat-sort-header> Identyfikator Google
+            </mat-header-cell>
+            <mat-cell *matCellDef="let profile"> {{profile.googleProfileId}}
+            </mat-cell>
+        </ng-container>
+
         <!-- LastName Column -->
         <ng-container matColumnDef="city">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Miasto </mat-header-cell>

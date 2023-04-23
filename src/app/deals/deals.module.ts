@@ -12,9 +12,16 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { ErrorCardComponent } from '../shared/error-card/error-card.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
+import { DealDetailsComponent } from './deal-details/deal-details.component';
+import { DealDetailsTodosComponent } from './deal-details/deal-details-todos/deal-details-todos.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
-  declarations: [DealsTableComponent],
+  declarations: [
+    DealsTableComponent,
+    DealDetailsComponent,
+    DealDetailsTodosComponent,
+  ],
   imports: [
     CommonModule,
     MatTableModule,
@@ -29,6 +36,7 @@ import { MatListModule } from '@angular/material/list';
     ErrorCardComponent,
     MatCardModule,
     MatListModule,
+    MatDatepickerModule,
   ],
 })
 export class DealsModule {}

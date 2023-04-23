@@ -12,7 +12,14 @@ import { ProfilesService } from 'src/app/services/profiles.service';
   styleUrls: ['./profiles-table.component.scss'],
 })
 export class ProfilesTableComponent {
-  displayedColumns = ['name', 'city', 'source', 'clientId', 'userId'];
+  displayedColumns = [
+    'name',
+    'googleProfileId',
+    'city',
+    'source',
+    'clientId',
+    'userId',
+  ];
   dataSource!: MatTableDataSource<ProfilesList>;
   profiles: ProfilesList[] = [];
 
@@ -27,6 +34,7 @@ export class ProfilesTableComponent {
 
   async ngOnInit() {
     this.profiles = await this.profilesService.getAllProfiles();
+    console.log(this.profiles);
     this.dataSource = new MatTableDataSource(this.profiles);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;

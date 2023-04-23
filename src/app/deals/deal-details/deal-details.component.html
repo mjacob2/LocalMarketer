@@ -1,0 +1,59 @@
+<mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+<div class="row-flex">
+    <mat-progress-bar *ngIf="!deal" mode="indeterminate"></mat-progress-bar>
+    <mat-card class="deal-details-card-generalInfo">
+        <mat-card-header>
+            <mat-card-title>Dane umowy</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form class="deal-details-form" #dealDetailsForm="ngForm" (ngSubmit)="saveChanges()">
+                <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>Nazwa</mat-label>
+                    <input [(ngModel)]="deal.name" name="name" matInput type="text">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>Etap</mat-label>
+                    <input [(ngModel)]="deal.stage" name="stage" matInput type="text">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>Cean</mat-label>
+                    <input [(ngModel)]="deal.price" name="price" matInput type="number">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Data zakończenia</mat-label>
+                    <input name="endDate" [(ngModel)]="deal.endDate" matInput [matDatepicker]="picker">
+                    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+
+
+                <mat-form-field appearance="outline" class="example-full-width">
+                    <mat-label>Opis</mat-label>
+                    <textarea [(ngModel)]="deal.description" name="description" matInput></textarea>
+                </mat-form-field>
+
+                <p>ID: {{deal.id}}</p>
+                <p>Utworzono: {{deal.creationDate}}</p>
+                <p>Kreator: {{deal.creatorId}}</p>
+                <p>Id profilu: {{deal.profileId}}</p>
+
+
+                <mat-card-actions>
+                    <button mat-raised-button color="primary" type="submit">Zapisz zmiany</button>
+                    <button (click)="openConfirmdDleteDialog()" type="button" mat-icon-button color="warn">
+                        <mat-icon>delete</mat-icon>
+                    </button>
+                </mat-card-actions>
+
+                <app-error-card *ngIf="errorMessage" errorMessage="{{errorMessage}}"></app-error-card>
+
+            </form>
+        </mat-card-content>
+
+    </mat-card>
+    <app-deal-details-todos [toDos]="deal.toDos" [dealId]="dealId"></app-deal-details-todos>
+
+</div>

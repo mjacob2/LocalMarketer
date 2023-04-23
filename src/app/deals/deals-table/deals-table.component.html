@@ -16,13 +16,13 @@
         <!-- LastName Column -->
         <ng-container matColumnDef="creationDate">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Data utworzenia </mat-header-cell>
-            <mat-cell *matCellDef="let deal"> {{deal.creationDate}} </mat-cell>
+            <mat-cell *matCellDef="let deal"> {{deal.creationDate | date:'dd-MM-yyyy'}} </mat-cell>
         </ng-container>
 
         <!-- Name Column -->
         <ng-container matColumnDef="endDate">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Data zakończenia </mat-header-cell>
-            <mat-cell *matCellDef="let deal"> {{deal.endDate}} </mat-cell>
+            <mat-cell *matCellDef="let deal"> {{deal.endDate | date:'dd-MM-yyyy'}} </mat-cell>
         </ng-container>
 
         <!-- Color Column -->

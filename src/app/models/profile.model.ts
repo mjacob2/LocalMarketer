@@ -3,6 +3,7 @@ import { ToDoGeneral } from './todoGeneral.model';
 
 export class Profile {
   public name?: string; //
+  public googleProfileId?: string;
   public creatorId?: number;
   public userId?: number;
   public clientId?: number;

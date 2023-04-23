@@ -7,6 +7,13 @@
     <mat-table [dataSource]="dataSource" matSort>
 
         <!-- FirstName Column -->
+        <ng-container matColumnDef="name">
+            <mat-header-cell style="margin-left: 15px;" *matHeaderCellDef mat-sort-header> Nazwa </mat-header-cell>
+            <mat-cell *matCellDef="let client"> {{client.name}}
+            </mat-cell>
+        </ng-container>
+
+        <!-- FirstName Column -->
         <ng-container matColumnDef="firstName">
             <mat-header-cell style="margin-left: 15px;" *matHeaderCellDef mat-sort-header> Imię </mat-header-cell>
             <mat-cell *matCellDef="let client"> {{client.firstName}}

@@ -30,6 +30,7 @@ export class ClientDetailsComponent {
     this.route.params.subscribe(async (params: Params) => {
       this.clientId = params['id'];
       this.client = await this.service.getClientById(this.clientId);
+      console.log(this.client);
       this.isLoading = false;
     });
   }

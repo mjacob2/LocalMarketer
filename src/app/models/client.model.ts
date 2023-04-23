@@ -1,6 +1,8 @@
 import { ProfileGeneral } from './profileGeneral.model';
 
 export class Client {
+  name: string = '';
+  googleGroupId: string = '';
   firstName: string = '';
   lastName: string = '';
   phone?: string;

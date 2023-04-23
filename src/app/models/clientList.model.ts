@@ -1,7 +1,8 @@
 export interface ClientList {
   Id: number;
   CreationDate: Date;
-  firstName: string;
+  Name: string;
+  FirstName: string;
   LastName: string;
   Phone: string;
   Email: string;

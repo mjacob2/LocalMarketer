@@ -25,4 +25,8 @@ export class ProfilesService {
   async updateProfileById(profile: Profile) {
     return await this.http.put<Profile>(`/profiles/${profile.id}`, profile);
   }
+
+  async deleteProfileById(id: number) {
+    return await this.http.delete<Profile>(`/profiles/${id}`);
+  }
 }

@@ -6,6 +6,7 @@ import { DealGeneral } from 'src/app/models/dealGeneral.mode';
 import { Profile } from 'src/app/models/profile.model';
 import { ProfilesService } from 'src/app/services/profiles.service';
 import { ToDoGeneral } from '../../models/todoGeneral.model';
+import { ConfirmDeleteDialogComponent } from 'src/app/shared/confirm-delete-dialog/confirm-delete-dialog.component';
 
 @Component({
   selector: 'app-profile-details',
@@ -23,7 +24,8 @@ export class ProfileDetailsComponent {
     private service: ProfilesService,
     private route: ActivatedRoute,
     public dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router
   ) {}
 
   async ngOnInit() {
@@ -72,5 +74,15 @@ export class ProfileDetailsComponent {
       });
   }
 
-  openConfirmdDleteDialog() {}
+  deleteProfile() {
+    this.service.deleteProfileById(this.profileId);
+    this.router.navigateByUrl('/profiles');
+  }
+
+  openConfirmdDleteDialog() {
+    const dialogRef = this.dialog.open(ConfirmDeleteDialogComponent);
+    dialogRef.componentInstance.onDelete.subscribe(() => {
+      this.deleteProfile();
+    });
+  }
 }
