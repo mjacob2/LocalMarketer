@@ -1,0 +1,60 @@
+@import '/src/colors.scss';
+
+.example-container {
+  margin: 10px;
+  padding: 10px;
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+  }
+
+  .example-header {
+    min-height: 64px;
+    padding: 8px 24px 0;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  mat-table {
+    background-color: $todos;
+  }
+
+  .mat-mdc-row:hover {
+    background-color: $todos-dark !important;
+  }
+  
+  .bottom-right{
+    position: fixed;
+    right: 2em;
+    bottom: 2em;
+  }
+
+  .mat-mdc-row{
+    padding-left: 15px;
+    margin-top: 10px;
+    border-radius: 26px;
+    background-color: white;
+    border: none !important;
+   }
+
+   .mat-mdc-cell{
+    border-radius: 26px;
+    border: none !important;
+   }
+
+   mat-paginator{
+    background-color: $todos;
+   }
+
+   mat-header-row{
+    min-height: 16px !important;
+   }
+
+   mat-header-cell{
+    color: white;
+    border-bottom-style:none;
+   }
+  

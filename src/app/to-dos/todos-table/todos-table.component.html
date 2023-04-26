@@ -1,1 +1,47 @@
-<p>todos-table works!</p>
+<mat-progress-bar *ngIf="!dataSource" mode="indeterminate"></mat-progress-bar>
+<div *ngIf="dataSource" class="example-container mat-elevation-z0">
+    <mat-form-field style="max-width: 250px;">
+        <input placeholder="wyszukaj..." matInput (keyup)="applyFilter($event)" #input>
+    </mat-form-field>
+
+    <mat-table [dataSource]="dataSource" matSort>
+
+        <!-- FirstName Column -->
+        <ng-container matColumnDef="title">
+            <mat-header-cell style="margin-left: 15px;" *matHeaderCellDef mat-sort-header> Tytuł </mat-header-cell>
+            <mat-cell *matCellDef="let toDo"> {{toDo.title}}
+            </mat-cell>
+        </ng-container>
+
+        <!-- LastName Column -->
+        <ng-container matColumnDef="dueDate">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Termin </mat-header-cell>
+            <mat-cell *matCellDef="let toDo"> {{toDo.dueDate | date:'dd-MM-yyyy'}} </mat-cell>
+        </ng-container>
+
+        <!-- LastName Column -->
+        <ng-container matColumnDef="profileName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Profil </mat-header-cell>
+            <mat-cell *matCellDef="let toDo"> <a [routerLink]="['/profiles', toDo.profileId]">{{ toDo.profileName }}</a>
+            </mat-cell>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="isFinished">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Ukończone </mat-header-cell>
+            <mat-cell *matCellDef="let toDo"> {{toDo.isFinished }} </mat-cell>
+        </ng-container>
+
+        <!-- Color Column -->
+        <ng-container matColumnDef="userFullName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Użytkownik </mat-header-cell>
+            <mat-cell *matCellDef="let toDo"> {{toDo.userFullName}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row (click)="openToDoDetailsPage(row.id)" *matRowDef="let row; columns: displayedColumns;">
+        </mat-row>
+    </mat-table>
+
+    <mat-paginator></mat-paginator>
+</div>
