@@ -1,0 +1,32 @@
+<h2>Utwórz nowe zadanie</h2>
+
+<form class="example-form" (ngSubmit)="addTodo()">
+
+    <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Tytuł zadania</mat-label>
+        <input [(ngModel)]="toDo.title" matInput name="title" type="text">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+        <mat-label>Termin</mat-label>
+        <input name="startDate" [(ngModel)]="toDo.dueDate" matInput [matDatepicker]="picker">
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-checkbox class="example-margin" [(ngModel)]="toDo.isFinished">Oznacz jako ukończone</mat-checkbox>
+
+    <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Opis</mat-label>
+        <textarea matInput [(ngModel)]="toDo.description" name="description" type="text"></textarea>
+    </mat-form-field>
+
+    <div class="example-button-row">
+        <button mat-raised-button color="primary" type="submit">Dodaj</button>
+        <button type="button" (click)="close()" style="margin-left: 16px;" mat-button>Anuluj</button>
+    </div>
+</form>
+
+<app-error-card *ngIf="errorMessage" errorMessage="{{errorMessage}}"></app-error-card>
+
+<mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>

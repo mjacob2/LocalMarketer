@@ -1,10 +1,8 @@
 import { Component, Inject } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import {
   MAT_BOTTOM_SHEET_DATA,
   MatBottomSheetRef,
 } from '@angular/material/bottom-sheet';
-import { Router } from '@angular/router';
 import { AddDealRequestModel } from 'src/app/models/add-deal-request.model';
 import { Package } from 'src/app/models/package.model';
 import { DealsService } from 'src/app/services/deals.service';
@@ -26,7 +24,6 @@ export class AddDealComponent {
     private _bottomSheetRef: MatBottomSheetRef<AddDealComponent>,
     private http: DealsService,
     private httpPackages: PackagesService,
-    private router: Router,
     @Inject(MAT_BOTTOM_SHEET_DATA) public profileId: number
   ) {}
 

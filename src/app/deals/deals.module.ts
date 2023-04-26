@@ -15,12 +15,15 @@ import { MatListModule } from '@angular/material/list';
 import { DealDetailsComponent } from './deal-details/deal-details.component';
 import { DealDetailsTodosComponent } from './deal-details/deal-details-todos/deal-details-todos.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { AddTodoComponent } from './add-todo/add-todo.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
     DealsTableComponent,
     DealDetailsComponent,
     DealDetailsTodosComponent,
+    AddTodoComponent,
   ],
   imports: [
     CommonModule,
@@ -37,6 +40,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatCardModule,
     MatListModule,
     MatDatepickerModule,
+    MatCheckboxModule,
   ],
 })
 export class DealsModule {}

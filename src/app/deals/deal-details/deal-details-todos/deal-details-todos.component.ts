@@ -5,6 +5,7 @@ import {
 } from '@angular/material/bottom-sheet';
 import { Router } from '@angular/router';
 import { ToDoGeneral } from 'src/app/models/todoGeneral.model';
+import { AddTodoComponent } from '../../add-todo/add-todo.component';
 
 @Component({
   selector: 'app-deal-details-todos',
@@ -20,14 +21,20 @@ export class DealDetailsTodosComponent {
   @Input()
   dealId?: number;
 
+  @Input()
+  dealEndDate?: Date;
+
   openAddToDoBottomSheet() {
-    /*     const bottomSheetRef: MatBottomSheetRef = this.bottomSheet.open(
-      AddToDoComponent,
+    const bottomSheetRef: MatBottomSheetRef = this.bottomSheet.open(
+      AddTodoComponent,
       {
         disableClose: true,
-        data: this.dealId,
+        data: {
+          dealId: this.dealId,
+          dealEndDate: this.dealEndDate,
+        },
       }
-    ); */
+    );
   }
 
   goToToDo(id: number) {
