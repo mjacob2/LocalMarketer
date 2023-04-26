@@ -4,7 +4,7 @@ import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { ProfilesService } from 'src/app/services/profiles.service';
 import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { AddProfileRequestModel } from 'src/app/models/add-profile-request.model';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-profile',

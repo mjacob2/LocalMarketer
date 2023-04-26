@@ -15,6 +15,9 @@ import { ProfileDetailsComponent } from './profile-details/profile-details.compo
 import { ProfileDetailsDealsComponent } from './profile-details/profile-details-deals/profile-details-deals.component';
 import { MatListModule } from '@angular/material/list';
 import { ProfileDetailsTodosComponent } from './profile-details/profile-details-todos/profile-details-todos.component';
+import { AddDealComponent } from './add-deal/add-deal.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -22,6 +25,7 @@ import { ProfileDetailsTodosComponent } from './profile-details/profile-details-
     ProfileDetailsComponent,
     ProfileDetailsDealsComponent,
     ProfileDetailsTodosComponent,
+    AddDealComponent,
   ],
   imports: [
     CommonModule,
@@ -37,6 +41,8 @@ import { ProfileDetailsTodosComponent } from './profile-details/profile-details-
     FormsModule,
     ReactiveFormsModule,
     MatListModule,
+    MatDatepickerModule,
+    MatSelectModule,
   ],
 })
 export class ProfilesModule {}

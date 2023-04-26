@@ -1,17 +1,16 @@
-import { DatePipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Deal } from 'src/app/models/deal.model';
 import { ToDoGeneral } from 'src/app/models/todoGeneral.model';
 import { DealsService } from 'src/app/services/deals.service';
+import { ConfirmDeleteDialogComponent } from 'src/app/shared/confirm-delete-dialog/confirm-delete-dialog.component';
 
 @Component({
   selector: 'app-deal-details',
   templateUrl: './deal-details.component.html',
   styleUrls: ['./deal-details.component.scss'],
-  providers: [DatePipe],
 })
 export class DealDetailsComponent {
   errorMessage: string = '';
@@ -19,14 +18,13 @@ export class DealDetailsComponent {
   deal: Deal = new Deal();
   dealId!: number;
   toDos: ToDoGeneral[] = [];
-  selectedDate?: Date;
 
   constructor(
     private service: DealsService,
     private route: ActivatedRoute,
+    private router: Router,
     public dialog: MatDialog,
-    private snackBar: MatSnackBar,
-    private datePipe: DatePipe
+    private snackBar: MatSnackBar
   ) {}
 
   async ngOnInit() {
@@ -60,5 +58,15 @@ export class DealDetailsComponent {
       });
   }
 
-  openConfirmdDleteDialog() {}
+  deleteDeal() {
+    this.service.deleteDealById(this.dealId);
+    this.router.navigateByUrl('/deals');
+  }
+
+  openConfirmdDleteDialog() {
+    const dialogRef = this.dialog.open(ConfirmDeleteDialogComponent);
+    dialogRef.componentInstance.onDelete.subscribe(() => {
+      this.deleteDeal();
+    });
+  }
 }

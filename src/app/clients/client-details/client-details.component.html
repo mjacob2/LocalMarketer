@@ -1,51 +1,52 @@
 <mat-progress-bar *ngIf="!client" mode="indeterminate"></mat-progress-bar>
 
-<mat-card class="client-details-card-personalInfo">
+<mat-card class="card">
 
-    <mat-card-header>
+    <mat-card-header class="card-header">
         <mat-card-title>Dane klienta</mat-card-title>
     </mat-card-header>
 
     <mat-card-content>
-        <form class="client-details-form" #clientDetailsForm="ngForm" (ngSubmit)="saveChanges()">
 
-            <mat-form-field appearance="outline" class="example-full-width">
+        <form #clientDetailsForm="ngForm" (ngSubmit)="saveChanges()">
+
+            <mat-form-field appearance="outline">
                 <mat-label>Nazwa</mat-label>
                 <input [(ngModel)]="client.name" name="name" matInput type="text" required>
             </mat-form-field>
 
-            <mat-form-field appearance="outline" class="example-full-width">
+            <mat-form-field appearance="outline">
                 <mat-label>Nr grupy firmowej Google</mat-label>
                 <input [(ngModel)]="client.googleGroupId" name="googleGroupId" matInput type="text" required>
             </mat-form-field>
 
-            <mat-form-field appearance="outline" class="example-full-width">
+            <mat-form-field appearance="outline">
                 <mat-label>Imię</mat-label>
                 <input [(ngModel)]="client.firstName" name="firstName" matInput type="text" required>
             </mat-form-field>
 
-            <mat-form-field appearance="outline" class="example-full-width">
+            <mat-form-field appearance="outline">
                 <mat-label>Nazwisko</mat-label>
                 <input [(ngModel)]="client.lastName" name="lastName" matInput type="text" required>
             </mat-form-field>
 
-            <mat-form-field appearance="outline" class="example-full-width">
+            <mat-form-field appearance="outline">
                 <mat-label>Telefon</mat-label>
                 <span matPrefix>&nbsp; +48 &nbsp;</span>
                 <input [(ngModel)]="client.phone" name="phone" matInput required>
             </mat-form-field>
 
-            <mat-form-field appearance="outline" class="example-full-width">
+            <mat-form-field appearance="outline">
                 <mat-label>E-mail</mat-label>
                 <input [(ngModel)]="client.email" name="email" matInput required>
             </mat-form-field>
 
-            <mat-form-field appearance="outline" class="example-full-width">
+            <mat-form-field appearance="outline">
                 <mat-label>Źródło</mat-label>
                 <input [(ngModel)]="client.source" name="source" matInput>
             </mat-form-field>
 
-            <mat-form-field appearance="outline" class="example-full-width">
+            <mat-form-field appearance="outline">
                 <mat-label>Opis</mat-label>
                 <textarea [(ngModel)]="client.description" name="description" matInput></textarea>
             </mat-form-field>
@@ -61,10 +62,13 @@
             </mat-card-actions>
 
             <app-error-card *ngIf="errorMessage" errorMessage="{{errorMessage}}"></app-error-card>
+
         </form>
+
     </mat-card-content>
 
     <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+
 </mat-card>
 
 <app-client-details-profiles [profiles]="client.profiles" [clientId]="clientId"></app-client-details-profiles>

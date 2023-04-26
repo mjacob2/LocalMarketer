@@ -6,6 +6,7 @@ import {
 import { Router } from '@angular/router';
 import { DealGeneral } from 'src/app/models/dealGeneral.mode';
 import { ToDoGeneral } from 'src/app/models/todoGeneral.model';
+import { AddDealComponent } from '../../add-deal/add-deal.component';
 
 @Component({
   selector: 'app-profile-details-deals',
@@ -22,13 +23,13 @@ export class ProfileDetailsDealsComponent {
   profileId?: number;
 
   openAddDealBottomSheet() {
-    /*     const bottomSheetRef: MatBottomSheetRef = this.bottomSheet.open(
+    const bottomSheetRef: MatBottomSheetRef = this.bottomSheet.open(
       AddDealComponent,
       {
         disableClose: true,
         data: this.profileId,
       }
-    ); */
+    );
   }
 
   goToDeal(id: number) {

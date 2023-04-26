@@ -1,0 +1,44 @@
+<h2>Utwórz nową umowę</h2>
+
+<form class="example-form" (ngSubmit)="addDeal()">
+
+    <!-- <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Nazwa umowy</mat-label>
+        <input [(ngModel)]="deal.name" matInput name="name" type="text">
+    </mat-form-field> -->
+
+    <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Pakiet</mat-label>
+        <mat-select [(ngModel)]="deal.packageId" name="package">
+            <mat-option *ngFor="let package of packages" [value]="package.id">
+                {{package.name}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Cena</mat-label>
+        <input matInput [(ngModel)]="deal.price" name="price" type="number">
+    </mat-form-field>
+
+    <!-- <mat-form-field appearance="outline">
+        <mat-label>Data zakończenia</mat-label>
+        <input name="endDate" [(ngModel)]="deal.endDate" matInput [matDatepicker]="picker">
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field> -->
+
+    <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Opis</mat-label>
+        <textarea matInput [(ngModel)]="deal.description" name="description" type="text"></textarea>
+    </mat-form-field>
+
+    <div class="example-button-row">
+        <button mat-raised-button color="primary" type="submit">Dodaj</button>
+        <button type="button" (click)="close()" style="margin-left: 16px;" mat-button>Anuluj</button>
+    </div>
+</form>
+
+<app-error-card *ngIf="errorMessage" errorMessage="{{errorMessage}}"></app-error-card>
+
+<mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
