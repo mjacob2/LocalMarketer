@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
+import { MatSort, MatSortable } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ToDoList } from 'src/app/models/toDo-list.model';
@@ -19,7 +19,7 @@ export class TodosTableComponent {
     'isFinished',
     'userFullName',
   ];
-  dataSource!: MatTableDataSource<ToDoList>;
+  dataSource = new MatTableDataSource();
   todos: ToDoList[] = [];
 
   @ViewChild(MatPaginator)
@@ -29,9 +29,11 @@ export class TodosTableComponent {
   constructor(private router: Router, private todosService: TodosService) {}
 
   async ngOnInit() {
-    this.todos = await this.todosService.getAllTodos();
-    this.dataSource = new MatTableDataSource(this.todos);
-    this.dataSource.paginator = this.paginator;
+    const todos = await this.todosService.getAllTodos();
+    this.dataSource.data = todos;
+  }
+
+  ngAfterViewInit() {
     this.dataSource.sort = this.sort;
   }
 

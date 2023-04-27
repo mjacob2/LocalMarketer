@@ -18,7 +18,6 @@ export class AddDealComponent {
   isLoading = false;
   deal = new AddDealRequestModel();
   packages: Package[] = [];
-  newDate: Date = new Date();
 
   constructor(
     private _bottomSheetRef: MatBottomSheetRef<AddDealComponent>,
@@ -39,11 +38,26 @@ export class AddDealComponent {
     const selectedPackage = this.packages.find(
       (x) => x.id === this.deal.packageId
     );
-    const duration = selectedPackage?.durationInMonths;
-    const name = selectedPackage?.name;
 
-    this.newDate.setMonth(this.newDate.getMonth() + duration!);
-    this.deal.endDate = this.newDate;
+    const name = selectedPackage?.name;
+    const selectedPackageMinPrice = selectedPackage?.minimumPrice;
+
+    const newDate = new Date();
+    const duration = selectedPackage?.durationInMonths;
+    const currentMonth = newDate.getMonth();
+    newDate.setMonth(currentMonth + duration!);
+    if (newDate.getMonth() !== (currentMonth + duration!) % 12) {
+      if (currentMonth + duration! < 0) {
+        newDate.setFullYear(newDate.getFullYear() - 1);
+        newDate.setMonth(11);
+      } else {
+        newDate.setFullYear(newDate.getFullYear() + 1);
+        newDate.setMonth(0);
+      }
+    }
+
+    this.deal.endDate = newDate;
+    this.deal.selectedPackageMinPrice = selectedPackageMinPrice;
     this.deal.name = name;
 
     this.http

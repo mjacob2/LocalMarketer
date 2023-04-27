@@ -16,6 +16,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { RouterModule } from '@angular/router';
 import { TodoDetailsComponent } from './todo-details/todo-details.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [TodosTableComponent, TodoDetailsComponent],
@@ -36,6 +37,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatDatepickerModule,
     RouterModule,
     MatCheckboxModule,
+    MatSortModule,
   ],
 })
 export class ToDosModule {}

@@ -32,14 +32,12 @@ export class AddProfileComponent {
       form.value.description
     );
 
-    console.log(profile);
-
     this.http
       .addProfile(profile)
       .then(() => {
         this._bottomSheetRef.dismiss();
         this.isLoading = false;
-        // navigate to newly created Profile
+        window.location.reload();
       })
       .catch((error) => {
         this.isLoading = false;

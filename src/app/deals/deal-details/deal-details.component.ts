@@ -6,6 +6,7 @@ import { Deal } from 'src/app/models/deal.model';
 import { ToDoGeneral } from 'src/app/models/todoGeneral.model';
 import { DealsService } from 'src/app/services/deals.service';
 import { ConfirmDeleteDialogComponent } from 'src/app/shared/confirm-delete-dialog/confirm-delete-dialog.component';
+import { Package } from '../../models/package.model';
 
 @Component({
   selector: 'app-deal-details',
@@ -34,14 +35,13 @@ export class DealDetailsComponent {
       this.dealId = params['id'];
       this.deal = await this.service.getDealById(this.dealId);
       //this.deal.endDate = this.datePipe.transform(this.myDate, 'yyyy-MM-dd');
-      console.log(this.deal.endDate);
+      console.log(this.deal);
       this.isLoading = false;
     });
   }
 
   saveChanges() {
     this.isLoading = true;
-
     this.service
       .updateDealById(this.deal)
       .then(() => {

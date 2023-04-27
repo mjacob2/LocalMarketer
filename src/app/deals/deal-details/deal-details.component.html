@@ -41,6 +41,7 @@
             <p>Utworzono: {{deal.creationDate | date: 'dd-MM-yyyy'}}</p>
             <p>Kreator: {{deal.creatorId}}</p>
             <p>Id profilu: {{deal.profileId}}</p>
+            <p>Uzytkownik profilu: {{deal.profileUserId}}</p>
 
 
             <mat-card-actions>
@@ -60,4 +61,5 @@
 
 </mat-card>
 
-<app-deal-details-todos [toDos]="deal.toDos" [dealId]="dealId" [dealEndDate]="deal.endDate"></app-deal-details-todos>
+<app-deal-details-todos [toDos]="deal.toDos" [dealId]="dealId" [dealEndDate]="deal.endDate"
+    [dealCreationDate]="deal.creationDate" [profileUserId]="deal.profileUserId"></app-deal-details-todos>

@@ -11,4 +11,6 @@ export class Deal {
   public description?: string;
   public stage?: string;
   public toDos?: ToDoGeneral[];
+  public profileUserId?: number;
+  public packageId?: number;
 }

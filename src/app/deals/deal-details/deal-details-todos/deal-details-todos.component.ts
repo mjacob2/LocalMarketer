@@ -24,7 +24,14 @@ export class DealDetailsTodosComponent {
   @Input()
   dealEndDate?: Date;
 
+  @Input()
+  dealCreationDate?: Date;
+
+  @Input()
+  profileUserId?: number;
+
   openAddToDoBottomSheet() {
+    console.log(this.profileUserId);
     const bottomSheetRef: MatBottomSheetRef = this.bottomSheet.open(
       AddTodoComponent,
       {
@@ -32,13 +39,14 @@ export class DealDetailsTodosComponent {
         data: {
           dealId: this.dealId,
           dealEndDate: this.dealEndDate,
+          profileUserId: this.profileUserId,
+          dealCreationDate: this.dealCreationDate,
         },
       }
     );
   }
 
   goToToDo(id: number) {
-    console.log(id);
     this.router.navigateByUrl(`/todos/${id}`);
   }
 }

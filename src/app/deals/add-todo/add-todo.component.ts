@@ -19,10 +19,14 @@ export class AddTodoComponent {
   ) {
     this.dealId = data.dealId;
     this.dealEndDate = data.dealEndDate;
+    this.profileUserId = data.profileUserId;
+    this.dealCreationDate = data.dealCreationDate;
   }
 
   dealId!: number;
   dealEndDate!: Date;
+  dealCreationDate!: Date;
+  profileUserId!: number;
   errorMessage: string = '';
   isLoading = false;
   toDo = new AddTodoRequestModel();
@@ -32,6 +36,8 @@ export class AddTodoComponent {
 
     this.toDo.dealId = this.dealId;
     this.toDo.dealEndDate = this.dealEndDate;
+    this.toDo.userId = this.profileUserId;
+    this.toDo.dealCreationDate = this.dealCreationDate;
 
     this.http
       .addTodo(this.toDo)

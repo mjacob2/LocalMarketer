@@ -4,13 +4,13 @@
         <input placeholder="wyszukaj..." matInput (keyup)="applyFilter($event)" #input>
     </mat-form-field>
 
-    <mat-table [dataSource]="dataSource" matSort>
+    <mat-table [dataSource]="dataSource" matSort #sortRef="matSort">
 
         <!-- FirstName Column -->
         <ng-container matColumnDef="title">
-            <mat-header-cell style="margin-left: 15px;" *matHeaderCellDef mat-sort-header> Tytuł </mat-header-cell>
-            <mat-cell *matCellDef="let toDo"> {{toDo.title}}
-            </mat-cell>
+            <mat-header-cell mat-sort-header style="margin-left: 15px;" *matHeaderCellDef mat-sort-header> Tytuł
+            </mat-header-cell>
+            <mat-cell *matCellDef="let toDo"> {{toDo.title}}</mat-cell>
         </ng-container>
 
         <!-- LastName Column -->
