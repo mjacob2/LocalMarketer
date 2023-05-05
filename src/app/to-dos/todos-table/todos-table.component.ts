@@ -29,8 +29,9 @@ export class TodosTableComponent {
   constructor(private router: Router, private todosService: TodosService) {}
 
   async ngOnInit() {
-    const todos = await this.todosService.getAllTodos();
+    const todos = await this.todosService.getUnfinishedTodos();
     this.dataSource.data = todos;
+    this.sort.sort({ id: 'dueDate', start: 'asc' } as MatSortable);
   }
 
   ngAfterViewInit() {

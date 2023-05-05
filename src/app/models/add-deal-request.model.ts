@@ -5,6 +5,8 @@ export class AddDealRequestModel {
   public name?: string;
   public price?: number;
   public endDate?: Date;
+  public profileName?: string;
+  public clientEmail?: string;
   public stage: string = 'domyslny stage';
   public description: string = '';
 }

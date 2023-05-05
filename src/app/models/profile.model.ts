@@ -20,8 +20,9 @@ export class Profile {
   public phone?: string; //
   public email?: string; //
   public customerService?: string; //
-  public activities?: ToDoGeneral[];
+  public toDos?: ToDoGeneral[];
   public deals: DealGeneral[] = [];
   public id?: number;
   public creationDate?: Date;
+  public clientEmail?: string;
 }

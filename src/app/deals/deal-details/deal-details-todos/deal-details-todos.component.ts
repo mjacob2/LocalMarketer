@@ -16,7 +16,7 @@ export class DealDetailsTodosComponent {
   constructor(private bottomSheet: MatBottomSheet, private router: Router) {}
 
   @Input()
-  toDos?: ToDoGeneral[] = [];
+  toDos?: ToDoGeneral[];
 
   @Input()
   dealId?: number;
@@ -44,6 +44,10 @@ export class DealDetailsTodosComponent {
         },
       }
     );
+
+    this.toDos!.forEach((todo) => {
+      console.log(todo);
+    });
   }
 
   goToToDo(id: number) {

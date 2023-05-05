@@ -4,7 +4,6 @@ import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { ProfilesService } from 'src/app/services/profiles.service';
 import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 import { AddProfileRequestModel } from 'src/app/models/add-profile-request.model';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-profile',
@@ -18,7 +17,6 @@ export class AddProfileComponent {
   constructor(
     private _bottomSheetRef: MatBottomSheetRef<AddProfileComponent>,
     private http: ProfilesService,
-    private router: Router,
     @Inject(MAT_BOTTOM_SHEET_DATA) public clientId: number
   ) {}
 

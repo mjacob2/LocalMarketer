@@ -23,8 +23,16 @@ export class AddDealComponent {
     private _bottomSheetRef: MatBottomSheetRef<AddDealComponent>,
     private http: DealsService,
     private httpPackages: PackagesService,
-    @Inject(MAT_BOTTOM_SHEET_DATA) public profileId: number
-  ) {}
+    @Inject(MAT_BOTTOM_SHEET_DATA) public data: any
+  ) {
+    this.profileId = data.profileId;
+    this.profileName = data.profileName;
+    this.clientEmail = data.clientEmail;
+  }
+
+  profileId!: number;
+  profileName!: string;
+  clientEmail!: string;
 
   async ngOnInit() {
     this.packages = await this.httpPackages.getAllPackages();
@@ -34,6 +42,8 @@ export class AddDealComponent {
     this.isLoading = true;
 
     this.deal.profileId = this.profileId;
+    this.deal.profileName = this.profileName;
+    this.deal.clientEmail = this.clientEmail;
 
     const selectedPackage = this.packages.find(
       (x) => x.id === this.deal.packageId

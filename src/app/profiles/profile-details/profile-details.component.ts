@@ -18,6 +18,8 @@ export class ProfileDetailsComponent {
   isLoading = false;
   profile: Profile = new Profile();
   profileId!: number;
+  profileName?: string;
+  clientEmail?: string;
   allToDos: ToDoGeneral[] = [];
 
   constructor(
@@ -36,7 +38,8 @@ export class ProfileDetailsComponent {
 
       this.profile = await this.service.getProfileById(this.profileId);
 
-      console.log(this.profile.deals);
+      this.profileName = this.profile.name;
+      this.clientEmail = this.profile.clientEmail;
 
       let deals = this.profile.deals;
       if (deals != undefined) {

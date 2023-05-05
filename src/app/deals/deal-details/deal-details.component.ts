@@ -3,10 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Deal } from 'src/app/models/deal.model';
-import { ToDoGeneral } from 'src/app/models/todoGeneral.model';
 import { DealsService } from 'src/app/services/deals.service';
 import { ConfirmDeleteDialogComponent } from 'src/app/shared/confirm-delete-dialog/confirm-delete-dialog.component';
-import { Package } from '../../models/package.model';
 
 @Component({
   selector: 'app-deal-details',
@@ -18,7 +16,6 @@ export class DealDetailsComponent {
   isLoading = false;
   deal: Deal = new Deal();
   dealId!: number;
-  toDos: ToDoGeneral[] = [];
 
   constructor(
     private service: DealsService,
@@ -34,7 +31,6 @@ export class DealDetailsComponent {
     this.route.params.subscribe(async (params: Params) => {
       this.dealId = params['id'];
       this.deal = await this.service.getDealById(this.dealId);
-      //this.deal.endDate = this.datePipe.transform(this.myDate, 'yyyy-MM-dd');
       console.log(this.deal);
       this.isLoading = false;
     });

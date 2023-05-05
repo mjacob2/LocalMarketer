@@ -7,7 +7,8 @@
         <input [(ngModel)]="deal.name" matInput name="name" type="text">
     </mat-form-field> -->
 
-    <mat-form-field appearance="outline" class="example-full-width">
+    <mat-spinner style="height: 36px;" *ngIf="packages.length <= 0"></mat-spinner>
+    <mat-form-field *ngIf="packages.length > 0" appearance="outline" class="example-full-width">
         <mat-label>Pakiet</mat-label>
         <mat-select [(ngModel)]="deal.packageId" name="package">
             <mat-option *ngFor="let package of packages" [value]="package.id">

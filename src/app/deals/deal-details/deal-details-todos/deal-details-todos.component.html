@@ -3,7 +3,8 @@
         <mat-card-title>Zadania dla tej umowy</mat-card-title>
     </mat-card-header>
     <mat-selection-list role="list" *ngFor="let toDo of toDos">
-        <mat-list-item (click)="goToToDo(toDo.id)" role="listitem">{{toDo.title}}</mat-list-item>
+        <mat-list-item [class.crossedText]="toDo.isFinished" (click)="goToToDo(toDo.id)"
+            role="listitem">{{toDo.title}}</mat-list-item>
     </mat-selection-list>
     <mat-card-actions align="end">
         <button (click)="openAddToDoBottomSheet()" mat-raised-button>Dodaj nowe zadanie</button>

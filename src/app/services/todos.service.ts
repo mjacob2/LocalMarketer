@@ -14,6 +14,10 @@ export class TodosService {
     return await this.http.get<ToDoList[]>('/todos');
   }
 
+  async getUnfinishedTodos() {
+    return await this.http.get<ToDoList[]>('/todos?ShowOnlyUnfinished=true');
+  }
+
   async addTodo(todo: AddTodoRequestModel) {
     return await this.http.post<AddTodoRequestModel>(`/todos`, todo);
   }

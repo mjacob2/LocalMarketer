@@ -10,18 +10,9 @@ import { ToDoGeneral } from 'src/app/models/todoGeneral.model';
 })
 export class ProfileDetailsTodosComponent {
   constructor(private bottomSheet: MatBottomSheet, private router: Router) {}
+
   @Input()
   toDos?: ToDoGeneral[] = [];
-
-  openAddToDoBottomSheet() {
-    /*     const bottomSheetRef: MatBottomSheetRef = this.bottomSheet.open(
-      AddDealComponent,
-      {
-        disableClose: true,
-        data: this.profileId,
-      }
-    ); */
-  }
 
   goToTodo(id: number) {
     console.log(id);

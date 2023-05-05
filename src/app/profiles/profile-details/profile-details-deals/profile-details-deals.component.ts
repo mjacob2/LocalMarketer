@@ -5,7 +5,6 @@ import {
 } from '@angular/material/bottom-sheet';
 import { Router } from '@angular/router';
 import { DealGeneral } from 'src/app/models/dealGeneral.mode';
-import { ToDoGeneral } from 'src/app/models/todoGeneral.model';
 import { AddDealComponent } from '../../add-deal/add-deal.component';
 
 @Component({
@@ -22,12 +21,22 @@ export class ProfileDetailsDealsComponent {
   @Input()
   profileId?: number;
 
+  @Input()
+  profileName?: string;
+
+  @Input()
+  clientEmail?: string;
+
   openAddDealBottomSheet() {
     const bottomSheetRef: MatBottomSheetRef = this.bottomSheet.open(
       AddDealComponent,
       {
         disableClose: true,
-        data: this.profileId,
+        data: {
+          profileId: this.profileId,
+          profileName: this.profileName,
+          clientEmail: this.clientEmail,
+        },
       }
     );
   }
