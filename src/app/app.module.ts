@@ -21,6 +21,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { DealsModule } from './deals/deals.module';
+import { MyFormsModule } from './my-forms/my-forms.module';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { DealsModule } from './deals/deals.module';
     ClientsModule,
     ToDosModule,
     DealsModule,
+    MyFormsModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     MatButtonModule,

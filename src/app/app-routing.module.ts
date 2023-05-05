@@ -11,6 +11,7 @@ import { ProfileDetailsComponent } from './profiles/profile-details/profile-deta
 import { DealsTableComponent } from './deals/deals-table/deals-table.component';
 import { DealDetailsComponent } from './deals/deal-details/deal-details.component';
 import { TodoDetailsComponent } from './to-dos/todo-details/todo-details.component';
+import { FaqFormComponent } from './my-forms/faq-form/faq-form.component';
 
 const routes: Routes = [
   {
@@ -53,6 +54,10 @@ const routes: Routes = [
       {
         path: 'deals/:id',
         component: DealDetailsComponent,
+      },
+      {
+        path: 'forms/faq',
+        component: FaqFormComponent,
       },
     ],
   },
