@@ -19,6 +19,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     flex-wrap: wrap;
   }
 
+  .column-flex{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+
   .clients-color{
     background-color: $clients;
 

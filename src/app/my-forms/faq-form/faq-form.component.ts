@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
 import { MyFormsService } from 'src/app/services/myForms.service';
-import { AddAttachmentRequestModel } from 'src/app/models/add-attachment-request.model';
+import { AddFormFaqRequestModel } from 'src/app/models/add-form-faq-request.model';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-faq-form',
@@ -10,35 +9,34 @@ import { AddAttachmentRequestModel } from 'src/app/models/add-attachment-request
   styleUrls: ['./faq-form.component.scss'],
 })
 export class FaqFormComponent {
-  constructor(private http: MyFormsService) {}
+  constructor(
+    private http: MyFormsService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
+  errorMessage: string = '';
+  isLoading = false;
   name: string = '';
-  attachment = new AddAttachmentRequestModel();
+  form = new AddFormFaqRequestModel();
 
-  save(formData: any): void {
-    this.attachment.data = Array.from(this.generatePdf(formData)).map(
-      (byte) => byte
-    );
-    this.attachment.name = 'fileName';
-    this.attachment.profileId = 24;
+  onSubmit(form: AddFormFaqRequestModel) {
+    this.isLoading = true;
+
+    const profileId = this.route.snapshot.queryParamMap.get('ProfileId');
+    const dealId = this.route.snapshot.queryParamMap.get('DealId');
+
+    form.ProfileId = parseInt(profileId!, 10);
+    form.DealId = parseInt(dealId!, 10);
 
     this.http
-      .addAttachment(this.attachment)
+      .addformFaq(form)
       .then(() => {
-        //this.isLoading = false;
-        // window.location.reload();
+        this.router.navigateByUrl('/forms/thx');
+        this.isLoading = false;
       })
       .catch((error) => {
-        //this.isLoading = false;
-        //this.errorMessage = error.message;
+        this.isLoading = false;
+        this.errorMessage = error.message;
       });
-  }
-
-  generatePdf(formData: any): Uint8Array {
-    const doc = new jsPDF();
-    doc.text(`Name: ${formData.name}`, 10, 10);
-    // Add more content to the document as needed
-    const pdfData = doc.output('arraybuffer');
-
-    return new Uint8Array(pdfData);
   }
 }

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
-import { AddAttachmentRequestModel } from '../models/add-attachment-request.model';
+import { AddFormFaqRequestModel } from '../models/add-form-faq-request.model';
+import { GetFormFaqByIdResponseModel } from '../models/get-form-faq-by-id-response.model';
 
 @Injectable({
   providedIn: 'root',
@@ -8,10 +9,11 @@ import { AddAttachmentRequestModel } from '../models/add-attachment-request.mode
 export class MyFormsService {
   constructor(private http: HttpService) {}
 
-  async addAttachment(attachment: AddAttachmentRequestModel) {
-    return await this.http.post<AddAttachmentRequestModel>(
-      `/attachments`,
-      attachment
-    );
+  async addformFaq(form: AddFormFaqRequestModel) {
+    return await this.http.post<AddFormFaqRequestModel>(`/formFaq`, form);
+  }
+
+  async getFormFaqById(id: number) {
+    return await this.http.get<GetFormFaqByIdResponseModel>(`/formfaq/${id}`);
   }
 }

@@ -1,7 +1,61 @@
-<form #myForm="ngForm" (ngSubmit)="save(myForm)">
-    <mat-form-field appearance="outline">
-        <mat-label>Nazwa</mat-label>
-        <input matInput type="text">
-    </mat-form-field>
-    <button mat-raised-button color="primary" type="submit">Zapisz zmiany</button>
+<form class="column-flex center" style="max-width: 500px;" #formFaq="ngForm" (ngSubmit)="onSubmit(formFaq.value)">
+
+    <mat-card class="example-card center">
+        <mat-card-header>
+            <mat-card-title>Pytanie i odpowiedź nr 1</mat-card-title>
+            <h1></h1>
+            <mat-card-subtitle></mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+
+            <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Pytanie</mat-label>
+                <input matInput ngModel name="question1" type="text" placeholder="Pytanie">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Odpowiedź</mat-label>
+                <textarea matInput ngModel name="answer1" type="text" placeholder="Odpowiedź"></textarea>
+            </mat-form-field>
+        </mat-card-content>
+    </mat-card>
+
+
+    <mat-card class="example-card center">
+        <mat-card-header>
+            <mat-card-title>Pytanie i odpowiedź nr 2</mat-card-title>
+            <h1></h1>
+            <mat-card-subtitle></mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+
+            <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Pytanie</mat-label>
+                <input matInput ngModel name="question2" type="text" placeholder="Pytanie">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Odpowiedź</mat-label>
+                <textarea matInput ngModel name="answer2" type="text" placeholder="Odpowiedź"></textarea>
+            </mat-form-field>
+
+        </mat-card-content>
+
+    </mat-card>
+
+    <mat-card class="example-card center">
+
+        <mat-card-actions align="end">
+            <button mat-raised-button color="primary" type="submit">Wyślij</button>
+        </mat-card-actions>
+
+        <mat-card-footer>
+            <app-error-card *ngIf="errorMessage" errorMessage="{{errorMessage}}"></app-error-card>
+            <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+        </mat-card-footer>
+    </mat-card>
+
+
 </form>

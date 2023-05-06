@@ -30,7 +30,10 @@ export class AppComponent implements OnDestroy, OnInit {
   }
   async ngOnInit(): Promise<void> {
     const user = await this.localStorage.getItem<User>('user');
-    if (user == null) {
+    const currentPath = this.router.url;
+    const allowedPaths = ['/forms/faq', '/forms/new', '/forms/new2'];
+
+    if (user == null && allowedPaths.includes(currentPath)) {
       this.router.navigateByUrl('/login');
     }
   }

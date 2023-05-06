@@ -6,9 +6,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatDividerModule } from '@angular/material/divider';
+import { ErrorCardComponent } from '../shared/error-card/error-card.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { FormThxComponent } from './form-thx/form-thx.component';
+import { FaqFormViewComponent } from './faq-form/faq-form-view/faq-form-view.component';
 
 @NgModule({
-  declarations: [FaqFormComponent],
+  declarations: [FaqFormComponent, FormThxComponent, FaqFormViewComponent],
   imports: [
     CommonModule,
     MatFormFieldModule,
@@ -17,6 +22,9 @@ import { MatInputModule } from '@angular/material/input';
     FormsModule,
     ReactiveFormsModule,
     MatCardModule,
+    MatDividerModule,
+    ErrorCardComponent,
+    MatProgressBarModule,
   ],
 })
 export class MyFormsModule {}

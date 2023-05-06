@@ -12,6 +12,8 @@ import { DealsTableComponent } from './deals/deals-table/deals-table.component';
 import { DealDetailsComponent } from './deals/deal-details/deal-details.component';
 import { TodoDetailsComponent } from './to-dos/todo-details/todo-details.component';
 import { FaqFormComponent } from './my-forms/faq-form/faq-form.component';
+import { FormThxComponent } from './my-forms/form-thx/form-thx.component';
+import { FaqFormViewComponent } from './my-forms/faq-form/faq-form-view/faq-form-view.component';
 
 const routes: Routes = [
   {
@@ -55,10 +57,6 @@ const routes: Routes = [
         path: 'deals/:id',
         component: DealDetailsComponent,
       },
-      {
-        path: 'forms/faq',
-        component: FaqFormComponent,
-      },
     ],
   },
   {
@@ -68,6 +66,18 @@ const routes: Routes = [
       {
         path: 'login',
         component: LoginComponent,
+      },
+      {
+        path: 'forms/faq',
+        component: FaqFormComponent,
+      },
+      {
+        path: 'formfaq/:id',
+        component: FaqFormViewComponent,
+      },
+      {
+        path: 'forms/thx',
+        component: FormThxComponent,
       },
     ],
   },

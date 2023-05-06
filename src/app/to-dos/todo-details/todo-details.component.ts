@@ -23,14 +23,14 @@ export class TodoDetailsComponent {
   errorMessage: string = '';
   isLoading = false;
   toDo: ToDo = new ToDo();
-  toDoId!: number;
+  id!: number;
 
   async ngOnInit() {
     this.isLoading = true;
 
     this.route.params.subscribe(async (params: Params) => {
-      this.toDoId = params['id'];
-      this.toDo = await this.service.getToDoById(this.toDoId);
+      this.id = params['id'];
+      this.toDo = await this.service.getToDoById(this.id);
 
       this.isLoading = false;
     });
@@ -56,7 +56,7 @@ export class TodoDetailsComponent {
   }
 
   deleteToDo() {
-    this.service.deleteToDoById(this.toDoId);
+    this.service.deleteToDoById(this.id);
     this.router.navigateByUrl('/todos');
   }
 
