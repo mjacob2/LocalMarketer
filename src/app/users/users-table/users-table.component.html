@@ -1,0 +1,61 @@
+<mat-progress-bar *ngIf="!dataSource" mode="indeterminate"></mat-progress-bar>
+<div *ngIf="dataSource" class="example-container mat-elevation-z0">
+    <mat-form-field style="max-width: 250px;">
+        <input placeholder="wyszukaj..." matInput (keyup)="applyFilter($event)" #input>
+    </mat-form-field>
+
+    <mat-table [dataSource]="dataSource" matSort #sortRef="matSort">
+
+        <ng-container matColumnDef="id">
+            <mat-header-cell mat-sort-header style="margin-left: 15px;" *matHeaderCellDef mat-sort-header> ID
+            </mat-header-cell>
+            <mat-cell *matCellDef="let user"> {{user.id}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="firstname">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Imię </mat-header-cell>
+            <mat-cell *matCellDef="let user"> {{user.firstname}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="lastname">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Nazwisko </mat-header-cell>
+            <mat-cell *matCellDef="let user"> {{ user.lastname }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> E-mail </mat-header-cell>
+            <mat-cell *matCellDef="let user"> {{user.email }} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="phone">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Telefon </mat-header-cell>
+            <mat-cell *matCellDef="let user"> {{user.phone}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="role">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Rola </mat-header-cell>
+            <mat-cell *matCellDef="let user"> {{user.role}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="accesDenied">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Dostęp </mat-header-cell>
+            <mat-cell *matCellDef="let user"> {{user.accesDenied}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="profilesCount">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Profile </mat-header-cell>
+            <mat-cell *matCellDef="let user"> {{user.profilesCount}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="toDosCount">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Zadania </mat-header-cell>
+            <mat-cell *matCellDef="let user"> {{user.toDosCount}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row (click)="openUsersDetailsPage(row.id)" *matRowDef="let row; columns: displayedColumns;">
+        </mat-row>
+    </mat-table>
+
+    <mat-paginator></mat-paginator>
+</div>

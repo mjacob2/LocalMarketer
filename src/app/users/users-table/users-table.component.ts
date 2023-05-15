@@ -3,34 +3,38 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, MatSortable } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { ToDoList } from 'src/app/models/toDo-list.model';
-import { TodosService } from 'src/app/services/todos.service';
+import { UserList } from 'src/app/models/user-list.model';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
-  selector: 'app-todos-table',
-  templateUrl: './todos-table.component.html',
-  styleUrls: ['./todos-table.component.scss'],
+  selector: 'app-users-table',
+  templateUrl: './users-table.component.html',
+  styleUrls: ['./users-table.component.scss'],
 })
-export class TodosTableComponent {
-  constructor(private router: Router, private todosService: TodosService) {}
+export class UsersTableComponent {
+  constructor(private router: Router, private usersService: UsersService) {}
 
   displayedColumns = [
-    'title',
-    'profileName',
-    'dueDate',
-    'isFinished',
-    'userFullName',
+    'id',
+    'firstname',
+    'lastname',
+    'email',
+    'phone',
+    'role',
+    'accesDenied',
+    'profilesCount',
+    'toDosCount',
   ];
   dataSource = new MatTableDataSource();
-  todos: ToDoList[] = [];
+  users: UserList[] = [];
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   async ngOnInit() {
-    const todos = await this.todosService.getUnfinishedTodos();
-    this.dataSource.data = todos;
+    const users = await this.usersService.getAllUsers();
+    this.dataSource.data = users;
     this.sort.sort({ id: 'dueDate', start: 'asc' } as MatSortable);
   }
 
@@ -47,7 +51,7 @@ export class TodosTableComponent {
     }
   }
 
-  openToDoDetailsPage(id: string) {
-    this.router.navigateByUrl(`/todos/${id}`);
+  openUsersDetailsPage(id: string) {
+    this.router.navigateByUrl(`/users/${id}`);
   }
 }

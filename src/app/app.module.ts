@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { ClientsModule } from './clients/clients.module';
 import { ProfilesModule } from './profiles/profiles.module';
 import { ToDosModule } from './to-dos/to-dos.module';
+import { UsersModule } from './users/users.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
@@ -36,6 +37,7 @@ import { MyFormsModule } from './my-forms/my-forms.module';
     AppRoutingModule,
     ClientsModule,
     ToDosModule,
+    UsersModule,
     DealsModule,
     MyFormsModule,
     BrowserAnimationsModule,

@@ -14,6 +14,7 @@ import { TodoDetailsComponent } from './to-dos/todo-details/todo-details.compone
 import { FaqFormComponent } from './my-forms/faq-form/faq-form.component';
 import { FormThxComponent } from './my-forms/form-thx/form-thx.component';
 import { FaqFormViewComponent } from './my-forms/faq-form/faq-form-view/faq-form-view.component';
+import { UsersTableComponent } from './users/users-table/users-table.component';
 
 const routes: Routes = [
   {
@@ -56,6 +57,10 @@ const routes: Routes = [
       {
         path: 'deals/:id',
         component: DealDetailsComponent,
+      },
+      {
+        path: 'users',
+        component: UsersTableComponent,
       },
     ],
   },

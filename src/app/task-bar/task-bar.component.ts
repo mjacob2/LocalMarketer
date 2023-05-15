@@ -35,6 +35,8 @@ export class TaskBarLayoutComponent implements OnDestroy {
         this.color = 'todos-color';
       } else if (path.includes('deals')) {
         this.color = 'deals-color';
+      } else if (path.includes('users')) {
+        this.color = 'users-color';
       } else {
         this.color = '';
       }
