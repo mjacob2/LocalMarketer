@@ -1,4 +1,4 @@
-<mat-progress-bar *ngIf="!dataSource" mode="indeterminate"></mat-progress-bar>
+<mat-progress-bar *ngIf="!users" mode="indeterminate"></mat-progress-bar>
 <div *ngIf="dataSource" class="example-container mat-elevation-z0">
     <mat-form-field style="max-width: 250px;">
         <input placeholder="wyszukaj..." matInput (keyup)="applyFilter($event)" #input>

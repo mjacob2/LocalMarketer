@@ -25,16 +25,16 @@ export class UsersTableComponent {
     'profilesCount',
     'toDosCount',
   ];
-  dataSource = new MatTableDataSource();
-  users: UserList[] = [];
+  dataSource = new MatTableDataSource<UserList>();
+  users?: UserList[];
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   async ngOnInit() {
-    const users = await this.usersService.getAllUsers();
-    this.dataSource.data = users;
+    this.users = await this.usersService.getAllUsers();
+    this.dataSource.data = this.users;
     this.sort.sort({ id: 'dueDate', start: 'asc' } as MatSortable);
   }
 

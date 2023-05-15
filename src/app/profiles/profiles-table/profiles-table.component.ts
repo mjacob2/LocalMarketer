@@ -20,8 +20,8 @@ export class ProfilesTableComponent {
     'clientId',
     'userId',
   ];
-  dataSource!: MatTableDataSource<ProfilesList>;
-  profiles: ProfilesList[] = [];
+  dataSource = new MatTableDataSource<ProfilesList>();
+  profiles?: ProfilesList[];
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -34,16 +34,13 @@ export class ProfilesTableComponent {
 
   async ngOnInit() {
     this.profiles = await this.profilesService.getAllProfiles();
-    console.log(this.profiles);
-    this.dataSource = new MatTableDataSource(this.profiles);
-    this.dataSource.paginator = this.paginator;
+    this.dataSource.data = this.profiles;
     this.dataSource.sort = this.sort;
   }
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }

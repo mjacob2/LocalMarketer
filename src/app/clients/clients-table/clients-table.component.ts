@@ -27,9 +27,8 @@ export class ClientsTableComponent {
     'creatorId',
   ];
 
-  dataSource!: MatTableDataSource<ClientList>;
-
-  clients: ClientList[] = [];
+  dataSource = new MatTableDataSource<ClientList>();
+  clients?: ClientList[];
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -43,7 +42,7 @@ export class ClientsTableComponent {
 
   async ngOnInit() {
     this.clients = await this.clientsService.getAllClients();
-    this.dataSource = new MatTableDataSource(this.clients);
+    this.dataSource.data = this.clients;
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }

@@ -2,6 +2,8 @@ import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { Router } from '@angular/router';
+import { LocalStorageService } from '../services/local-storage.service';
+import { User } from '../models/user.model';
 
 @Component({
   selector: 'app-task-bar',
@@ -11,6 +13,8 @@ import { Router } from '@angular/router';
 export class TaskBarLayoutComponent implements OnDestroy {
   title = 'LocalMarketer';
   color = '';
+  user: User | null = {};
+  isAdministrator: boolean = false;
 
   mobileQuery: MediaQueryList;
 
@@ -20,7 +24,8 @@ export class TaskBarLayoutComponent implements OnDestroy {
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private localStorage: LocalStorageService
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
     this._mobileQueryListener = () => changeDetectorRef.detectChanges();
@@ -41,6 +46,13 @@ export class TaskBarLayoutComponent implements OnDestroy {
         this.color = '';
       }
     });
+  }
+
+  async ngOnInit() {
+    this.user = await this.localStorage.getItem<User>('user');
+    if (this.user?.role == 'Administrator') {
+      this.isAdministrator = true;
+    }
   }
 
   onLogout() {

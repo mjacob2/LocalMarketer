@@ -21,16 +21,16 @@ export class TodosTableComponent {
     'isFinished',
     'userFullName',
   ];
-  dataSource = new MatTableDataSource();
-  todos: ToDoList[] = [];
+  dataSource = new MatTableDataSource<ToDoList>();
+  todos?: ToDoList[];
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
+  @ViewChild(MatSort) sort: MatSort = new MatSort();
 
   async ngOnInit() {
-    const todos = await this.todosService.getUnfinishedTodos();
-    this.dataSource.data = todos;
+    this.todos = await this.todosService.getUnfinishedTodos();
+    this.dataSource.data = this.todos;
     this.sort.sort({ id: 'dueDate', start: 'asc' } as MatSortable);
   }
 
@@ -41,7 +41,6 @@ export class TodosTableComponent {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
-
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
