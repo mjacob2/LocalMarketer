@@ -19,6 +19,9 @@ export class FaqFormComponent {
   name: string = '';
   form = new AddFormFaqRequestModel();
 
+  numbers: number[] = [1];
+  increment: number = 1;
+
   onSubmit(form: AddFormFaqRequestModel) {
     this.isLoading = true;
 
@@ -38,5 +41,11 @@ export class FaqFormComponent {
         this.isLoading = false;
         this.errorMessage = error.message;
       });
+  }
+
+  add() {
+    this.increment++;
+    this.numbers.push(this.increment);
+    console.log(this.numbers);
   }
 }

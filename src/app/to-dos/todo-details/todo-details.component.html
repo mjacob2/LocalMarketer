@@ -30,11 +30,11 @@
                 <textarea [(ngModel)]="toDo.description" name="description" matInput></textarea>
             </mat-form-field>
 
-            <a *ngIf="toDo.link1" href="{{toDo.link1}}">Otwórz link 1</a>
-            <a *ngIf="toDo.link2" href="{{toDo.link2}}">Otwórz link 2</a>
-            <a *ngIf="toDo.link3" href="{{toDo.link3}}">Otwórz link 3</a>
-            <a *ngIf="toDo.link4" href="{{toDo.link4}}">Otwórz link 4</a>
-            <a *ngIf="toDo.link5" href="{{toDo.link5}}">Otwórz link 5</a>
+            <a *ngIf="toDo.link1" href="{{toDo.link1}}" target="_blank">Otwórz link 1</a>
+            <a *ngIf="toDo.link2" href="{{toDo.link2}}" target="_blank">Otwórz link 2</a>
+            <a *ngIf="toDo.link3" href="{{toDo.link3}}" target="_blank">Otwórz link 3</a>
+            <a *ngIf="toDo.link4" href="{{toDo.link4}}" target="_blank">Otwórz link 4</a>
+            <a *ngIf="toDo.link5" href="{{toDo.link5}}" target="_blank">Otwórz link 5</a>
 
             <p>ID: {{toDo.id}}</p>
             <p>Utworzono: {{toDo.creationDate | date: 'dd-MM-yyyy'}}</p>

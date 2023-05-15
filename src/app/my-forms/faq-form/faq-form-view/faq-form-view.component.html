@@ -1,7 +1,9 @@
-<div style="margin-left: 36px;">
+<div style="margin-left: 36px; padding-bottom: 36px;">
 
     <h2>formularz FAQ dla profilu:</h2>
     <h1>{{formFaqResponse.profileName}}</h1>
+
+    <mat-divider></mat-divider>
 
     <div *ngIf="formFaqResponse.question1">
         <h3>#1</h3>
@@ -11,6 +13,8 @@
         <p>{{formFaqResponse.answer1}}</p>
     </div>
 
+    <mat-divider></mat-divider>
+
     <div *ngIf="formFaqResponse.question2">
         <h3>#2</h3>
         <h4>Pytanie:</h4>
@@ -18,6 +22,8 @@
         <h4>Odpowiedź:</h4>
         <p>{{formFaqResponse.answer2}}</p>
     </div>
+
+    <mat-divider></mat-divider>
 
     <div *ngIf="formFaqResponse.question3">
         <h3>#3</h3>
@@ -27,6 +33,8 @@
         <p>{{formFaqResponse.answer3}}</p>
     </div>
 
+    <mat-divider></mat-divider>
+
     <div *ngIf="formFaqResponse.question4">
         <h3>#4</h3>
         <h4>Pytanie:</h4>
@@ -35,6 +43,8 @@
         <p>{{formFaqResponse.answer4}}</p>
     </div>
 
+    <mat-divider></mat-divider>
+
     <div *ngIf="formFaqResponse.question5">
         <h3>#5</h3>
         <h4>Pytanie:</h4>
@@ -42,6 +52,8 @@
         <h4>Odpowiedź:</h4>
         <p>{{formFaqResponse.answer5}}</p>
     </div>
+
+    <mat-divider></mat-divider>
 
     <div *ngIf="formFaqResponse.question5">
         <h3>#6</h3>
