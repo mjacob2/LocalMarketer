@@ -10,14 +10,17 @@ import { User } from '../models/user.model';
   templateUrl: './task-bar.component.html',
   styleUrls: ['./task-bar.component.scss'],
 })
-export class TaskBarLayoutComponent implements OnDestroy {
+export class TaskBarLayoutComponent {
   title = 'LocalMarketer';
   color = '';
-  user: User | null = {};
+  // user?: User = new User();
   isAdministrator: boolean = false;
   mobileQuery: MediaQueryList;
 
   private _mobileQueryListener: () => void;
+  user: User | null | undefined;
+  firstName?: string;
+  lastName?: string;
 
   constructor(
     changeDetectorRef: ChangeDetectorRef,
@@ -49,9 +52,12 @@ export class TaskBarLayoutComponent implements OnDestroy {
 
   async ngOnInit() {
     this.user = await this.localStorage.getItem<User>('user');
+
     if (this.user?.role == 'Administrator') {
       this.isAdministrator = true;
     }
+    this.firstName = this.user?.firstName;
+    this.lastName = this.user?.lastName;
   }
 
   onLogout() {

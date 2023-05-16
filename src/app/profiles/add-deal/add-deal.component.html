@@ -7,7 +7,7 @@
         <mat-label>Sprzedawca</mat-label>
         <mat-select [(ngModel)]="deal.sellerId" name="sellerId">
             <mat-option *ngFor="let user of users" [value]="user.id">
-                {{user.lastname}} {{user.firstname}} - {{user.role}}
+                {{user.lastName}} {{user.firstName}} - {{user.role}}
             </mat-option>
         </mat-select>
     </mat-form-field>

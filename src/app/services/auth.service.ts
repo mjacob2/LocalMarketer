@@ -15,24 +15,6 @@ export class AuthService {
     private router: Router
   ) {}
 
-  addUser(
-    lastName: string,
-    firstName: string,
-    email: string,
-    phone: string,
-    password: string,
-    role: string
-  ) {
-    return this.http.post<User>('/', {
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      phone: phone,
-      password: password,
-      role: role,
-    });
-  }
-
   async login(email: string, password: string) {
     this.user = await this.http.post<User>('/login', {
       email: email,

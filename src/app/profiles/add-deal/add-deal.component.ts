@@ -56,7 +56,7 @@ export class AddDealComponent {
 
     const selectedseller = this.users.find((x) => x.id === this.deal.sellerId);
 
-    this.deal.sellerFullName = `${selectedseller?.firstname} ${selectedseller?.lastname}`;
+    this.deal.sellerFullName = `${selectedseller?.firstName} ${selectedseller?.lastName}`;
 
     const name = selectedPackage?.name;
     const selectedPackageMinPrice = selectedPackage?.minimumPrice;

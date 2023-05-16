@@ -1,12 +1,12 @@
 export interface UserList {
   id: number;
   creationDate: Date;
-  firstname: string;
+  firstName: string;
   lastname: string;
   email: string;
   phone: string;
   role: string;
   accesDenied: boolean;
   profilesCount: number;
-  doDosCount: number;
+  toDosCount: number;
 }
