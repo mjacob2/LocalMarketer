@@ -9,6 +9,7 @@ import { ToDoGeneral } from '../../models/todoGeneral.model';
 import { ConfirmDeleteDialogComponent } from 'src/app/shared/confirm-delete-dialog/confirm-delete-dialog.component';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { User } from 'src/app/models/user.model';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-profile-details',
@@ -25,6 +26,7 @@ export class ProfileDetailsComponent {
   allToDos: ToDoGeneral[] = [];
   loggedUser: User | null = {};
   isSeller: boolean = false;
+  users: User[] = [];
 
   constructor(
     private service: ProfilesService,
@@ -32,10 +34,12 @@ export class ProfileDetailsComponent {
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
     private router: Router,
-    private localStorage: LocalStorageService
+    private localStorage: LocalStorageService,
+    private httpUsers: UsersService,
   ) {}
 
   async ngOnInit() {
+
     this.isLoading = true;
 
     this.loggedUser = await this.localStorage.getItem<User>('user');
@@ -63,6 +67,8 @@ export class ProfileDetailsComponent {
           //}
         });
       }
+
+      this.users = await this.httpUsers.getAllUsers();
 
       this.isLoading = false;
     });

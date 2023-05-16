@@ -2,7 +2,7 @@
 
 <form class="example-form" #addDealForm="ngForm" (ngSubmit)="addDeal(addDealForm.value)">
 
-    <mat-spinner style="height: 36px;" *ngIf="packages.length <= 0"></mat-spinner>
+    <mat-spinner style="height: 36px;" *ngIf="users.length <= 0"></mat-spinner>
     <mat-form-field *ngIf="users.length > 0" appearance="outline" class="example-full-width">
         <mat-label>Sprzedawca</mat-label>
         <mat-select [(ngModel)]="deal.sellerId" name="sellerId">
