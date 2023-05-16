@@ -14,7 +14,7 @@ import { DealsService } from 'src/app/services/deals.service';
 export class DealsTableComponent {
   displayedColumns = ['name', 'creationDate', 'endDate', 'stage', 'creatorId'];
   dataSource!: MatTableDataSource<DealsList>;
-  deals: DealsList[] = [];
+  deals?: DealsList[];
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;

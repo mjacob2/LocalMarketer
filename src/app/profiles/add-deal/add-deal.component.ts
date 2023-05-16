@@ -5,8 +5,10 @@ import {
 } from '@angular/material/bottom-sheet';
 import { AddDealRequestModel } from 'src/app/models/add-deal-request.model';
 import { Package } from 'src/app/models/package.model';
+import { User } from 'src/app/models/user.model';
 import { DealsService } from 'src/app/services/deals.service';
 import { PackagesService } from 'src/app/services/packages.service';
+import { UsersService } from 'src/app/services/users.service';
 
 @Component({
   selector: 'app-add-deal',
@@ -18,11 +20,13 @@ export class AddDealComponent {
   isLoading = false;
   deal = new AddDealRequestModel();
   packages: Package[] = [];
+  users: User[] = [];
 
   constructor(
     private _bottomSheetRef: MatBottomSheetRef<AddDealComponent>,
     private http: DealsService,
     private httpPackages: PackagesService,
+    private httpUsers: UsersService,
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: any
   ) {
     this.profileId = data.profileId;
@@ -36,9 +40,10 @@ export class AddDealComponent {
 
   async ngOnInit() {
     this.packages = await this.httpPackages.getAllPackages();
+    this.users = await this.httpUsers.getAllUsers();
   }
 
-  addDeal() {
+  addDeal(dealToAdd: AddDealRequestModel) {
     this.isLoading = true;
 
     this.deal.profileId = this.profileId;
@@ -48,6 +53,10 @@ export class AddDealComponent {
     const selectedPackage = this.packages.find(
       (x) => x.id === this.deal.packageId
     );
+
+    const selectedseller = this.users.find((x) => x.id === this.deal.sellerId);
+
+    this.deal.sellerFullName = `${selectedseller?.firstname} ${selectedseller?.lastname}`;
 
     const name = selectedPackage?.name;
     const selectedPackageMinPrice = selectedPackage?.minimumPrice;

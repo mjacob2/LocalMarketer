@@ -7,6 +7,8 @@ import { Profile } from 'src/app/models/profile.model';
 import { ProfilesService } from 'src/app/services/profiles.service';
 import { ToDoGeneral } from '../../models/todoGeneral.model';
 import { ConfirmDeleteDialogComponent } from 'src/app/shared/confirm-delete-dialog/confirm-delete-dialog.component';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-profile-details',
@@ -21,17 +23,25 @@ export class ProfileDetailsComponent {
   profileName?: string;
   clientEmail?: string;
   allToDos: ToDoGeneral[] = [];
+  loggedUser: User | null = {};
+  isSeller: boolean = false;
 
   constructor(
     private service: ProfilesService,
     private route: ActivatedRoute,
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private localStorage: LocalStorageService
   ) {}
 
   async ngOnInit() {
     this.isLoading = true;
+
+    this.loggedUser = await this.localStorage.getItem<User>('user');
+    if (this.loggedUser?.role == 'Seller') {
+      this.isSeller = true;
+    }
 
     this.route.params.subscribe(async (params: Params) => {
       this.profileId = params['id'];

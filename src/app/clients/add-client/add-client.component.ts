@@ -19,7 +19,6 @@ export class AddClientComponent {
   isLoading = false;
 
   onSubmit(clientToAdd: Client) {
-    console.log(clientToAdd);
     this.isLoading = true;
 
     this.http

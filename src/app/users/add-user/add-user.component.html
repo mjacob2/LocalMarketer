@@ -1,0 +1,49 @@
+<h2>Dodaj nowego użytkownika</h2>
+
+<form class="example-form" #form="ngForm" (ngSubmit)="onSubmit(form.value)">
+
+    <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Imię</mat-label>
+        <input matInput ngModel name="firstname" type="text">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Nazwisko</mat-label>
+        <input matInput ngModel name="lastname" type="text">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>E-mail</mat-label>
+        <input matInput ngModel name="email" type="text">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Telefon</mat-label>
+        <span matPrefix>&nbsp; +48 &nbsp;</span>
+        <input matInput ngModel name="phone" type="tel">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Hasło</mat-label>
+        <input matInput ngModel name="password" type="password">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Rola</mat-label>
+        <mat-select [(ngModel)]="selectedRole" name="role">
+            <mat-option *ngFor="let role of roles" [value]="role.value">
+                {{role.viewValue}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <div class="example-button-row">
+        <button mat-raised-button color="primary" type="submit">Dodaj</button>
+        <button type="button" (click)="close()" style="margin-left: 16px;" mat-button>Anuluj</button>
+    </div>
+
+</form>
+
+<app-error-card *ngIf="errorMessage" errorMessage="{{errorMessage}}"></app-error-card>
+
+<mat-progress-bar style="margin-top: 6px;" *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>

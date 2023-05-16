@@ -75,3 +75,23 @@
   position: relative;
   z-index: 2;
 }
+
+.sidenav-wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidenav-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.top-items {
+  flex-grow: 1;
+}
+
+.bottom-item {
+  margin-top: auto;
+}

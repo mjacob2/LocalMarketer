@@ -3,7 +3,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Deal } from 'src/app/models/deal.model';
+import { User } from 'src/app/models/user.model';
 import { DealsService } from 'src/app/services/deals.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { ConfirmDeleteDialogComponent } from 'src/app/shared/confirm-delete-dialog/confirm-delete-dialog.component';
 
 @Component({
@@ -16,16 +18,24 @@ export class DealDetailsComponent {
   isLoading = false;
   deal: Deal = new Deal();
   dealId!: number;
+  loggedUser: User | null = {};
+  isSeller: boolean = false;
 
   constructor(
     private service: DealsService,
     private route: ActivatedRoute,
     private router: Router,
     public dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private localStorage: LocalStorageService
   ) {}
 
   async ngOnInit() {
+    this.loggedUser = await this.localStorage.getItem<User>('user');
+    if (this.loggedUser?.role == 'Seller') {
+      this.isSeller = true;
+    }
+
     this.isLoading = true;
 
     this.route.params.subscribe(async (params: Params) => {

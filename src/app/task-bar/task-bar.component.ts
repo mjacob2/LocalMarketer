@@ -15,7 +15,6 @@ export class TaskBarLayoutComponent implements OnDestroy {
   color = '';
   user: User | null = {};
   isAdministrator: boolean = false;
-
   mobileQuery: MediaQueryList;
 
   private _mobileQueryListener: () => void;

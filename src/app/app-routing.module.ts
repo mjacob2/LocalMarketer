@@ -23,7 +23,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: '/clients',
+        redirectTo: '/todos',
         pathMatch: 'full',
       },
       {

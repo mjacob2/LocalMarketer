@@ -15,9 +15,12 @@ import { MatListModule } from '@angular/material/list';
 import { RouterModule } from '@angular/router';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSortModule } from '@angular/material/sort';
+import { AddUserComponent } from './add-user/add-user.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
-  declarations: [UsersTableComponent],
+  declarations: [UsersTableComponent, AddUserComponent],
   imports: [
     CommonModule,
     MatProgressBarModule,
@@ -36,6 +39,8 @@ import { MatSortModule } from '@angular/material/sort';
     RouterModule,
     MatCheckboxModule,
     MatSortModule,
+    MatSelectModule,
+    MatSlideToggleModule,
   ],
 })
 export class UsersModule {}

@@ -1,5 +1,7 @@
 <mat-progress-bar *ngIf="!users" mode="indeterminate"></mat-progress-bar>
-<div *ngIf="dataSource" class="example-container mat-elevation-z0">
+
+<div *ngIf="users" class="example-container mat-elevation-z0">
+
     <mat-form-field style="max-width: 250px;">
         <input placeholder="wyszukaj..." matInput (keyup)="applyFilter($event)" #input>
     </mat-form-field>
@@ -39,7 +41,8 @@
 
         <ng-container matColumnDef="accesDenied">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Dostęp </mat-header-cell>
-            <mat-cell *matCellDef="let user"> {{user.accesDenied}} </mat-cell>
+            <mat-cell *matCellDef="let user"> <mat-slide-toggle [(ngModel)]="!user.accesDenied"></mat-slide-toggle>
+            </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="profilesCount">
@@ -53,9 +56,14 @@
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row (click)="openUsersDetailsPage(row.id)" *matRowDef="let row; columns: displayedColumns;">
+        <mat-row *matRowDef="let row; columns: displayedColumns;">
         </mat-row>
     </mat-table>
 
     <mat-paginator></mat-paginator>
 </div>
+
+<button (click)="openAddUserBottomSheet()" class="bottom-right" mat-fab extended color="primary">
+    <mat-icon>add</mat-icon>
+    Dodaj użytkownika
+</button>

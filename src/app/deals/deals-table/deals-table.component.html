@@ -1,5 +1,6 @@
-<mat-progress-bar *ngIf="!dataSource" mode="indeterminate"></mat-progress-bar>
-<div *ngIf="dataSource" class="example-container mat-elevation-z0">
+<mat-progress-bar *ngIf="!deals" mode="indeterminate"></mat-progress-bar>
+
+<div *ngIf="deals" class="example-container mat-elevation-z0">
     <mat-form-field style="max-width: 250px;">
         <input placeholder="wyszukaj..." matInput (keyup)="applyFilter($event)" #input>
     </mat-form-field>

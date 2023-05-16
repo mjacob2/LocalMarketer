@@ -61,5 +61,5 @@
 
 </mat-card>
 
-<app-deal-details-todos [toDos]="deal.toDos" [dealId]="dealId" [dealEndDate]="deal.endDate"
+<app-deal-details-todos *ngIf="!isSeller" [toDos]="deal.toDos" [dealId]="dealId" [dealEndDate]="deal.endDate"
     [dealCreationDate]="deal.creationDate" [profileUserId]="deal.profileUserId"></app-deal-details-todos>

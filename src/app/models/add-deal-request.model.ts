@@ -1,4 +1,6 @@
 export class AddDealRequestModel {
+  sellerId?: number;
+  sellerFullName?: string;
   public packageId?: number;
   public selectedPackageMinPrice?: number;
   public profileId?: number;

@@ -1,11 +1,16 @@
 <h2>Utwórz nową umowę</h2>
 
-<form class="example-form" (ngSubmit)="addDeal()">
+<form class="example-form" #addDealForm="ngForm" (ngSubmit)="addDeal(addDealForm.value)">
 
-    <!-- <mat-form-field appearance="outline" class="example-full-width">
-        <mat-label>Nazwa umowy</mat-label>
-        <input [(ngModel)]="deal.name" matInput name="name" type="text">
-    </mat-form-field> -->
+    <mat-spinner style="height: 36px;" *ngIf="packages.length <= 0"></mat-spinner>
+    <mat-form-field *ngIf="users.length > 0" appearance="outline" class="example-full-width">
+        <mat-label>Sprzedawca</mat-label>
+        <mat-select [(ngModel)]="deal.sellerId" name="sellerId">
+            <mat-option *ngFor="let user of users" [value]="user.id">
+                {{user.lastname}} {{user.firstname}} - {{user.role}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
 
     <mat-spinner style="height: 36px;" *ngIf="packages.length <= 0"></mat-spinner>
     <mat-form-field *ngIf="packages.length > 0" appearance="outline" class="example-full-width">
@@ -21,13 +26,6 @@
         <mat-label>Cena</mat-label>
         <input matInput [(ngModel)]="deal.price" name="price" type="number">
     </mat-form-field>
-
-    <!-- <mat-form-field appearance="outline">
-        <mat-label>Data zakończenia</mat-label>
-        <input name="endDate" [(ngModel)]="deal.endDate" matInput [matDatepicker]="picker">
-        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-        <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field> -->
 
     <mat-form-field appearance="outline" class="example-full-width">
         <mat-label>Opis</mat-label>

@@ -1,10 +1,15 @@
 import { Component, ViewChild } from '@angular/core';
+import {
+  MatBottomSheet,
+  MatBottomSheetRef,
+} from '@angular/material/bottom-sheet';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, MatSortable } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { UserList } from 'src/app/models/user-list.model';
 import { UsersService } from 'src/app/services/users.service';
+import { AddUserComponent } from '../add-user/add-user.component';
 
 @Component({
   selector: 'app-users-table',
@@ -12,7 +17,11 @@ import { UsersService } from 'src/app/services/users.service';
   styleUrls: ['./users-table.component.scss'],
 })
 export class UsersTableComponent {
-  constructor(private router: Router, private usersService: UsersService) {}
+  constructor(
+    private router: Router,
+    private usersService: UsersService,
+    private bottomSheet: MatBottomSheet
+  ) {}
 
   displayedColumns = [
     'id',
@@ -35,7 +44,6 @@ export class UsersTableComponent {
   async ngOnInit() {
     this.users = await this.usersService.getAllUsers();
     this.dataSource.data = this.users;
-    this.sort.sort({ id: 'dueDate', start: 'asc' } as MatSortable);
   }
 
   ngAfterViewInit() {
@@ -49,6 +57,20 @@ export class UsersTableComponent {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  openAddUserBottomSheet() {
+    const bottomSheetRef: MatBottomSheetRef = this.bottomSheet.open(
+      AddUserComponent,
+      {
+        disableClose: true,
+      }
+    );
+
+    bottomSheetRef.afterDismissed().subscribe(async () => {
+      this.users = await this.usersService.getAllUsers();
+      this.dataSource.data = this.users;
+    });
   }
 
   openUsersDetailsPage(id: string) {
