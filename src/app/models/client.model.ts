@@ -12,4 +12,5 @@ export class Client {
   id?: number;
   creationDate?: Date;
   profiles?: ProfileGeneral[];
+  sellerId: number | null | undefined;
 }

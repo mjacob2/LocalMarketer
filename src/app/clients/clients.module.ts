@@ -17,6 +17,8 @@ import { MatCardModule } from '@angular/material/card';
 import { ClientDetailsProfilesComponent } from './client-details/client-details-profiles/client-details-profiles.component';
 import { MatListModule } from '@angular/material/list';
 import { AddProfileComponent } from './add-profile/add-profile.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,8 @@ import { AddProfileComponent } from './add-profile/add-profile.component';
     ErrorCardComponent,
     MatCardModule,
     MatListModule,
+    MatProgressSpinnerModule,
+    MatSelectModule,
   ],
 })
 export class ClientsModule {}

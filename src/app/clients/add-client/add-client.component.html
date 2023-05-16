@@ -1,6 +1,16 @@
 <h2>Dodaj nowego klienta</h2>
 <form class="example-form" #addClientform="ngForm" (ngSubmit)="onSubmit(addClientform.value)">
 
+    <mat-spinner style="height: 36px;" *ngIf="users.length <= 0"></mat-spinner>
+    <mat-form-field *ngIf="users.length > 0" appearance="outline" class="example-full-width">
+        <mat-label>Sprzedawca</mat-label>
+        <mat-select [(ngModel)]="sellerId" name="sellerId">
+            <mat-option *ngFor="let user of users" [value]="user.id">
+                {{user.lastName}} {{user.firstName}} - {{user.role}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
     <mat-form-field appearance="outline" class="example-full-width">
         <mat-label>Nazwa klienta/firmy</mat-label>
         <input matInput ngModel name="name" type="text" placeholder="nazwa klienta/firmy rozpoznawalna dla nas">
