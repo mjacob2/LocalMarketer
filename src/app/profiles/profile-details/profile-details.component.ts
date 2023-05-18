@@ -26,7 +26,6 @@ export class ProfileDetailsComponent {
   allToDos: ToDoGeneral[] = [];
   loggedUser: User | null = {};
   isSeller: boolean = false;
-  users: User[] = [];
 
   constructor(
     private service: ProfilesService,
@@ -35,11 +34,10 @@ export class ProfileDetailsComponent {
     private snackBar: MatSnackBar,
     private router: Router,
     private localStorage: LocalStorageService,
-    private httpUsers: UsersService,
+    private httpUsers: UsersService
   ) {}
 
   async ngOnInit() {
-
     this.isLoading = true;
 
     this.loggedUser = await this.localStorage.getItem<User>('user');
@@ -67,8 +65,6 @@ export class ProfileDetailsComponent {
           //}
         });
       }
-
-      this.users = await this.httpUsers.getAllUsers();
 
       this.isLoading = false;
     });

@@ -69,17 +69,6 @@
                 <input [(ngModel)]="profile.regon" name="regon" matInput>
             </mat-form-field>
 
-
-            <mat-spinner style="height: 36px;" *ngIf="users.length <= 0"></mat-spinner>
-            <mat-form-field *ngIf="users.length > 0" appearance="outline" class="example-full-width">
-                <mat-label>Użytkownik</mat-label>
-                <mat-select [(ngModel)]="profile.userId" name="sellerId">
-                    <mat-option *ngFor="let user of users" [value]="user.id">
-                        {{user.lastName}} {{user.firstName}} - {{user.role}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-
             <p>ID: {{profile.id}}</p>
             <p>Użytkownik: {{profile.userId}}</p>
             <p>Utworzono: {{profile.creationDate}}</p>

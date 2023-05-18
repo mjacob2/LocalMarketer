@@ -51,6 +51,28 @@
                 <textarea [(ngModel)]="client.description" name="description" matInput></textarea>
             </mat-form-field>
 
+            <mat-spinner style="height: 36px;" *ngIf="allUsers.length <= 0"></mat-spinner>
+            <mat-form-field style="width: 400px;" *ngIf="allUsers.length > 0" appearance="outline"
+                class="example-full-width">
+                <mat-label>Sprzedawca</mat-label>
+                <mat-select [(ngModel)]="sellerId" name="sellerId">
+                    <mat-option *ngFor="let user of allSellers" [value]="user.id">
+                        {{user.lastName}} {{user.firstName}} - {{user.role}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-spinner style="height: 36px;" *ngIf="allUsers.length <= 0"></mat-spinner>
+            <mat-form-field style="width: 400px;" *ngIf="allUsers.length > 0" appearance="outline"
+                class="example-full-width">
+                <mat-label>Local Marketer</mat-label>
+                <mat-select [(ngModel)]="userId" name="userId">
+                    <mat-option *ngFor="let user of allLocalMarketers" [value]="user.id">
+                        {{user.lastName}} {{user.firstName}} - {{user.role}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
             <p>ID: {{clientId}}</p>
             <p>Utworzono: {{client.creationDate | date: 'dd-MM-yyyy'}}</p>
 

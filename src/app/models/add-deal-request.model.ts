@@ -1,14 +1,14 @@
+import { Package } from './package.model';
+import { User } from './user.model';
+
 export class AddDealRequestModel {
-  sellerId?: number;
+  profileId?: number;
   sellerFullName?: string;
-  public packageId?: number;
-  public selectedPackageMinPrice?: number;
-  public profileId?: number;
-  public name?: string;
-  public price?: number;
-  public endDate?: Date;
-  public profileName?: string;
-  public clientEmail?: string;
-  public stage: string = 'domyslny stage';
-  public description: string = '';
+  sellerId?: number;
+  selectedPackage?: Package;
+  name?: string;
+  price?: number;
+  description?: string;
+  profileName?: string;
+  clientEmail?: string;
 }

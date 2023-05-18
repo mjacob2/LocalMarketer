@@ -7,8 +7,10 @@ import { AddDealRequestModel } from 'src/app/models/add-deal-request.model';
 import { Package } from 'src/app/models/package.model';
 import { User } from 'src/app/models/user.model';
 import { DealsService } from 'src/app/services/deals.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { PackagesService } from 'src/app/services/packages.service';
 import { UsersService } from 'src/app/services/users.service';
+import { Params } from '@angular/router';
 
 @Component({
   selector: 'app-add-deal',
@@ -18,15 +20,27 @@ import { UsersService } from 'src/app/services/users.service';
 export class AddDealComponent {
   errorMessage: string = '';
   isLoading = false;
-  deal = new AddDealRequestModel();
   packages: Package[] = [];
   users: User[] = [];
+  currentlyLoggedUser: User | null | undefined;
+  profileId!: number;
+  profileName!: string;
+  clientEmail!: string;
+  sellerId: number | null | undefined;
+  packageId: number | null | undefined;
+  foods: any[] = [
+    { value: 'steak-0', viewValue: 'Steak' },
+    { value: 'pizza-1', viewValue: 'Pizza' },
+    { value: 'tacos-2', viewValue: 'Tacos' },
+  ];
 
   constructor(
     private _bottomSheetRef: MatBottomSheetRef<AddDealComponent>,
     private http: DealsService,
     private httpPackages: PackagesService,
     private httpUsers: UsersService,
+    private localStorage: LocalStorageService,
+
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: any
   ) {
     this.profileId = data.profileId;
@@ -34,53 +48,35 @@ export class AddDealComponent {
     this.clientEmail = data.clientEmail;
   }
 
-  profileId!: number;
-  profileName!: string;
-  clientEmail!: string;
-
   async ngOnInit() {
     this.packages = await this.httpPackages.getAllPackages();
+
     this.users = await this.httpUsers.getAllUsers();
+    this.currentlyLoggedUser = await this.localStorage.getItem<User>('user');
+    if (this.currentlyLoggedUser?.role == 'Seller') {
+      this.sellerId = this.currentlyLoggedUser?.id;
+    }
   }
 
   addDeal(dealToAdd: AddDealRequestModel) {
+    console.log(dealToAdd);
+
     this.isLoading = true;
 
-    this.deal.profileId = this.profileId;
-    this.deal.profileName = this.profileName;
-    this.deal.clientEmail = this.clientEmail;
-
-    const selectedPackage = this.packages.find(
-      (x) => x.id === this.deal.packageId
+    dealToAdd.profileId = this.profileId;
+    dealToAdd.sellerFullName = `${this.currentlyLoggedUser?.firstName} ${this.currentlyLoggedUser?.lastName}`;
+    dealToAdd.sellerId = this.currentlyLoggedUser?.id;
+    dealToAdd.selectedPackage = this.packages.find(
+      (x) => x.packageId === this.packageId
     );
+    dealToAdd.name = `${dealToAdd.selectedPackage?.name} - ${this.profileName}`;
+    dealToAdd.profileName = this.profileName;
+    dealToAdd.clientEmail = this.clientEmail;
 
-    const selectedseller = this.users.find((x) => x.id === this.deal.sellerId);
-
-    this.deal.sellerFullName = `${selectedseller?.firstName} ${selectedseller?.lastName}`;
-
-    const name = selectedPackage?.name;
-    const selectedPackageMinPrice = selectedPackage?.minimumPrice;
-
-    const newDate = new Date();
-    const duration = selectedPackage?.durationInMonths;
-    const currentMonth = newDate.getMonth();
-    newDate.setMonth(currentMonth + duration!);
-    if (newDate.getMonth() !== (currentMonth + duration!) % 12) {
-      if (currentMonth + duration! < 0) {
-        newDate.setFullYear(newDate.getFullYear() - 1);
-        newDate.setMonth(11);
-      } else {
-        newDate.setFullYear(newDate.getFullYear() + 1);
-        newDate.setMonth(0);
-      }
-    }
-
-    this.deal.endDate = newDate;
-    this.deal.selectedPackageMinPrice = selectedPackageMinPrice;
-    this.deal.name = name;
+    const selectedseller = this.users.find((x) => x.id === this.sellerId);
 
     this.http
-      .addDeal(this.deal)
+      .addDeal(dealToAdd)
       .then(() => {
         this._bottomSheetRef.dismiss();
         this.isLoading = false;

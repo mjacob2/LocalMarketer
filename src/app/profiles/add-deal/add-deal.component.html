@@ -5,7 +5,7 @@
     <mat-spinner style="height: 36px;" *ngIf="users.length <= 0"></mat-spinner>
     <mat-form-field *ngIf="users.length > 0" appearance="outline" class="example-full-width">
         <mat-label>Sprzedawca</mat-label>
-        <mat-select [(ngModel)]="deal.sellerId" name="sellerId">
+        <mat-select [(ngModel)]="sellerId" name="sellerId">
             <mat-option *ngFor="let user of users" [value]="user.id">
                 {{user.lastName}} {{user.firstName}} - {{user.role}}
             </mat-option>
@@ -15,8 +15,8 @@
     <mat-spinner style="height: 36px;" *ngIf="packages.length <= 0"></mat-spinner>
     <mat-form-field *ngIf="packages.length > 0" appearance="outline" class="example-full-width">
         <mat-label>Pakiet</mat-label>
-        <mat-select [(ngModel)]="deal.packageId" name="package">
-            <mat-option *ngFor="let package of packages" [value]="package.id">
+        <mat-select [(ngModel)]="packageId" name="packageId">
+            <mat-option *ngFor="let package of packages" [value]="package.packageId">
                 {{package.name}}
             </mat-option>
         </mat-select>
@@ -24,12 +24,12 @@
 
     <mat-form-field appearance="outline" class="example-full-width">
         <mat-label>Cena</mat-label>
-        <input matInput [(ngModel)]="deal.price" name="price" type="number">
+        <input matInput ngModel name="price" type="number">
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="example-full-width">
         <mat-label>Opis</mat-label>
-        <textarea matInput [(ngModel)]="deal.description" name="description" type="text"></textarea>
+        <textarea matInput ngModel name="description" type="text"></textarea>
     </mat-form-field>
 
     <div class="example-button-row">
