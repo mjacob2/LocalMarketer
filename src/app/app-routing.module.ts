@@ -15,6 +15,7 @@ import { FaqFormComponent } from './my-forms/faq-form/faq-form.component';
 import { FormThxComponent } from './my-forms/form-thx/form-thx.component';
 import { FaqFormViewComponent } from './my-forms/faq-form/faq-form-view/faq-form-view.component';
 import { UsersTableComponent } from './users/users-table/users-table.component';
+import { ServicesFormComponent } from './my-forms/services-form/services-form.component';
 
 const routes: Routes = [
   {
@@ -79,6 +80,10 @@ const routes: Routes = [
       {
         path: 'formfaq/:id',
         component: FaqFormViewComponent,
+      },
+      {
+        path: 'forms/service',
+        component: ServicesFormComponent,
       },
       {
         path: 'forms/thx',

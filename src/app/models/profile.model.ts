@@ -22,7 +22,8 @@ export class Profile {
   public customerService?: string; //
   public toDos?: ToDoGeneral[];
   public deals: DealGeneral[] = [];
-  public id?: number;
+  public profileId?: number;
   public creationDate?: Date;
   public clientEmail?: string;
+  public mediaLink?: string;
 }

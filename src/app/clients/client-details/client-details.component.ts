@@ -22,7 +22,6 @@ export class ClientDetailsComponent {
   client: Client = new Client();
   clientId!: number;
   allUsers: User[] = [];
-
   usersRelatedToClient: User[] = [];
   sellerId: number | null | undefined;
   userId: number | null | undefined;
@@ -47,13 +46,12 @@ export class ClientDetailsComponent {
     });
 
     this.client = await this.service.getClientById(this.clientId);
-    const usersRelatedToClient = this.client.users;
 
+    const usersRelatedToClient = this.client.users;
     const sellerRelatedToClient = usersRelatedToClient?.find(
       (user) => user.role === 'Seller'
     );
     this.sellerId = sellerRelatedToClient?.id;
-
     const userRelatedToClient = usersRelatedToClient?.find(
       (user) => user.role !== 'Seller'
     );
@@ -71,17 +69,12 @@ export class ClientDetailsComponent {
   saveChanges() {
     this.isLoading = true;
 
-    this.client.sellerId = this.sellerId;
-    this.client.userId = this.userId;
-
     const clientUsers: ClientUser[] = [
       {
-        ClientId: 8,
-        UserId: 3,
+        UserId: this.sellerId,
       },
       {
-        ClientId: 8,
-        UserId: 4,
+        UserId: this.userId,
       },
     ];
 
@@ -93,7 +86,7 @@ export class ClientDetailsComponent {
         this.errorMessage = '';
         this.isLoading = false;
         this.snackBar.open('Zmiany zostały zapisane', 'Ok', {
-          duration: 2000,
+          duration: 3000,
           panelClass: ['success-snackbar'],
         });
       })
@@ -104,8 +97,21 @@ export class ClientDetailsComponent {
   }
 
   deleteClient() {
-    this.service.deleteClientById(this.clientId);
-    this.router.navigateByUrl('/clients');
+    this.service
+      .deleteClientById(this.clientId)
+      .then(() => {
+        this.errorMessage = '';
+        this.isLoading = false;
+        this.snackBar.open('Klient został usunięty', 'Ok', {
+          duration: 3000,
+          panelClass: ['success-snackbar'],
+        });
+        this.router.navigateByUrl('/clients');
+      })
+      .catch((error) => {
+        this.isLoading = false;
+        this.errorMessage = error.message;
+      });
   }
 
   openConfirmdDleteDialog() {

@@ -14,6 +14,10 @@ export class ProfileDetailsTodosComponent {
   @Input()
   toDos?: ToDoGeneral[] = [];
 
+  ngOnInit() {
+    console.log(this.toDos);
+  }
+
   goToTodo(id: number) {
     console.log(id);
     this.router.navigateByUrl(`/todos/${id}`);

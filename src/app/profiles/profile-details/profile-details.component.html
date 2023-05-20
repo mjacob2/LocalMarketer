@@ -69,7 +69,12 @@
                 <input [(ngModel)]="profile.regon" name="regon" matInput>
             </mat-form-field>
 
-            <p>ID: {{profile.id}}</p>
+            <mat-form-field appearance="outline">
+                <mat-label>Link do folderu z mediami</mat-label>
+                <input [(ngModel)]="profile.mediaLink" name="mediaLink" matInput>
+            </mat-form-field>
+
+            <p>ID: {{profile.profileId}}</p>
             <p>Użytkownik: {{profile.userId}}</p>
             <p>Utworzono: {{profile.creationDate}}</p>
 

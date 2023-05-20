@@ -50,6 +50,9 @@ export class ProfileDetailsComponent {
 
       this.profile = await this.service.getProfileById(this.profileId);
 
+      console.log('profile from server');
+      console.log(this.profile);
+
       this.profileName = this.profile.name;
       this.clientEmail = this.profile.clientEmail;
 
@@ -71,6 +74,8 @@ export class ProfileDetailsComponent {
   }
 
   saveChanges() {
+    console.log(this.profile);
+
     this.isLoading = true;
 
     this.service
@@ -90,8 +95,21 @@ export class ProfileDetailsComponent {
   }
 
   deleteProfile() {
-    this.service.deleteProfileById(this.profileId);
-    this.router.navigateByUrl('/profiles');
+    this.service
+      .deleteProfileById(this.profileId)
+      .then(() => {
+        this.errorMessage = '';
+        this.isLoading = false;
+        this.snackBar.open('Profil został usunięty', 'Ok', {
+          duration: 3000,
+          panelClass: ['success-snackbar'],
+        });
+        this.router.navigateByUrl('/profiles');
+      })
+      .catch((error) => {
+        this.isLoading = false;
+        this.errorMessage = error.message;
+      });
   }
 
   openConfirmdDleteDialog() {

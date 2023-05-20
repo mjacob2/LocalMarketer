@@ -1,0 +1,65 @@
+<form class="column-flex center" style="max-width: 500px;" #formFaq="ngForm" (ngSubmit)="onSubmit(formFaq.value)">
+
+    <mat-card class="example-card">
+        <mat-card-header>
+            <mat-card-title>Formularz Usług</mat-card-title>
+            <mat-card-subtitle>Ten formularz zawiera informacje o usługach, jakie oferuje Twoja firma swoim
+                klientom.</mat-card-subtitle>
+        </mat-card-header>
+    </mat-card>
+
+    <mat-card *ngFor="let number of numbers" class="example-card center">
+        <mat-card-header>
+            <mat-card-title>Usługa nr {{number}}</mat-card-title>
+            <h1></h1>
+            <mat-card-subtitle></mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+
+            <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Kategoria</mat-label>
+                <input #category maxlength="60" matInput ngModel name="category{{number}}" type="text">
+                <mat-hint>Np. zabiegi na twarz, wulkanizacja, ortodoncja, itp.</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Nazwa</mat-label>
+                <input #name maxlength="60" matInput ngModel name="name{{number}}" type="text">
+                <mat-hint align="end">{{name.value.length}} / 120</mat-hint>
+                <mat-hint>Nazwa marketingowa dla klienta</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Cena</mat-label>
+                <input #price maxlength="60" matInput ngModel name="price{{number}}" type="text">
+                <mat-hint>Stała cena, Cena od, Bepłatnie, Cena od</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Opis</mat-label>
+                <textarea #description maxlength="500" matInput ngModel name="description{{number}}"
+                    type="text"></textarea>
+                <mat-hint align="end">{{description.value.length}} / 300</mat-hint>
+            </mat-form-field>
+        </mat-card-content>
+    </mat-card>
+
+    <button class="center" *ngIf="numbers.length < 20" (click)="add()" type="button" mat-mini-fab>
+        <mat-icon>add</mat-icon>
+    </button>
+
+    <mat-card style="margin-top: 50px;" class="example-card center">
+
+
+        <button mat-raised-button color="primary" type="submit">Wyślij</button>
+
+
+        <mat-card-footer>
+            <app-error-card *ngIf="errorMessage" errorMessage="{{errorMessage}}"></app-error-card>
+            <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+        </mat-card-footer>
+    </mat-card>
+
+
+</form>

@@ -1,5 +1,5 @@
 export class ToDo {
-  public id?: number;
+  public toDoId?: number;
   public title?: string;
   public creationDate?: Date;
   public creatorId?: number;
@@ -15,4 +15,5 @@ export class ToDo {
   public link3?: string;
   public link4?: string;
   public link5?: string;
+  public forRole?: string;
 }

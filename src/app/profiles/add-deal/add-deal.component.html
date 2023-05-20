@@ -22,9 +22,11 @@
         </mat-select>
     </mat-form-field>
 
-    <mat-form-field appearance="outline" class="example-full-width">
+    <mat-form-field style="margin-bottom: 10px;" appearance="outline" class="example-full-width">
         <mat-label>Cena</mat-label>
         <input matInput ngModel name="price" type="number">
+        <mat-hint align="start">Ceny nie można później edytować. Sprawdź dwa razy!
+        </mat-hint>
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="example-full-width">

@@ -23,7 +23,10 @@ export class ProfilesService {
   }
 
   async updateProfileById(profile: Profile) {
-    return await this.http.put<Profile>(`/profiles/${profile.id}`, profile);
+    return await this.http.put<Profile>(
+      `/profiles/${profile.profileId}`,
+      profile
+    );
   }
 
   async deleteProfileById(id: number) {

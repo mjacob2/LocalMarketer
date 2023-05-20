@@ -12,9 +12,10 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { FormThxComponent } from './form-thx/form-thx.component';
 import { FaqFormViewComponent } from './faq-form/faq-form-view/faq-form-view.component';
 import { MatIconModule } from '@angular/material/icon';
+import { ServicesFormComponent } from './services-form/services-form.component';
 
 @NgModule({
-  declarations: [FaqFormComponent, FormThxComponent, FaqFormViewComponent],
+  declarations: [FaqFormComponent, FormThxComponent, FaqFormViewComponent, ServicesFormComponent],
   imports: [
     CommonModule,
     MatFormFieldModule,

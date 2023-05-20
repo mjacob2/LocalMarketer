@@ -27,7 +27,7 @@ export class TodosService {
   }
 
   async updateToDoById(toDo: ToDo) {
-    return await this.http.put<ToDo>(`/toDos/${toDo.id}`, toDo);
+    return await this.http.put<ToDo>(`/toDos/${toDo.toDoId}`, toDo);
   }
 
   async deleteToDoById(id: number) {

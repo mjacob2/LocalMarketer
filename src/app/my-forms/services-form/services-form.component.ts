@@ -1,39 +1,53 @@
 import { Component } from '@angular/core';
-import { MyFormsService } from 'src/app/services/myForms.service';
-import { AddFormFaqRequestModel } from 'src/app/models/add-form-faq-request.model';
 import { ActivatedRoute, Router } from '@angular/router';
+import {
+  FormService,
+  Service,
+} from 'src/app/models/add-form-service-request.model';
+import { MyFormsService } from 'src/app/services/myForms.service';
 
 @Component({
-  selector: 'app-faq-form',
-  templateUrl: './faq-form.component.html',
-  styleUrls: ['./faq-form.component.scss'],
+  selector: 'app-services-form',
+  templateUrl: './services-form.component.html',
+  styleUrls: ['./services-form.component.scss'],
 })
-export class FaqFormComponent {
+export class ServicesFormComponent {
   constructor(
     private http: MyFormsService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
+
   errorMessage: string = '';
   isLoading = false;
-  name: string = '';
-  form = new AddFormFaqRequestModel();
-
   numbers: number[] = [1];
   increment: number = 1;
+  services: Service[] = [];
+  addFormServiceRequest: FormService = new FormService();
 
-  onSubmit(form: AddFormFaqRequestModel) {
-    console.log(form);
+  onSubmit(form: any) {
     this.isLoading = true;
+
+    this.addFormServiceRequest.services = [];
+    for (let number of this.numbers) {
+      const service: Service = new Service(
+        form['category' + number],
+        form['name' + number],
+        form['price' + number],
+        form['description' + number]
+      );
+      this.addFormServiceRequest.services.push(service);
+    }
 
     const profileId = this.route.snapshot.queryParamMap.get('ProfileId');
     const dealId = this.route.snapshot.queryParamMap.get('DealId');
+    this.addFormServiceRequest.profileId = parseInt(profileId!, 10);
+    this.addFormServiceRequest.dealId = parseInt(dealId!, 10);
 
-    form.ProfileId = parseInt(profileId!, 10);
-    form.DealId = parseInt(dealId!, 10);
+    console.log(this.addFormServiceRequest);
 
     this.http
-      .addformFaq(form)
+      .addformService(this.addFormServiceRequest)
       .then(() => {
         this.router.navigateByUrl('/forms/thx');
         this.isLoading = false;
@@ -43,7 +57,6 @@ export class FaqFormComponent {
         this.errorMessage = error.message;
       });
   }
-
   add() {
     this.increment++;
     this.numbers.push(this.increment);

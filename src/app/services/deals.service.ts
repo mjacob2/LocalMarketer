@@ -19,7 +19,7 @@ export class DealsService {
   }
 
   async updateDealById(deal: Deal) {
-    return await this.http.put<Deal>(`/deals/${deal.id}`, deal);
+    return await this.http.put<Deal>(`/deals/${deal.dealId}`, deal);
   }
 
   async deleteDealById(id: number) {

@@ -54,7 +54,7 @@ export class DealDetailsComponent {
         this.errorMessage = '';
         this.isLoading = false;
         this.snackBar.open('Zmiany zostały zapisane', 'Ok', {
-          duration: 2000,
+          duration: 3000,
           panelClass: ['success-snackbar'],
         });
       })
@@ -65,8 +65,21 @@ export class DealDetailsComponent {
   }
 
   deleteDeal() {
-    this.service.deleteDealById(this.dealId);
-    this.router.navigateByUrl('/deals');
+    this.service
+      .deleteDealById(this.dealId)
+      .then(() => {
+        this.errorMessage = '';
+        this.isLoading = false;
+        this.snackBar.open('Umowa została usunięta', 'Ok', {
+          duration: 3000,
+          panelClass: ['success-snackbar'],
+        });
+        this.router.navigateByUrl('/deals');
+      })
+      .catch((error) => {
+        this.isLoading = false;
+        this.errorMessage = error.message;
+      });
   }
 
   openConfirmdDleteDialog() {

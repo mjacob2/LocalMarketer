@@ -1,5 +1,5 @@
 export interface ToDoList {
-  id: number;
+  toDoId: number;
   creationDate: Date;
   title: string;
   profileId: number;
@@ -7,4 +7,5 @@ export interface ToDoList {
   dueDate: Date;
   isFinished: boolean;
   userFullName: string;
+  forRole: string;
 }
