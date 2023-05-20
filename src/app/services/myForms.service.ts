@@ -21,4 +21,8 @@ export class MyFormsService {
   async addformService(form: FormService) {
     return await this.http.post<FormService>(`/forms/service`, form);
   }
+
+  async getFormServiceById(id: number) {
+    return await this.http.get<FormService>(`/forms/service/${id}`);
+  }
 }

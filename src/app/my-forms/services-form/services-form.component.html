@@ -25,20 +25,21 @@
 
             <mat-form-field appearance="outline" class="example-full-width">
                 <mat-label>Nazwa</mat-label>
-                <input #name maxlength="60" matInput ngModel name="name{{number}}" type="text">
+                <input maxlength="120" #name maxlength="60" matInput ngModel name="name{{number}}" type="text">
                 <mat-hint align="end">{{name.value.length}} / 120</mat-hint>
                 <mat-hint>Nazwa marketingowa dla klienta</mat-hint>
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="example-full-width">
                 <mat-label>Cena</mat-label>
-                <input #price maxlength="60" matInput ngModel name="price{{number}}" type="text">
+                <input #price maxlength="50" matInput ngModel name="price{{number}}" type="text">
                 <mat-hint>Stała cena, Cena od, Bepłatnie, Cena od</mat-hint>
+                <mat-hint align="end">{{name.value.length}} / 50</mat-hint>
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="example-full-width">
                 <mat-label>Opis</mat-label>
-                <textarea #description maxlength="500" matInput ngModel name="description{{number}}"
+                <textarea maxlength="300" #description maxlength="500" matInput ngModel name="description{{number}}"
                     type="text"></textarea>
                 <mat-hint align="end">{{description.value.length}} / 300</mat-hint>
             </mat-form-field>

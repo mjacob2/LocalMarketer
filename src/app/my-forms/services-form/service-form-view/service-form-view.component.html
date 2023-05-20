@@ -1,0 +1,18 @@
+<div style="margin-left: 36px; padding-bottom: 36px;">
+
+    <h2>formularz USŁUG dla profilu:</h2>
+    <h1>{{formServiceResponse.profileName}}</h1>
+    <mat-divider></mat-divider>
+
+    <div *ngFor="let service of services; let i = index">
+        <div *ngIf="formServiceResponse">
+            <h3>Usługa {{i + 1}}</h3>
+            <p>Kategoria: {{service.category}}</p>
+            <p>Nazwa: {{service.name}}</p>
+            <p>Cena: {{service.price}}</p>
+            <p>Opis: {{service.description}}</p>
+        </div>
+
+        <mat-divider></mat-divider>
+    </div>
+</div>

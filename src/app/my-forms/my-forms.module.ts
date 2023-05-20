@@ -13,9 +13,10 @@ import { FormThxComponent } from './form-thx/form-thx.component';
 import { FaqFormViewComponent } from './faq-form/faq-form-view/faq-form-view.component';
 import { MatIconModule } from '@angular/material/icon';
 import { ServicesFormComponent } from './services-form/services-form.component';
+import { ServiceFormViewComponent } from './services-form/service-form-view/service-form-view.component';
 
 @NgModule({
-  declarations: [FaqFormComponent, FormThxComponent, FaqFormViewComponent, ServicesFormComponent],
+  declarations: [FaqFormComponent, FormThxComponent, FaqFormViewComponent, ServicesFormComponent, ServiceFormViewComponent],
   imports: [
     CommonModule,
     MatFormFieldModule,
