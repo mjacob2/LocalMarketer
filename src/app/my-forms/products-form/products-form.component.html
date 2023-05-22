@@ -3,7 +3,8 @@
     <mat-card class="example-card">
         <mat-card-header>
             <mat-card-title>Formularz Produktów</mat-card-title>
-            <mat-card-subtitle>Ten formularz zawiera informacje o produktach, jakie oferuje Twoja.</mat-card-subtitle>
+            <mat-card-subtitle>Ten formularz zawiera informacje o produktach, jakie oferuje Twoja
+                firma.</mat-card-subtitle>
         </mat-card-header>
     </mat-card>
 
@@ -11,57 +12,68 @@
         <mat-card-header>
             <mat-card-title>Produkt nr {{number}}</mat-card-title>
             <h1></h1>
+
             <mat-card-subtitle></mat-card-subtitle>
         </mat-card-header>
 
         <mat-card-content>
-
             <mat-form-field appearance="outline" class="example-full-width">
                 <mat-label>Kategoria</mat-label>
-                <input #category maxlength="60" matInput ngModel name="category{{number}}" type="text">
-                <mat-hint>Np. słodycze, kosmetyki, kredyty, itp.</mat-hint>
+                <input required maxlength="150" #category matInput ngModel name="category{{number}}" type="text"
+                    placeholder="Np. słodycze, kosmetyki, kredyty, itp.">
+                <mat-hint align="end">{{name.value.length}} / 150</mat-hint>
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="example-full-width">
                 <mat-label>Nazwa</mat-label>
-                <input maxlength="120" #name maxlength="60" matInput ngModel name="name{{number}}" type="text">
-                <mat-hint align="end">{{name.value.length}} / 120</mat-hint>
-                <mat-hint>Nazwa marketingowa dla klienta</mat-hint>
+                <input required maxlength="58" #name matInput ngModel name="name{{number}}" type="text"
+                    placeholder="Nazwa jaką widzi klient">
+                <mat-hint align="end">{{name.value.length}} / 58</mat-hint>
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="example-full-width">
                 <mat-label>Cena</mat-label>
-                <input #price maxlength="50" matInput ngModel name="price{{number}}" type="text">
-                <mat-hint>Stała cena, Cena od, Bepłatnie, Cena od</mat-hint>
-                <mat-hint align="end">{{price.value.length}} / 50</mat-hint>
-            </mat-form-field>
-
-            <mat-form-field appearance="outline" class="example-full-width">
-                <mat-label>Link</mat-label>
-                <input #link maxlength="250" maxlength="60" matInput ngModel name="link{{number}}" type="text">
-                <mat-hint align="end">{{link.value.length}} / 250</mat-hint>
-                <mat-hint>Opcjonalny link do strony w Twoim sklepie internetowym.</mat-hint>
+                <input #price maxlength="100" matInput ngModel name="price{{number}}" type="text"
+                    placeholder="Stała cena, Cena od, Bepłatnie">
+                <mat-hint align="end">{{price.value.length}} / 100</mat-hint>
             </mat-form-field>
 
             <mat-form-field appearance="outline" class="example-full-width">
                 <mat-label>Opis</mat-label>
-                <textarea maxlength="300" #description maxlength="500" matInput ngModel name="description{{number}}"
-                    type="text"></textarea>
-                <mat-hint align="end">{{description.value.length}} / 300</mat-hint>
+                <textarea maxlength="1000" #description matInput ngModel name="description{{number}}" type="text"
+                    placeholder="Dodatkowy opis produktu"></textarea>
+                <mat-hint align="end">{{description.value.length}} / 1000</mat-hint>
             </mat-form-field>
+
+            <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Link do produktu na stronie www</mat-label>
+                <input #link maxlength="1500" matInput ngModel name="link{{number}}" type="text"
+                    placeholder="Opcjonalny link do strony w Twoim sklepie internetowym.">
+                <mat-hint align="end">{{link.value.length}} / 1500</mat-hint>
+            </mat-form-field>
+
+            <button mat-fab type="button"
+                (click)="uploadAndResize(number)"><mat-icon>add_a_photoadd_a_photo</mat-icon></button>
+            <img *ngIf="imgResultAfterResize" [src]="apendedImages[number - 1]" alt="" />
+            <mat-spinner style="width: 25px;" *ngIf="isImageLoading"></mat-spinner>
+            <mat-error>{{fileUploadErrorMessage}}</mat-error>
 
         </mat-card-content>
     </mat-card>
 
-    <button class="center" *ngIf="numbers.length < 20" (click)="add()" type="button" mat-mini-fab>
+    <button style="margin-bottom: 16px;" color="warn" *ngIf="numbers.length > 1" mat-button type="button"
+        (click)="remove()">Usuń ostatni
+        produkt</button>
+
+    <button class="center" *ngIf="numbers.length < 20" (click)="add()" type="button" mat-fab extended>
         <mat-icon>add</mat-icon>
+        Następny produkt
     </button>
 
     <mat-card style="margin-top: 50px;" class="example-card center">
 
 
         <button mat-raised-button color="primary" type="submit">Wyślij</button>
-
 
         <mat-card-footer>
             <app-error-card *ngIf="errorMessage" errorMessage="{{errorMessage}}"></app-error-card>

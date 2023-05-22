@@ -2,13 +2,15 @@ import { Package } from './package.model';
 import { User } from './user.model';
 
 export class AddDealRequestModel {
-  profileId?: number;
-  sellerFullName?: string;
-  sellerId?: number;
-  selectedPackage?: Package;
-  name?: string;
-  price?: number;
-  description?: string;
-  profileName?: string;
-  clientEmail?: string;
+  constructor(
+    public profileId?: number,
+    public sellerFullName?: string,
+    public sellerId?: number,
+    public selectedPackage: Package | null = null, // Set selectedPackage to null by default
+    public name?: string,
+    public price?: number,
+    public description?: string,
+    public profileName?: string,
+    public clientEmail?: string
+  ) {}
 }

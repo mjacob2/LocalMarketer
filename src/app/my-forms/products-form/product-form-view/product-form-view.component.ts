@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { Product } from 'src/app/models/add-form-product-request.model';
+import {
+  Product,
+  ProductResponse,
+} from 'src/app/models/add-form-product-request.model';
 import { FormProduct } from 'src/app/models/add-form-product-request.model';
 import { MyFormsService } from 'src/app/services/myForms.service';
 
@@ -15,7 +18,7 @@ export class ProductFormViewComponent {
   isLoading = false;
   formProductResponse = new FormProduct();
   id!: number;
-  products: Product[] = [];
+  products: ProductResponse[] = [];
 
   async ngOnInit() {
     this.isLoading = true;

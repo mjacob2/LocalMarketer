@@ -16,9 +16,19 @@ import { ServicesFormComponent } from './services-form/services-form.component';
 import { ServiceFormViewComponent } from './services-form/service-form-view/service-form-view.component';
 import { ProductsFormComponent } from './products-form/products-form.component';
 import { ProductFormViewComponent } from './products-form/product-form-view/product-form-view.component';
+import { NgxImageCompressService } from 'ngx-image-compress';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
-  declarations: [FaqFormComponent, FormThxComponent, FaqFormViewComponent, ServicesFormComponent, ServiceFormViewComponent, ProductsFormComponent, ProductFormViewComponent],
+  declarations: [
+    FaqFormComponent,
+    FormThxComponent,
+    FaqFormViewComponent,
+    ServicesFormComponent,
+    ServiceFormViewComponent,
+    ProductsFormComponent,
+    ProductFormViewComponent,
+  ],
   imports: [
     CommonModule,
     MatFormFieldModule,
@@ -31,6 +41,8 @@ import { ProductFormViewComponent } from './products-form/product-form-view/prod
     ErrorCardComponent,
     MatProgressBarModule,
     MatIconModule,
+    MatProgressSpinnerModule,
   ],
+  providers: [NgxImageCompressService],
 })
 export class MyFormsModule {}

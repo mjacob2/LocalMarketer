@@ -12,6 +12,7 @@
             <p>Cena: {{product.price}}</p>
             <p>Link: {{product.link}}</p>
             <p>Opis: {{product.description}}</p>
+            <img [src]="'https://localhost:44336/ProductsImages/' + product.imageName" alt="" />
         </div>
 
         <mat-divider></mat-divider>

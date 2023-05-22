@@ -1,3 +1,5 @@
+import { DataUrl } from 'ngx-image-compress';
+
 export class FormProduct {
   constructor(
     public profileName?: string,
@@ -13,6 +15,18 @@ export class Product {
     public name?: string,
     public price?: string,
     public description?: string,
-    public link?: string
+    public link?: string,
+    public image?: string
+  ) {}
+}
+
+export class ProductResponse {
+  constructor(
+    public category?: string,
+    public name?: string,
+    public price?: string,
+    public description?: string,
+    public link?: string,
+    public imageName?: string
   ) {}
 }

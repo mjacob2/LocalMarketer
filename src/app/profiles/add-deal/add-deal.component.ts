@@ -63,12 +63,14 @@ export class AddDealComponent {
 
     this.isLoading = true;
 
+    dealToAdd.price = dealToAdd.price ? dealToAdd.price : 0;
     dealToAdd.profileId = this.profileId;
-    dealToAdd.sellerFullName = `${this.currentlyLoggedUser?.firstName} ${this.currentlyLoggedUser?.lastName}`;
-    dealToAdd.sellerId = this.currentlyLoggedUser?.id;
-    dealToAdd.selectedPackage = this.packages.find(
-      (x) => x.packageId === this.packageId
-    );
+    dealToAdd.sellerFullName = `Not set from Angular`;
+    dealToAdd.sellerId = this.sellerId!;
+
+    dealToAdd.selectedPackage = this.packageId
+      ? this.packages.find((x) => x.packageId === this.packageId) || null
+      : null;
     dealToAdd.name = `${dealToAdd.selectedPackage?.name} - ${this.profileName}`;
     dealToAdd.profileName = this.profileName;
     dealToAdd.clientEmail = this.clientEmail;
