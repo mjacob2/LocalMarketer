@@ -1,0 +1,19 @@
+<div style="margin-left: 36px; padding-bottom: 36px;">
+
+    <h2>formularz PRODUKTÓW dla profilu:</h2>
+    <h1>{{formProductResponse.profileName}}</h1>
+    <mat-divider></mat-divider>
+
+    <div *ngFor="let product of products; let i = index">
+        <div *ngIf="formProductResponse">
+            <h3>Usługa {{i + 1}}</h3>
+            <p>Kategoria: {{product.category}}</p>
+            <p>Nazwa: {{product.name}}</p>
+            <p>Cena: {{product.price}}</p>
+            <p>Link: {{product.link}}</p>
+            <p>Opis: {{product.description}}</p>
+        </div>
+
+        <mat-divider></mat-divider>
+    </div>
+</div>
