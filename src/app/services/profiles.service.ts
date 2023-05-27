@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
-import { ProfilesList } from '../models/profilesList.model';
-import { Profile } from '../models/profile.model';
-import { AddProfileRequestModel } from '../models/add-profile-request.model';
+import { XProfile } from '../models/XProfile.model';
 
 @Injectable({
   providedIn: 'root',
@@ -10,26 +8,26 @@ import { AddProfileRequestModel } from '../models/add-profile-request.model';
 export class ProfilesService {
   constructor(private http: HttpService) {}
 
-  async addProfile(profile: AddProfileRequestModel) {
-    return await this.http.post<AddProfileRequestModel>(`/profiles`, profile);
+  async addProfile(profile: XProfile) {
+    return await this.http.post<XProfile>(`/profiles`, profile);
   }
 
   async getAllProfiles() {
-    return await this.http.get<ProfilesList[]>('/profiles');
+    return await this.http.get<XProfile[]>('/profiles');
   }
 
   async getProfileById(id: number) {
-    return await this.http.get<Profile>(`/profiles/${id}`);
+    return await this.http.get<XProfile>(`/profiles/${id}`);
   }
 
-  async updateProfileById(profile: Profile) {
-    return await this.http.put<Profile>(
+  async updateProfileById(profile: XProfile) {
+    return await this.http.put<XProfile>(
       `/profiles/${profile.profileId}`,
       profile
     );
   }
 
   async deleteProfileById(id: number) {
-    return await this.http.delete<Profile>(`/profiles/${id}`);
+    return await this.http.delete<XProfile>(`/profiles/${id}`);
   }
 }

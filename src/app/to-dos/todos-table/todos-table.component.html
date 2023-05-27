@@ -1,11 +1,23 @@
 <mat-progress-bar *ngIf="!todos" mode="indeterminate"></mat-progress-bar>
 
-<div *ngIf="todos" class="example-container mat-elevation-z0">
-    <mat-form-field style="max-width: 250px;">
-        <input placeholder="wyszukaj..." matInput (keyup)="applyFilter($event)" #input>
-    </mat-form-field>
+<div class="example-container mat-elevation-z0">
+    <div style="justify-content: space-between;" class="row-flex">
 
-    <mat-table [dataSource]="dataSource" matSort #sortRef="matSort">
+        <p>
+            <mat-button-toggle-group [(ngModel)]="toDosType" aria-label="ToDo Style">
+                <mat-button-toggle (click)="getUnfinishedToDos()" value="unfinished">Do zrobienia</mat-button-toggle>
+                <mat-button-toggle (click)="getFinishedToDos()" value="finished">Zrobione</mat-button-toggle>
+                <mat-button-toggle (click)="getAllToDos()" value="all">Wszystkie</mat-button-toggle>
+            </mat-button-toggle-group>
+        </p>
+
+        <mat-form-field style="width: 300px;">
+            <input placeholder="wyszukaj..." matInput (keyup)="applyFilter($event)" #input>
+        </mat-form-field>
+
+    </div>
+
+    <mat-table *ngIf="todos" [dataSource]="dataSource" matSort #sortRef="matSort">
 
         <!-- FirstName Column -->
         <ng-container matColumnDef="title">
@@ -50,5 +62,7 @@
         </mat-row>
     </mat-table>
 
-    <mat-paginator></mat-paginator>
+    <mat-paginator (page)="handlePageEvent($event)" [pageSizeOptions]="[10, 20, 50, 100]" [length]="count"
+        [pageSize]="pageSize" [showFirstLastButtons]="true" [pageIndex]="pageIndex">
+    </mat-paginator>
 </div>

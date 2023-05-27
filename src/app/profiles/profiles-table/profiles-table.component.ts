@@ -3,7 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { ProfilesList } from 'src/app/models/profilesList.model';
+import { XProfile } from 'src/app/models/XProfile.model';
 import { ProfilesService } from 'src/app/services/profiles.service';
 
 @Component({
@@ -14,14 +14,15 @@ import { ProfilesService } from 'src/app/services/profiles.service';
 export class ProfilesTableComponent {
   displayedColumns = [
     'name',
-    'googleProfileId',
-    'city',
-    'source',
     'clientId',
-    'userId',
+    'googleProfileId',
+    'voivodeship',
+    'city',
+    'sellerFullName',
+    'localMarketerFullName',
   ];
-  dataSource = new MatTableDataSource<ProfilesList>();
-  profiles?: ProfilesList[];
+  dataSource = new MatTableDataSource<XProfile>();
+  profiles?: XProfile[];
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;

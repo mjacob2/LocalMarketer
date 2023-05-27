@@ -3,14 +3,13 @@ import {
   MAT_BOTTOM_SHEET_DATA,
   MatBottomSheetRef,
 } from '@angular/material/bottom-sheet';
-import { AddDealRequestModel } from 'src/app/models/add-deal-request.model';
-import { Package } from 'src/app/models/package.model';
-import { User } from 'src/app/models/user.model';
 import { DealsService } from 'src/app/services/deals.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { PackagesService } from 'src/app/services/packages.service';
 import { UsersService } from 'src/app/services/users.service';
-import { Params } from '@angular/router';
+import { XUser } from 'src/app/models/XUser.model';
+import { XPackage } from 'src/app/models/XPackage.model';
+import { XDeal } from 'src/app/models/XDeal.model';
 
 @Component({
   selector: 'app-add-deal',
@@ -20,19 +19,14 @@ import { Params } from '@angular/router';
 export class AddDealComponent {
   errorMessage: string = '';
   isLoading = false;
-  packages: Package[] = [];
-  users: User[] = [];
-  currentlyLoggedUser: User | null | undefined;
+  packages: XPackage[] = [];
+  sellers: XUser[] = [];
+  currentlyLoggedUser: XUser | null | undefined;
   profileId!: number;
   profileName!: string;
   clientEmail!: string;
   sellerId: number | null | undefined;
-  packageId: number | null | undefined;
-  foods: any[] = [
-    { value: 'steak-0', viewValue: 'Steak' },
-    { value: 'pizza-1', viewValue: 'Pizza' },
-    { value: 'tacos-2', viewValue: 'Tacos' },
-  ];
+  packageId?: number;
 
   constructor(
     private _bottomSheetRef: MatBottomSheetRef<AddDealComponent>,
@@ -51,22 +45,25 @@ export class AddDealComponent {
   async ngOnInit() {
     this.packages = await this.httpPackages.getAllPackages();
 
-    this.users = await this.httpUsers.getAllUsers();
-    this.currentlyLoggedUser = await this.localStorage.getItem<User>('user');
+    this.sellers = (await this.httpUsers.getAllUsers()).filter(
+      (x) => x.role == 'Seller'
+    );
+    this.currentlyLoggedUser = await this.localStorage.getItem<XUser>('user');
     if (this.currentlyLoggedUser?.role == 'Seller') {
-      this.sellerId = this.currentlyLoggedUser?.id;
+      this.sellerId = this.currentlyLoggedUser?.userId;
     }
   }
 
-  addDeal(dealToAdd: AddDealRequestModel) {
+  addDeal(dealToAdd: XDeal) {
     console.log(dealToAdd);
 
     this.isLoading = true;
 
     dealToAdd.price = dealToAdd.price ? dealToAdd.price : 0;
     dealToAdd.profileId = this.profileId;
-    dealToAdd.sellerFullName = `Not set from Angular`;
-    dealToAdd.sellerId = this.sellerId!;
+    //dealToAdd.sellerId = this.sellerId!;
+    //const seller = this.sellers.find((x) => x.userId == dealToAdd.sellerId);
+    //dealToAdd.sellerFullName = `${seller?.firstName} ${seller?.lastName}`;
 
     dealToAdd.selectedPackage = this.packageId
       ? this.packages.find((x) => x.packageId === this.packageId) || null
@@ -74,8 +71,6 @@ export class AddDealComponent {
     dealToAdd.name = `${dealToAdd.selectedPackage?.name} - ${this.profileName}`;
     dealToAdd.profileName = this.profileName;
     dealToAdd.clientEmail = this.clientEmail;
-
-    const selectedseller = this.users.find((x) => x.id === this.sellerId);
 
     this.http
       .addDeal(dealToAdd)

@@ -36,7 +36,9 @@
             <a *ngIf="toDo.link4" href="{{toDo.link4}}" target="_blank">Otwórz link 4</a>
             <a *ngIf="toDo.link5" href="{{toDo.link5}}" target="_blank">Otwórz link 5</a>
 
-            <p href="google.pl">Profil: <a [routerLink]="['/profiles', toDo.profileId]"> {{ toDo.profileName }} </a></p>
+            <p>Profil: <a [routerLink]="['/profiles', toDo.profileId]"> {{ toDo.profileName }} </a></p>
+
+            <p>Ukończono: {{toDo.executionDate | date: 'dd-MM-yyyy'}}</p>
             <p>ID: {{toDo.toDoId}}</p>
             <p>Utworzono: {{toDo.creationDate | date: 'dd-MM-yyyy'}}</p>
             <p>Kreator: {{toDo.creatorId}}</p>

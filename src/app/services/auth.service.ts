@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import { User } from '../models/user.model';
 import { HttpService } from './http.service';
 import { LocalStorageService } from './local-storage.service';
 import { Buffer } from 'buffer';
 import { Router } from '@angular/router';
+import { XUser } from '../models/XUser.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  user: User | null = {};
+  user: XUser | null = {};
 
   constructor(
     private http: HttpService,
@@ -16,7 +16,7 @@ export class AuthService {
   ) {}
 
   async login(email: string, password: string) {
-    this.user = await this.http.post<User>('/login', {
+    this.user = await this.http.post<XUser>('/login', {
       email: email,
       password: password,
     });
@@ -31,6 +31,6 @@ export class AuthService {
   }
 
   async initialize() {
-    this.user = await this.localStorage.getItem<User>('user');
+    this.user = await this.localStorage.getItem<XUser>('user');
   }
 }

@@ -2,8 +2,8 @@ import { MediaMatcher } from '@angular/cdk/layout';
 import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { LocalStorageService } from './services/local-storage.service';
-import { User } from './models/user.model';
 import { Router } from '@angular/router';
+import { XUser } from './models/XUser.model';
 
 @Component({
   selector: 'app-root',
@@ -29,7 +29,7 @@ export class AppComponent implements OnDestroy, OnInit {
     this.mobileQuery.addListener(this._mobileQueryListener);
   }
   async ngOnInit(): Promise<void> {
-    const user = await this.localStorage.getItem<User>('user');
+    const user = await this.localStorage.getItem<XUser>('user');
     const currentPath = this.router.url;
     const allowedPaths = ['/forms/faq', '/forms/new', '/forms/new2'];
 

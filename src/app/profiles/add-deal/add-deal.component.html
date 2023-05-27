@@ -2,30 +2,33 @@
 
 <form class="example-form" #addDealForm="ngForm" (ngSubmit)="addDeal(addDealForm.value)">
 
-    <mat-spinner style="height: 36px;" *ngIf="users.length <= 0"></mat-spinner>
-    <mat-form-field *ngIf="users.length > 0" appearance="outline" class="example-full-width">
+    <!-- <mat-spinner style="height: 36px;" *ngIf="sellers.length <= 0"></mat-spinner>
+    <mat-form-field *ngIf="sellers.length > 0" appearance="outline" class="example-full-width">
         <mat-label>Sprzedawca</mat-label>
-        <mat-select [(ngModel)]="sellerId" name="sellerId">
-            <mat-option *ngFor="let user of users" [value]="user.id">
+        <mat-select required [(ngModel)]="sellerId" name="sellerId">
+            <mat-option *ngFor="let user of sellers" [value]="user.userId">
                 {{user.lastName}} {{user.firstName}} - {{user.role}}
             </mat-option>
         </mat-select>
-    </mat-form-field>
+    </mat-form-field> -->
 
     <mat-spinner style="height: 36px;" *ngIf="packages.length <= 0"></mat-spinner>
     <mat-form-field *ngIf="packages.length > 0" appearance="outline" class="example-full-width">
         <mat-label>Pakiet</mat-label>
-        <mat-select [(ngModel)]="packageId" name="packageId">
+        <mat-select required [(ngModel)]="packageId" name="packageId">
             <mat-option *ngFor="let package of packages" [value]="package.packageId">
                 {{package.name}}
             </mat-option>
         </mat-select>
+        <mat-hint style="color: red;" align="start">Wybór pakietu wyzwala automatyczne zadania. Nie można później
+            zmienić pakietu!
+        </mat-hint>
     </mat-form-field>
 
     <mat-form-field style="margin-bottom: 10px;" appearance="outline" class="example-full-width">
         <mat-label>Cena</mat-label>
-        <input matInput ngModel name="price" type="number">
-        <mat-hint align="start">Ceny nie można później edytować. Sprawdź dwa razy!
+        <input required matInput ngModel name="price" type="number">
+        <mat-hint style="color: red;" align="start">Ceny nie można później edytować. Sprawdź dwa razy!
         </mat-hint>
     </mat-form-field>
 
@@ -34,12 +37,12 @@
         <textarea matInput ngModel name="description" type="text"></textarea>
     </mat-form-field>
 
+    <app-error-card *ngIf="errorMessage" errorMessage="{{errorMessage}}"></app-error-card>
+
     <div class="example-button-row">
         <button mat-raised-button color="primary" type="submit">Dodaj</button>
         <button type="button" (click)="close()" style="margin-left: 16px;" mat-button>Anuluj</button>
     </div>
 </form>
-
-<app-error-card *ngIf="errorMessage" errorMessage="{{errorMessage}}"></app-error-card>
 
 <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>

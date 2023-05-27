@@ -1,11 +1,26 @@
 <mat-progress-bar *ngIf="!clients" mode="indeterminate"></mat-progress-bar>
 
-<div *ngIf="clients" class="example-container mat-elevation-z0">
-    <mat-form-field style="max-width: 250px;">
-        <input placeholder="wyszukaj..." matInput (keyup)="applyFilter($event)" #input>
-    </mat-form-field>
+<div class="example-container mat-elevation-z0">
 
-    <mat-table [dataSource]="dataSource" matSort>
+    <div style="justify-content: space-between;" class="row-flex">
+
+        <p>
+            <mat-button-toggle-group
+                *ngIf="currentlyLoggedUser?.role == 'Administrator' || currentlyLoggedUser?.role == 'Manager'"
+                [(ngModel)]="clientsType" aria-label="ToDo Style">
+                <mat-button-toggle (click)="getAllClients()" value="all">Wszyscy</mat-button-toggle>
+                <mat-button-toggle (click)="getClientsWithoutLocalMarketer()"
+                    value="unallocated">Nieprzydzielone</mat-button-toggle>
+            </mat-button-toggle-group>
+        </p>
+
+        <mat-form-field style="width: 300px;">
+            <input placeholder="wyszukaj..." matInput (keyup)="applyFilter($event)" #input>
+        </mat-form-field>
+
+    </div>
+
+    <mat-table *ngIf="clients" [dataSource]="dataSource" matSort>
 
         <!-- FirstName Column -->
         <ng-container matColumnDef="name">
@@ -39,20 +54,20 @@
             <mat-cell *matCellDef="let client"> {{client.email}} </mat-cell>
         </ng-container>
 
-        <!-- Source Column -->
-        <ng-container matColumnDef="source">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Źródło </mat-header-cell>
-            <mat-cell *matCellDef="let client"> {{client.source}} </mat-cell>
+        <!-- CreatorId Column -->
+        <ng-container matColumnDef="sellerFullName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Sprzedawca </mat-header-cell>
+            <mat-cell *matCellDef="let client"> {{client.sellerFullName}} </mat-cell>
         </ng-container>
 
         <!-- CreatorId Column -->
-        <ng-container matColumnDef="creatorId">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Kreator </mat-header-cell>
-            <mat-cell *matCellDef="let client"> {{client.creatorId}} </mat-cell>
+        <ng-container matColumnDef="localMarketerFullName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Local Marketer </mat-header-cell>
+            <mat-cell *matCellDef="let client"> {{client.localMarketerFullName}} </mat-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row (click)="openClientDetailsPage(row.id)" *matRowDef="let row; columns: displayedColumns;">
+        <mat-row (click)="openClientDetailsPage(row.clientId)" *matRowDef="let row; columns: displayedColumns;">
         </mat-row>
     </mat-table>
 

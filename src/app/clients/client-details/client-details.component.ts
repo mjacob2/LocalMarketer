@@ -1,15 +1,13 @@
 import { Component } from '@angular/core';
 import { ClientsService } from 'src/app/services/clients.service';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Client } from 'src/app/models/client.model';
 import { ConfirmDeleteDialogComponent } from 'src/app/shared/confirm-delete-dialog/confirm-delete-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { User } from 'src/app/models/user.model';
 import { UsersService } from 'src/app/services/users.service';
-import { LocalStorageService } from 'src/app/services/local-storage.service';
-import { UserList } from '../../models/user-list.model';
 import { ClientUser } from 'src/app/models/ClientUser.model';
+import { XClient } from 'src/app/models/XClient.model';
+import { XUser } from 'src/app/models/XUser.model';
 
 @Component({
   selector: 'app-client-details',
@@ -19,14 +17,14 @@ import { ClientUser } from 'src/app/models/ClientUser.model';
 export class ClientDetailsComponent {
   errorMessage: string = '';
   isLoading = false;
-  client: Client = new Client();
+  client: XClient = new XClient();
   clientId!: number;
-  allUsers: User[] = [];
-  usersRelatedToClient: User[] = [];
+  allUsers: XUser[] = [];
+  usersRelatedToClient: XUser[] = [];
   sellerId: number | null | undefined;
   userId: number | null | undefined;
-  allSellers: User[] | undefined;
-  allLocalMarketers: User[] | undefined;
+  allSellers: XUser[] | undefined;
+  allLocalMarketers: XUser[] | undefined;
 
   constructor(
     private service: ClientsService,
@@ -34,8 +32,7 @@ export class ClientDetailsComponent {
     private router: Router,
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
-    private httpUsers: UsersService,
-    private localStorage: LocalStorageService
+    private httpUsers: UsersService
   ) {}
 
   async ngOnInit() {
@@ -51,11 +48,11 @@ export class ClientDetailsComponent {
     const sellerRelatedToClient = usersRelatedToClient?.find(
       (user) => user.role === 'Seller'
     );
-    this.sellerId = sellerRelatedToClient?.id;
+    this.sellerId = sellerRelatedToClient?.userId;
     const userRelatedToClient = usersRelatedToClient?.find(
       (user) => user.role !== 'Seller'
     );
-    this.userId = userRelatedToClient?.id;
+    this.userId = userRelatedToClient?.userId;
 
     this.allUsers = await this.httpUsers.getAllUsers();
     this.allSellers = this.allUsers.filter((user) => user.role === 'Seller');
@@ -71,9 +68,11 @@ export class ClientDetailsComponent {
 
     const clientUsers: ClientUser[] = [
       {
+        //ClientId: this.clientId,
         UserId: this.sellerId,
       },
       {
+        //ClientId: this.clientId,
         UserId: this.userId,
       },
     ];

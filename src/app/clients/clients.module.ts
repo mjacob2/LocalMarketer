@@ -19,6 +19,7 @@ import { MatListModule } from '@angular/material/list';
 import { AddProfileComponent } from './add-profile/add-profile.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatListModule,
     MatProgressSpinnerModule,
     MatSelectModule,
+    MatButtonToggleModule,
   ],
 })
 export class ClientsModule {}

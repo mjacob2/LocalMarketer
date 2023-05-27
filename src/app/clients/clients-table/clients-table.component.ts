@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ClientsService } from 'src/app/services/clients.service';
-import { ClientList } from 'src/app/models/clientList.model';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -10,6 +9,10 @@ import {
   MatBottomSheetRef,
 } from '@angular/material/bottom-sheet';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { XClient } from 'src/app/models/XClient.model';
+import { XUser } from 'src/app/models/XUser.model';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 
 @Component({
   selector: 'app-clients-table',
@@ -23,12 +26,14 @@ export class ClientsTableComponent {
     'lastName',
     'phone',
     'email',
-    'source',
-    'creatorId',
+    'sellerFullName',
+    'localMarketerFullName',
   ];
 
-  dataSource = new MatTableDataSource<ClientList>();
-  clients?: ClientList[];
+  dataSource = new MatTableDataSource<XClient>();
+  clients?: XClient[];
+  clientsType?: string;
+  currentlyLoggedUser: XUser | null | undefined;
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -37,10 +42,14 @@ export class ClientsTableComponent {
   constructor(
     private clientsService: ClientsService,
     private bottomSheet: MatBottomSheet,
-    private router: Router
+    private router: Router,
+    private localStorage: LocalStorageService
   ) {}
 
   async ngOnInit() {
+    this.currentlyLoggedUser = await this.localStorage.getItem<XUser>('user');
+
+    this.clientsType = 'all';
     this.clients = await this.clientsService.getAllClients();
     this.dataSource.data = this.clients;
     this.dataSource.paginator = this.paginator;
@@ -72,5 +81,21 @@ export class ClientsTableComponent {
 
   openClientDetailsPage(id: string) {
     this.router.navigateByUrl(`/clients/${id}`);
+  }
+
+  async getAllClients() {
+    this.clients = undefined;
+    this.clients = await this.clientsService.getAllClients();
+    this.dataSource.data = this.clients;
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  async getClientsWithoutLocalMarketer() {
+    this.clients = undefined;
+    this.clients = await this.clientsService.getUnallocatedClients();
+    this.dataSource.data = this.clients;
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
 }

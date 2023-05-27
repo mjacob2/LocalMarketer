@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
-import { DealsList } from '../models/dealsList.model';
-import { Deal } from '../models/deal.model';
-import { AddDealRequestModel } from '../models/add-deal-request.model';
+import { XDeal } from '../models/XDeal.model';
 
 @Injectable({
   providedIn: 'root',
@@ -11,22 +9,22 @@ export class DealsService {
   constructor(private http: HttpService) {}
 
   async getAllDeals() {
-    return await this.http.get<DealsList[]>('/deals');
+    return await this.http.get<XDeal[]>('/deals');
   }
 
   async getDealById(id: number) {
-    return await this.http.get<Deal>(`/deals/${id}`);
+    return await this.http.get<XDeal>(`/deals/${id}`);
   }
 
-  async updateDealById(deal: Deal) {
-    return await this.http.put<Deal>(`/deals/${deal.dealId}`, deal);
+  async updateDealById(deal: XDeal) {
+    return await this.http.put<XDeal>(`/deals/${deal.dealId}`, deal);
   }
 
   async deleteDealById(id: number) {
-    return await this.http.delete<Deal>(`/deals/${id}`);
+    return await this.http.delete<XDeal>(`/deals/${id}`);
   }
 
-  async addDeal(deal: AddDealRequestModel) {
-    return await this.http.post<AddDealRequestModel>(`/deals`, deal);
+  async addDeal(deal: XDeal) {
+    return await this.http.post<XDeal>(`/deals`, deal);
   }
 }

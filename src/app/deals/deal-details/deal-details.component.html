@@ -19,7 +19,7 @@
                 <input [(ngModel)]="deal.stage" name="stage" matInput type="text">
             </mat-form-field>
 
-            <mat-form-field appearance="outline" class="example-full-width">
+            <mat-form-field *ngIf="loggedUser?.role != 'LocalMarketer'" appearance="outline" class="example-full-width">
                 <mat-label>Cena</mat-label>
                 <input disabled [(ngModel)]="deal.price" name="price" matInput type="number">
             </mat-form-field>
@@ -41,7 +41,7 @@
             <p>Utworzono: {{deal.creationDate | date: 'dd-MM-yyyy'}}</p>
             <p>Kreator: {{deal.creatorId}}</p>
             <p>Id profilu: {{deal.profileId}}</p>
-            <p>Uzytkownik profilu: {{deal.profileUserId}}</p>
+            <!-- <p>Uzytkownik profilu: {{deal.profileUserId}}</p> -->
 
 
             <mat-card-actions>
@@ -62,4 +62,4 @@
 </mat-card>
 
 <app-deal-details-todos [toDos]="deal.toDos" [dealId]="dealId" [dealEndDate]="deal.endDate"
-    [dealCreationDate]="deal.creationDate" [profileUserId]="deal.profileUserId"></app-deal-details-todos>
+    [dealCreationDate]="deal.creationDate"></app-deal-details-todos>

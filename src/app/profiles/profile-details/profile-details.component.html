@@ -11,42 +11,17 @@
         <form #profileDetailsForm="ngForm" (ngSubmit)="saveChanges()">
             <mat-form-field appearance="outline">
                 <mat-label>Nazwa</mat-label>
-                <input [(ngModel)]="profile.name" name="name" matInput type="text">
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-                <mat-label>Google identyfikator</mat-label>
-                <input [(ngModel)]="profile.googleProfileId" name="googleProfileId" matInput type="text">
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-                <mat-label>Telefon</mat-label>
-                <input [(ngModel)]="profile.phone" name="phone" matInput type="text">
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-                <mat-label>E-mail</mat-label>
-                <input [(ngModel)]="profile.email" name="email" matInput type="text">
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-                <mat-label>Źródło</mat-label>
-                <input [(ngModel)]="profile.source" name="source" matInput type="text">
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-                <mat-label>Serwis</mat-label>
-                <input [(ngModel)]="profile.customerService" name="customerService" matInput>
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-                <mat-label>Miasto</mat-label>
-                <input [(ngModel)]="profile.city" name="city" matInput type="text">
+                <input required [(ngModel)]="profile.name" name="name" matInput type="text">
             </mat-form-field>
 
             <mat-form-field appearance="outline">
                 <mat-label>Województwo</mat-label>
-                <input [(ngModel)]="profile.voivodeship" name="voivodeship" matInput>
+                <input required [(ngModel)]="profile.voivodeship" name="voivodeship" matInput>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Miasto</mat-label>
+                <input required [(ngModel)]="profile.city" name="city" matInput type="text">
             </mat-form-field>
 
             <mat-form-field appearance="outline">
@@ -60,13 +35,22 @@
             </mat-form-field>
 
             <mat-form-field appearance="outline">
-                <mat-label>NIP</mat-label>
-                <input [(ngModel)]="profile.nip" name="nip" matInput>
+                <mat-label>Telefon</mat-label>
+                <input [(ngModel)]="profile.phone" name="phone" matInput type="text">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Obsługa klientów</mat-label>
+                <mat-select [(ngModel)]="customerService" name="customerService">
+                    <mat-option *ngFor="let item of customerServices" [value]="item.value">
+                        {{item.viewValue}}
+                    </mat-option>
+                </mat-select>
             </mat-form-field>
 
             <mat-form-field appearance="outline">
-                <mat-label>REGON</mat-label>
-                <input [(ngModel)]="profile.regon" name="regon" matInput>
+                <mat-label>Google identyfikator</mat-label>
+                <input [(ngModel)]="profile.googleProfileId" name="googleProfileId" matInput type="text">
             </mat-form-field>
 
             <mat-form-field appearance="outline">
@@ -75,8 +59,7 @@
             </mat-form-field>
 
             <p>ID: {{profile.profileId}}</p>
-            <p>Użytkownik: {{profile.userId}}</p>
-            <p>Utworzono: {{profile.creationDate}}</p>
+            <p>Utworzono: {{profile.creationDate | date: 'dd-MM-yyyy'}}</p>
 
             <mat-card-actions>
                 <button mat-raised-button color="primary" type="submit">Zapisz zmiany</button>

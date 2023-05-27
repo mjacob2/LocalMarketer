@@ -3,9 +3,9 @@ import {
   MatBottomSheet,
   MatBottomSheetRef,
 } from '@angular/material/bottom-sheet';
-import { ProfileGeneral } from 'src/app/models/profileGeneral.model';
 import { AddProfileComponent } from '../../add-profile/add-profile.component';
 import { Router } from '@angular/router';
+import { XProfile } from 'src/app/models/XProfile.model';
 
 @Component({
   selector: 'app-client-details-profiles',
@@ -16,7 +16,7 @@ export class ClientDetailsProfilesComponent {
   constructor(private bottomSheet: MatBottomSheet, private router: Router) {}
 
   @Input()
-  profiles?: ProfileGeneral[] = [];
+  profiles?: XProfile[] = [];
 
   @Input()
   clientId?: number;
@@ -31,7 +31,7 @@ export class ClientDetailsProfilesComponent {
     );
   }
 
-  goToProfile(id: number) {
+  goToProfile(id?: number) {
     console.log(id);
     this.router.navigateByUrl(`/profiles/${id}`);
   }

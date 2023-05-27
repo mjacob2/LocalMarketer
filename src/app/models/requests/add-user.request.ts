@@ -1,4 +1,4 @@
-export class AddUSerRequestModel {
+export class AddUserRequest {
   public firstName?: string;
   public lastName?: string;
   public email?: string;

@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { Router } from '@angular/router';
-import { ToDoGeneral } from 'src/app/models/todoGeneral.model';
+import { XToDo } from 'src/app/models/XToDo.model';
 
 @Component({
   selector: 'app-profile-details-todos',
@@ -12,13 +12,13 @@ export class ProfileDetailsTodosComponent {
   constructor(private bottomSheet: MatBottomSheet, private router: Router) {}
 
   @Input()
-  toDos?: ToDoGeneral[] = [];
+  toDos?: XToDo[] = [];
 
   ngOnInit() {
     console.log(this.toDos);
   }
 
-  goToTodo(id: number) {
+  goToTodo(id?: number) {
     console.log(id);
     this.router.navigateByUrl(`/todos/${id}`);
   }

@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
 import { LocalStorageService } from './local-storage.service';
-import { User } from '../models/user.model';
+import { XUser } from '../models/XUser.model';
 
 interface ApiResponse<T> {
   responseData: T;
   error: string | null;
+  // hasNextPage?: boolean;
+  // hasPreviousPage?: boolean;
+  // totalPages?: number;
+  count?: number;
 }
 
 @Injectable({
@@ -14,10 +18,15 @@ export class HttpService {
   baseUrl: string = 'https://localhost:44336';
   constructor(private localStorage: LocalStorageService) {}
 
+  count?: number;
+  totalPages?: number;
+  hasNextPage?: boolean;
+  hasPreviousPage?: boolean;
+
   async request<T>(method: string, url: string, body?: any): Promise<T> {
     let authHeader: string = 'Basic';
 
-    const user = await this.localStorage.getItem<User>('user');
+    const user = await this.localStorage.getItem<XUser>('user');
 
     if (user != null) {
       authHeader = `Basic ${`${user.authData}`}`;
@@ -37,6 +46,11 @@ export class HttpService {
     if (!response.ok) {
       throw new Error(`${data.error}`);
     }
+
+    // this.hasNextPage = data.hasNextPage;
+    // this.hasPreviousPage = data.hasPreviousPage;
+    // this.totalPages = data.totalPages;
+    this.count = data.count;
 
     return data.responseData;
   }

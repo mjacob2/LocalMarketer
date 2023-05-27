@@ -3,7 +3,7 @@ import {
   MAT_BOTTOM_SHEET_DATA,
   MatBottomSheetRef,
 } from '@angular/material/bottom-sheet';
-import { AddTodoRequestModel } from 'src/app/models/add-todo-request.model';
+import { XToDo } from 'src/app/models/XToDo.model';
 import { TodosService } from 'src/app/services/todos.service';
 
 @Component({
@@ -29,14 +29,19 @@ export class AddTodoComponent {
   profileUserId!: number;
   errorMessage: string = '';
   isLoading = false;
-  toDo = new AddTodoRequestModel();
+  toDo = new XToDo();
+  forRole?: string;
+  roles: any[] = [
+    { value: 'LocalMarketer', viewValue: 'Local Marketer' },
+    { value: 'Seller', viewValue: 'Sprzedawca' },
+  ];
 
   addTodo() {
     this.isLoading = true;
 
+    this.toDo.forRole = this.forRole;
     this.toDo.dealId = this.dealId;
     this.toDo.dealEndDate = this.dealEndDate;
-    this.toDo.userId = this.profileUserId;
     this.toDo.dealCreationDate = this.dealCreationDate;
 
     this.http

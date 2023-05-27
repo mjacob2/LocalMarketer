@@ -1,15 +1,44 @@
 <h2>Utwórz nowy profil</h2>
 
-<form class="example-form" #addProfileForm="ngForm" (ngSubmit)="onSubmit(addProfileForm)">
+<form class="example-form" #addProfileForm="ngForm" (ngSubmit)="onSubmit(addProfileForm.value)">
 
     <mat-form-field appearance="outline" class="example-full-width">
         <mat-label>Nazwa profilu</mat-label>
-        <input matInput ngModel name="name" type="text">
+        <input required matInput ngModel name="name" type="text">
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="example-full-width">
-        <mat-label>Identyfikator Goole</mat-label>
-        <input matInput ngModel name="googleProfileId" type="text">
+        <mat-label>Województwo</mat-label>
+        <input required matInput ngModel name="voivodeship" type="text">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Miasto</mat-label>
+        <input required matInput ngModel name="city" type="text">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Ulica i nr</mat-label>
+        <input matInput ngModel name="street" type="text">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Kod pocztowy</mat-label>
+        <input matInput ngModel name="postCode" type="text">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Telefon dla klientów</mat-label>
+        <input matInput ngModel name="phone" type="text">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Obsługa klientów</mat-label>
+        <mat-select ngModel name="customerService">
+            <mat-option *ngFor="let item of customerServices" [value]="item.value">
+                {{item.viewValue}}
+            </mat-option>
+        </mat-select>
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="example-full-width">
@@ -17,12 +46,12 @@
         <textarea matInput ngModel name="description" type="text"></textarea>
     </mat-form-field>
 
+    <app-error-card *ngIf="errorMessage" errorMessage="{{errorMessage}}"></app-error-card>
+
     <div class="example-button-row">
         <button mat-raised-button color="primary" type="submit">Dodaj</button>
-        <button type="button" (click)="close()" style="margin-left: 16px;" mat-button>Anuluj</button>
+        <button type="button" (click)="closeBottomSheet()" style="margin-left: 16px;" mat-button>Anuluj</button>
     </div>
 </form>
-
-<app-error-card *ngIf="errorMessage" errorMessage="{{errorMessage}}"></app-error-card>
 
 <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>

@@ -1,11 +1,11 @@
 <h2>Dodaj nowego klienta</h2>
 <form class="example-form" #addClientform="ngForm" (ngSubmit)="onSubmit(addClientform.value)">
 
-    <mat-spinner style="height: 36px;" *ngIf="users.length <= 0"></mat-spinner>
-    <mat-form-field *ngIf="users.length > 0" appearance="outline" class="example-full-width">
+    <mat-spinner style="height: 36px;" *ngIf="sellers.length <= 0"></mat-spinner>
+    <mat-form-field *ngIf="sellers.length > 0" appearance="outline" class="example-full-width">
         <mat-label>Sprzedawca</mat-label>
-        <mat-select [(ngModel)]="sellerId" name="sellerId">
-            <mat-option *ngFor="let user of users" [value]="user.id">
+        <mat-select required [(ngModel)]="sellerId" name="sellerId">
+            <mat-option *ngFor="let user of sellers" [value]="user.userId">
                 {{user.lastName}} {{user.firstName}} - {{user.role}}
             </mat-option>
         </mat-select>
@@ -13,33 +13,33 @@
 
     <mat-form-field appearance="outline" class="example-full-width">
         <mat-label>Nazwa klienta/firmy</mat-label>
-        <input matInput ngModel name="name" type="text" placeholder="nazwa klienta/firmy rozpoznawalna dla nas">
+        <input required matInput ngModel name="name" type="text"
+            placeholder="nazwa klienta/firmy rozpoznawalna dla nas">
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="example-full-width">
         <mat-label>Imię</mat-label>
-        <input matInput ngModel name="firstName" type="text" placeholder="imię osoby do kontaktu z tym klientem">
+        <input required matInput ngModel name="firstName" type="text"
+            placeholder="imię osoby do kontaktu z tym klientem">
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="example-full-width">
         <mat-label>Nazwisko</mat-label>
-        <input matInput ngModel name="lastName" type="text" placeholder="nazwisko osoby do kontaktu z tym klientem">
+        <input required matInput ngModel name="lastName" type="text"
+            placeholder="nazwisko osoby do kontaktu z tym klientem">
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="example-full-width">
         <mat-label>Telefon</mat-label>
         <span matPrefix>&nbsp; +48 &nbsp;</span>
-        <input matInput ngModel name="phone" type="tel" placeholder="nr telefonu osoby do kontaktu z tym klientem">
+        <input required matInput ngModel name="phone" type="tel"
+            placeholder="nr telefonu osoby do kontaktu z tym klientem">
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="example-full-width">
         <mat-label>E-mail</mat-label>
-        <input matInput ngModel name="email" type="email" placeholder="e-mail osoby do kontaktu z tym klientem">
-    </mat-form-field>
-
-    <mat-form-field appearance="outline" class="example-full-width">
-        <mat-label>Źródło</mat-label>
-        <input matInput ngModel name="source" type="text" placeholder="źródło pozyskania klienta">
+        <input required matInput ngModel name="email" type="email"
+            placeholder="e-mail osoby do kontaktu z tym klientem">
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="example-full-width">
@@ -48,10 +48,13 @@
             placeholder="miejsce na dodatkowe informacje"></textarea>
     </mat-form-field>
 
+    <app-error-card *ngIf="errorMessage" errorMessage="{{errorMessage}}"></app-error-card>
+
     <div class="example-button-row">
         <button mat-raised-button color="primary" type="submit">Dodaj</button>
         <button type="button" (click)="close()" style="margin-left: 16px;" mat-button>Anuluj</button>
     </div>
+
 </form>
-<app-error-card *ngIf="errorMessage" errorMessage="{{errorMessage}}"></app-error-card>
+
 <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>

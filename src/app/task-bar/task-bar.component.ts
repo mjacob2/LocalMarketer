@@ -3,7 +3,7 @@ import { AuthService } from '../services/auth.service';
 import { MediaMatcher } from '@angular/cdk/layout';
 import { Router } from '@angular/router';
 import { LocalStorageService } from '../services/local-storage.service';
-import { User } from '../models/user.model';
+import { XUser } from '../models/XUser.model';
 
 @Component({
   selector: 'app-task-bar',
@@ -18,7 +18,7 @@ export class TaskBarLayoutComponent {
   mobileQuery: MediaQueryList;
 
   private _mobileQueryListener: () => void;
-  user: User | null | undefined;
+  user: XUser | null | undefined;
   firstName?: string;
   lastName?: string;
 
@@ -51,7 +51,7 @@ export class TaskBarLayoutComponent {
   }
 
   async ngOnInit() {
-    this.user = await this.localStorage.getItem<User>('user');
+    this.user = await this.localStorage.getItem<XUser>('user');
 
     if (this.user?.role == 'Administrator') {
       this.isAdministrator = true;

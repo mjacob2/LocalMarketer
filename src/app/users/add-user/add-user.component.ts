@@ -4,7 +4,8 @@ import {
   MatBottomSheetRef,
 } from '@angular/material/bottom-sheet';
 import { Router } from '@angular/router';
-import { AddUSerRequestModel } from 'src/app/models/add-user-request.model';
+import { XUser } from 'src/app/models/XUser.model';
+import { AddUserRequest } from 'src/app/models/requests/add-user.request';
 import { UsersService } from 'src/app/services/users.service';
 
 @Component({
@@ -28,7 +29,7 @@ export class AddUserComponent {
     { value: 'Seller', viewValue: 'Sprzedawca' },
   ];
 
-  onSubmit(userToAdd: AddUSerRequestModel) {
+  onSubmit(userToAdd: XUser) {
     userToAdd.role = this.selectedRole;
 
     this.isLoading = true;

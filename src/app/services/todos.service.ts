@@ -1,36 +1,29 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
-import { AddTodoRequestModel } from '../models/add-todo-request.model';
-import { ToDoList } from '../models/toDo-list.model';
-import { ToDo } from '../models/toDo.model';
-
+import { XToDo } from '../models/XToDo.model';
 @Injectable({
   providedIn: 'root',
 })
 export class TodosService {
   constructor(private http: HttpService) {}
 
-  async getAllTodos() {
-    return await this.http.get<ToDoList[]>('/todos');
+  async getAllTodos(queryParameter?: string) {
+    return await this.http.get<XToDo[]>(`/todos${queryParameter}`);
   }
 
-  async getUnfinishedTodos() {
-    return await this.http.get<ToDoList[]>('/todos?ShowOnlyUnfinished=true');
-  }
-
-  async addTodo(todo: AddTodoRequestModel) {
-    return await this.http.post<AddTodoRequestModel>(`/todos`, todo);
+  async addTodo(todo: XToDo) {
+    return await this.http.post<XToDo>(`/todos`, todo);
   }
 
   async getToDoById(id: number) {
-    return await this.http.get<ToDo>(`/todos/${id}`);
+    return await this.http.get<XToDo>(`/todos/${id}`);
   }
 
-  async updateToDoById(toDo: ToDo) {
-    return await this.http.put<ToDo>(`/toDos/${toDo.toDoId}`, toDo);
+  async updateToDoById(toDo: XToDo) {
+    return await this.http.put<XToDo>(`/toDos/${toDo.toDoId}`, toDo);
   }
 
   async deleteToDoById(id: number) {
-    return await this.http.delete<ToDo>(`/toDos/${id}`);
+    return await this.http.delete<XToDo>(`/toDos/${id}`);
   }
 }

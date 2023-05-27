@@ -1,5 +1,3 @@
-import { DataUrl } from 'ngx-image-compress';
-
 export class FormProduct {
   constructor(
     public profileName?: string,

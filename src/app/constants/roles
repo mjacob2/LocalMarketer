@@ -1,0 +1,6 @@
+export enum Roles {
+  Administrator,
+  Manager,
+  LocalMarketer,
+  Selelr,
+}

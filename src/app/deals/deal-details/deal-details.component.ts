@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Deal } from 'src/app/models/deal.model';
-import { User } from 'src/app/models/user.model';
+import { XDeal } from 'src/app/models/XDeal.model';
+import { XUser } from 'src/app/models/XUser.model';
 import { DealsService } from 'src/app/services/deals.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { ConfirmDeleteDialogComponent } from 'src/app/shared/confirm-delete-dialog/confirm-delete-dialog.component';
@@ -16,9 +16,9 @@ import { ConfirmDeleteDialogComponent } from 'src/app/shared/confirm-delete-dial
 export class DealDetailsComponent {
   errorMessage: string = '';
   isLoading = false;
-  deal: Deal = new Deal();
+  deal: XDeal = new XDeal();
   dealId!: number;
-  loggedUser: User | null = {};
+  loggedUser: XUser | null = {};
   isSeller: boolean = false;
 
   constructor(
@@ -31,7 +31,7 @@ export class DealDetailsComponent {
   ) {}
 
   async ngOnInit() {
-    this.loggedUser = await this.localStorage.getItem<User>('user');
+    this.loggedUser = await this.localStorage.getItem<XUser>('user');
     if (this.loggedUser?.role == 'Seller') {
       this.isSeller = true;
     }

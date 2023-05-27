@@ -1,14 +1,12 @@
-import { ClientUser } from './ClientUser.model';
-
-export interface UserList {
-  id: number;
+export interface GetAllUsersResponse {
+  userId: number;
   creationDate: Date;
   firstName: string;
   lastName: string;
   email: string;
   phone: string;
   role: string;
-  accesDenied: boolean;
+  hasAcces: boolean;
   profilesCount: number;
   toDosCount: number;
 }

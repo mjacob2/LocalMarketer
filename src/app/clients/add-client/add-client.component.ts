@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { Router } from '@angular/router';
-import { Client } from 'src/app/models/client.model';
-import { User } from 'src/app/models/user.model';
+import { XClient } from 'src/app/models/XClient.model';
+import { XUser } from 'src/app/models/XUser.model';
 import { ClientsService } from 'src/app/services/clients.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { UsersService } from 'src/app/services/users.service';
@@ -22,22 +22,21 @@ export class AddClientComponent {
   ) {}
   errorMessage: string = '';
   isLoading = false;
-  users: User[] = [];
-  sellerId: number | null | undefined;
-  user: User | null | undefined;
+  sellers: XUser[] = [];
+  sellerId?: number;
+  currentlyLoggedUser: XUser | null | undefined;
 
   async ngOnInit() {
-    this.users = await this.httpUsers.getAllUsers();
-    this.user = await this.localStorage.getItem<User>('user');
-    if (this.user?.role == 'Seller') {
-      this.sellerId = this.user?.id;
+    this.sellers = await this.httpUsers.getAllSellers();
+    this.currentlyLoggedUser = await this.localStorage.getItem<XUser>('user');
+    if (this.currentlyLoggedUser?.role == 'Seller') {
+      this.sellerId = this.currentlyLoggedUser?.userId;
     }
   }
 
-  onSubmit(clientToAdd: Client) {
+  onSubmit(clientToAdd: XClient) {
     this.isLoading = true;
 
-    clientToAdd.sellerId = this.sellerId;
     this.http
       .addClient(clientToAdd)
       .then(() => {

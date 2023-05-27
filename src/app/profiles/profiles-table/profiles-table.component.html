@@ -1,10 +1,18 @@
 <mat-progress-bar *ngIf="!profiles" mode="indeterminate"></mat-progress-bar>
-<div *ngIf="profiles" class="example-container mat-elevation-z0">
-    <mat-form-field style="max-width: 250px;">
-        <input placeholder="wyszukaj..." matInput (keyup)="applyFilter($event)" #input>
-    </mat-form-field>
 
-    <mat-table [dataSource]="dataSource" matSort>
+<div *ngIf="profiles" class="example-container mat-elevation-z0">
+
+    <div style="justify-content: space-between;" class="row-flex">
+
+        <p></p>
+
+        <mat-form-field style="width: 300px;">
+            <input placeholder="wyszukaj..." matInput (keyup)="applyFilter($event)" #input>
+        </mat-form-field>
+
+    </div>
+
+    <mat-table *ngIf="profiles" [dataSource]="dataSource" matSort>
 
         <!-- FirstName Column -->
         <ng-container matColumnDef="name">
@@ -13,12 +21,26 @@
             </mat-cell>
         </ng-container>
 
+        <!-- Name Column -->
+        <ng-container matColumnDef="clientId">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Klient </mat-header-cell>
+            <mat-cell *matCellDef="let profile"> <a [routerLink]="['/clients', profile.clientId]">{{
+                    profile.clientName }}</a>
+            </mat-cell>
+        </ng-container>
+
         <!-- FirstName Column -->
         <ng-container matColumnDef="googleProfileId">
-            <mat-header-cell style="margin-left: 15px;" *matHeaderCellDef mat-sort-header> Identyfikator Google
+            <mat-header-cell style="margin-left: 15px;" *matHeaderCellDef mat-sort-header> Google ID
             </mat-header-cell>
             <mat-cell *matCellDef="let profile"> {{profile.googleProfileId}}
             </mat-cell>
+        </ng-container>
+
+        <!-- LastName Column -->
+        <ng-container matColumnDef="voivodeship">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Województwo </mat-header-cell>
+            <mat-cell *matCellDef="let profile"> {{profile.voivodeship}} </mat-cell>
         </ng-container>
 
         <!-- LastName Column -->
@@ -27,22 +49,16 @@
             <mat-cell *matCellDef="let profile"> {{profile.city}} </mat-cell>
         </ng-container>
 
-        <!-- Name Column -->
-        <ng-container matColumnDef="clientId">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Klient </mat-header-cell>
-            <mat-cell *matCellDef="let profile"> {{profile.clientId}} </mat-cell>
+        <!-- CreatorId Column -->
+        <ng-container matColumnDef="sellerFullName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Sprzedawca </mat-header-cell>
+            <mat-cell *matCellDef="let client"> {{client.sellerFullName}} </mat-cell>
         </ng-container>
 
-        <!-- Color Column -->
-        <ng-container matColumnDef="userId">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Użytkownik </mat-header-cell>
-            <mat-cell *matCellDef="let profile"> {{profile.userId}} </mat-cell>
-        </ng-container>
-
-        <!-- Source Column -->
-        <ng-container matColumnDef="source">
-            <mat-header-cell *matHeaderCellDef mat-sort-header> Źródło </mat-header-cell>
-            <mat-cell *matCellDef="let profile"> {{profile.source}} </mat-cell>
+        <!-- CreatorId Column -->
+        <ng-container matColumnDef="localMarketerFullName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Local Marketer </mat-header-cell>
+            <mat-cell *matCellDef="let client"> {{client.localMarketerFullName}} </mat-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

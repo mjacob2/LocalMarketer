@@ -42,11 +42,6 @@
             </mat-form-field>
 
             <mat-form-field appearance="outline">
-                <mat-label>Źródło</mat-label>
-                <input [(ngModel)]="client.source" name="source" matInput>
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
                 <mat-label>Opis</mat-label>
                 <textarea [(ngModel)]="client.description" name="description" matInput></textarea>
             </mat-form-field>
@@ -56,7 +51,7 @@
                 class="example-full-width">
                 <mat-label>Sprzedawca</mat-label>
                 <mat-select [(ngModel)]="sellerId" name="sellerId">
-                    <mat-option *ngFor="let user of allSellers" [value]="user.id">
+                    <mat-option *ngFor="let user of allSellers" [value]="user.userId">
                         {{user.lastName}} {{user.firstName}} - {{user.role}}
                     </mat-option>
                 </mat-select>
@@ -67,7 +62,7 @@
                 class="example-full-width">
                 <mat-label>Local Marketer</mat-label>
                 <mat-select [(ngModel)]="userId" name="userId">
-                    <mat-option *ngFor="let user of allLocalMarketers" [value]="user.id">
+                    <mat-option *ngFor="let user of allLocalMarketers" [value]="user.userId">
                         {{user.lastName}} {{user.firstName}} - {{user.role}}
                     </mat-option>
                 </mat-select>
@@ -75,6 +70,7 @@
 
             <p>ID: {{clientId}}</p>
             <p>Utworzono: {{client.creationDate | date: 'dd-MM-yyyy'}}</p>
+            <p>Utworzone przez: {{client.creatorFullName}}, ID: {{client.creatorId}}</p>
 
             <mat-card-actions>
                 <button mat-raised-button color="primary" type="submit">Zapisz zmiany</button>

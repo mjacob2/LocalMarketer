@@ -19,6 +19,7 @@ import { AddDealComponent } from './add-deal/add-deal.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatDatepickerModule,
     MatSelectModule,
     MatProgressSpinnerModule,
+    RouterModule,
   ],
 })
 export class ProfilesModule {}

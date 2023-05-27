@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { ToDo } from 'src/app/models/toDo.model';
+import { XToDo } from 'src/app/models/XToDo.model';
 import { TodosService } from 'src/app/services/todos.service';
 import { ConfirmDeleteDialogComponent } from 'src/app/shared/confirm-delete-dialog/confirm-delete-dialog.component';
 
@@ -22,7 +22,7 @@ export class TodoDetailsComponent {
 
   errorMessage: string = '';
   isLoading = false;
-  toDo: ToDo = new ToDo();
+  toDo: XToDo = new XToDo();
   id!: number;
 
   async ngOnInit() {

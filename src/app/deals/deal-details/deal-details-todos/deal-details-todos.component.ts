@@ -4,8 +4,8 @@ import {
   MatBottomSheetRef,
 } from '@angular/material/bottom-sheet';
 import { Router } from '@angular/router';
-import { ToDoGeneral } from 'src/app/models/todoGeneral.model';
 import { AddTodoComponent } from '../../add-todo/add-todo.component';
+import { XToDo } from 'src/app/models/XToDo.model';
 
 @Component({
   selector: 'app-deal-details-todos',
@@ -16,7 +16,7 @@ export class DealDetailsTodosComponent {
   constructor(private bottomSheet: MatBottomSheet, private router: Router) {}
 
   @Input()
-  toDos?: ToDoGeneral[];
+  toDos?: XToDo[];
 
   @Input()
   dealId?: number;
@@ -27,11 +27,7 @@ export class DealDetailsTodosComponent {
   @Input()
   dealCreationDate?: Date;
 
-  @Input()
-  profileUserId?: number;
-
   openAddToDoBottomSheet() {
-    console.log(this.profileUserId);
     const bottomSheetRef: MatBottomSheetRef = this.bottomSheet.open(
       AddTodoComponent,
       {
@@ -39,18 +35,13 @@ export class DealDetailsTodosComponent {
         data: {
           dealId: this.dealId,
           dealEndDate: this.dealEndDate,
-          profileUserId: this.profileUserId,
           dealCreationDate: this.dealCreationDate,
         },
       }
     );
-
-    this.toDos!.forEach((todo) => {
-      console.log(todo);
-    });
   }
 
-  goToToDo(id: number) {
+  goToToDo(id?: number) {
     this.router.navigateByUrl(`/todos/${id}`);
   }
 }

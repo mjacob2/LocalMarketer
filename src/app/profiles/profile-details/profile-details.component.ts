@@ -2,14 +2,14 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { DealGeneral } from 'src/app/models/dealGeneral.mode';
-import { Profile } from 'src/app/models/profile.model';
 import { ProfilesService } from 'src/app/services/profiles.service';
-import { ToDoGeneral } from '../../models/todoGeneral.model';
 import { ConfirmDeleteDialogComponent } from 'src/app/shared/confirm-delete-dialog/confirm-delete-dialog.component';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
-import { User } from 'src/app/models/user.model';
 import { UsersService } from 'src/app/services/users.service';
+import { CustomerService } from 'src/app/models/customer-service.model';
+import { XProfile } from 'src/app/models/XProfile.model';
+import { XUser } from 'src/app/models/XUser.model';
+import { XToDo } from 'src/app/models/XToDo.model';
 
 @Component({
   selector: 'app-profile-details',
@@ -19,13 +19,19 @@ import { UsersService } from 'src/app/services/users.service';
 export class ProfileDetailsComponent {
   errorMessage: string = '';
   isLoading = false;
-  profile: Profile = new Profile();
+  profile: XProfile = new XProfile();
   profileId!: number;
   profileName?: string;
   clientEmail?: string;
-  allToDos: ToDoGeneral[] = [];
-  loggedUser: User | null = {};
+  allToDos: XToDo[] = [];
+  loggedUser: XUser | null = {};
   isSeller: boolean = false;
+  customerService?: string;
+  customerServices: CustomerService[] = [
+    { value: 'insideOnly', viewValue: 'Tylko na miejscu' },
+    { value: 'awayOnly', viewValue: 'Tylko z dojazdem' },
+    { value: 'insideAndAway', viewValue: 'Na miejscu i z dojazdem' },
+  ];
 
   constructor(
     private service: ProfilesService,
@@ -40,7 +46,7 @@ export class ProfileDetailsComponent {
   async ngOnInit() {
     this.isLoading = true;
 
-    this.loggedUser = await this.localStorage.getItem<User>('user');
+    this.loggedUser = await this.localStorage.getItem<XUser>('user');
     if (this.loggedUser?.role == 'Seller') {
       this.isSeller = true;
     }
@@ -50,22 +56,17 @@ export class ProfileDetailsComponent {
 
       this.profile = await this.service.getProfileById(this.profileId);
 
-      console.log('profile from server');
-      console.log(this.profile);
-
+      this.customerService = this.profile.customerService;
       this.profileName = this.profile.name;
       this.clientEmail = this.profile.clientEmail;
 
       let deals = this.profile.deals;
       if (deals != undefined) {
         deals.forEach((deal) => {
-          console.log('deal ' + deal);
-          //if (deal.todos != undefined) {
-          deal.toDos.forEach((todo) => {
+          deal.toDos?.forEach((todo) => {
             this.allToDos.push(todo);
             console.log('todo ' + todo);
           });
-          //}
         });
       }
 
@@ -74,10 +75,9 @@ export class ProfileDetailsComponent {
   }
 
   saveChanges() {
-    console.log(this.profile);
-
     this.isLoading = true;
 
+    this.profile.customerService = this.customerService;
     this.service
       .updateProfileById(this.profile)
       .then(() => {

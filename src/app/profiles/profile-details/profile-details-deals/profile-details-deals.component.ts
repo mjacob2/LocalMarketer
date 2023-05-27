@@ -4,8 +4,8 @@ import {
   MatBottomSheetRef,
 } from '@angular/material/bottom-sheet';
 import { Router } from '@angular/router';
-import { DealGeneral } from 'src/app/models/dealGeneral.mode';
 import { AddDealComponent } from '../../add-deal/add-deal.component';
+import { XDeal } from 'src/app/models/XDeal.model';
 
 @Component({
   selector: 'app-profile-details-deals',
@@ -16,7 +16,7 @@ export class ProfileDetailsDealsComponent {
   constructor(private bottomSheet: MatBottomSheet, private router: Router) {}
 
   @Input()
-  deals?: DealGeneral[] = [];
+  deals?: XDeal[] = [];
 
   @Input()
   profileId?: number;
@@ -41,7 +41,7 @@ export class ProfileDetailsDealsComponent {
     );
   }
 
-  goToDeal(id: number) {
+  goToDeal(id?: number) {
     console.log(id);
     this.router.navigateByUrl(`/deals/${id}`);
   }

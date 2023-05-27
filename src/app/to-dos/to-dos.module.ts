@@ -17,6 +17,7 @@ import { RouterModule } from '@angular/router';
 import { TodoDetailsComponent } from './todo-details/todo-details.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSortModule } from '@angular/material/sort';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 
 @NgModule({
   declarations: [TodosTableComponent, TodoDetailsComponent],
@@ -38,6 +39,7 @@ import { MatSortModule } from '@angular/material/sort';
     RouterModule,
     MatCheckboxModule,
     MatSortModule,
+    MatButtonToggleModule,
   ],
 })
 export class ToDosModule {}

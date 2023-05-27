@@ -3,7 +3,7 @@
         <mat-card-title>Profile</mat-card-title>
     </mat-card-header>
     <mat-selection-list role="list" *ngFor="let profile of profiles">
-        <mat-list-item (click)="goToProfile(profile.id)" role="listitem">{{profile.name}}</mat-list-item>
+        <mat-list-item (click)="goToProfile(profile.profileId)" role="listitem">{{profile.name}}</mat-list-item>
     </mat-selection-list>
     <mat-card-actions align="end">
         <button (click)="openAddProfileBottomSheet()" mat-raised-button>Utwórz nowy profil</button>

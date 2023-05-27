@@ -7,9 +7,10 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort, MatSortable } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { UserList } from 'src/app/models/user-list.model';
+import { GetAllUsersResponse } from 'src/app/models/responses/get-all-users.response';
 import { UsersService } from 'src/app/services/users.service';
 import { AddUserComponent } from '../add-user/add-user.component';
+import { XUser } from 'src/app/models/XUser.model';
 
 @Component({
   selector: 'app-users-table',
@@ -24,7 +25,7 @@ export class UsersTableComponent {
   ) {}
 
   displayedColumns = [
-    'id',
+    'userId',
     'firstname',
     'lastname',
     'email',
@@ -34,8 +35,8 @@ export class UsersTableComponent {
     'profilesCount',
     'toDosCount',
   ];
-  dataSource = new MatTableDataSource<UserList>();
-  users?: UserList[];
+  dataSource = new MatTableDataSource<XUser>();
+  users?: XUser[];
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;

@@ -7,6 +7,15 @@
         <input [(ngModel)]="toDo.title" matInput name="title" type="text">
     </mat-form-field>
 
+    <mat-form-field appearance="outline" class="example-full-width">
+        <mat-label>Dla kogo</mat-label>
+        <mat-select [(ngModel)]="forRole" name="forRole">
+            <mat-option *ngFor="let role of roles" [value]="role.value">
+                {{role.viewValue}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
     <mat-form-field appearance="outline">
         <mat-label>Termin</mat-label>
         <input name="startDate" [(ngModel)]="toDo.dueDate" matInput [matDatepicker]="picker">

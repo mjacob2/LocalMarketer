@@ -17,6 +17,7 @@ import { DealDetailsTodosComponent } from './deal-details/deal-details-todos/dea
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { AddTodoComponent } from './add-todo/add-todo.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatListModule,
     MatDatepickerModule,
     MatCheckboxModule,
+    MatSelectModule,
   ],
 })
 export class DealsModule {}

@@ -3,7 +3,8 @@ import { NgForm } from '@angular/forms';
 import { MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import { ProfilesService } from 'src/app/services/profiles.service';
 import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
-import { AddProfileRequestModel } from 'src/app/models/add-profile-request.model';
+import { CustomerService } from 'src/app/models/customer-service.model';
+import { XProfile } from 'src/app/models/XProfile.model';
 
 @Component({
   selector: 'app-add-profile',
@@ -13,6 +14,12 @@ import { AddProfileRequestModel } from 'src/app/models/add-profile-request.model
 export class AddProfileComponent {
   errorMessage: string = '';
   isLoading = false;
+  customerService?: string;
+  customerServices: CustomerService[] = [
+    { value: 'insideOnly', viewValue: 'Tylko na miejscu' },
+    { value: 'awayOnly', viewValue: 'Tylko z dojazdem' },
+    { value: 'insideAndAway', viewValue: 'Na miejscu i z dojazdem' },
+  ];
 
   constructor(
     private _bottomSheetRef: MatBottomSheetRef<AddProfileComponent>,
@@ -20,21 +27,16 @@ export class AddProfileComponent {
     @Inject(MAT_BOTTOM_SHEET_DATA) public clientId: number
   ) {}
 
-  onSubmit(form: NgForm) {
+  onSubmit(addProfileRequest: XProfile) {
     this.isLoading = true;
 
-    let profile = new AddProfileRequestModel(
-      this.clientId,
-      form.value.name,
-      form.value.googleProfileId,
-      form.value.description
-    );
+    addProfileRequest.clientId = this.clientId;
 
     this.http
-      .addProfile(profile)
+      .addProfile(addProfileRequest)
       .then(() => {
-        this._bottomSheetRef.dismiss();
         this.isLoading = false;
+        this._bottomSheetRef.dismiss();
         window.location.reload();
       })
       .catch((error) => {
@@ -43,7 +45,7 @@ export class AddProfileComponent {
       });
   }
 
-  close() {
+  closeBottomSheet() {
     this._bottomSheetRef.dismiss();
   }
 }

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ClientList } from '../models/clientList.model';
 import { HttpService } from './http.service';
-import { Client } from '../models/client.model';
+import { XClient } from '../models/XClient.model';
 
 @Injectable({
   providedIn: 'root',
@@ -10,22 +9,26 @@ export class ClientsService {
   constructor(private http: HttpService) {}
 
   async getAllClients() {
-    return await this.http.get<ClientList[]>('/clients');
+    return await this.http.get<XClient[]>('/clients');
+  }
+
+  async getUnallocatedClients() {
+    return await this.http.get<XClient[]>('/clients?ShowOnlyUnallocaded=true');
   }
 
   async getClientById(id: number) {
-    return await this.http.get<Client>(`/clients/${id}`);
+    return await this.http.get<XClient>(`/clients/${id}`);
   }
 
   async deleteClientById(id: number) {
-    return await this.http.delete<Client>(`/clients/${id}`);
+    return await this.http.delete<XClient>(`/clients/${id}`);
   }
 
-  async updateClientById(client: Client) {
-    return await this.http.put<Client>(`/clients/${client.id}`, client);
+  async updateClientById(client: XClient) {
+    return await this.http.put<XClient>(`/clients/${client.clientId}`, client);
   }
 
-  async addClient(client: Client) {
-    return await this.http.post<Client>(`/clients`, client);
+  async addClient(client: XClient) {
+    return await this.http.post<XClient>(`/clients`, client);
   }
 }

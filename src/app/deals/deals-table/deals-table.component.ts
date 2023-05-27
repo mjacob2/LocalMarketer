@@ -3,7 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { DealsList } from 'src/app/models/dealsList.model';
+import { XDeal } from 'src/app/models/XDeal.model';
 import { DealsService } from 'src/app/services/deals.service';
 
 @Component({
@@ -13,8 +13,8 @@ import { DealsService } from 'src/app/services/deals.service';
 })
 export class DealsTableComponent {
   displayedColumns = ['name', 'creationDate', 'endDate', 'stage', 'creatorId'];
-  dataSource!: MatTableDataSource<DealsList>;
-  deals?: DealsList[];
+  dataSource!: MatTableDataSource<XDeal>;
+  deals?: XDeal[];
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;

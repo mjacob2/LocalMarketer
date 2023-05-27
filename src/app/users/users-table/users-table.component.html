@@ -1,17 +1,24 @@
 <mat-progress-bar *ngIf="!users" mode="indeterminate"></mat-progress-bar>
 
-<div *ngIf="users" class="example-container mat-elevation-z0">
+<div class="example-container mat-elevation-z0">
 
-    <mat-form-field style="max-width: 250px;">
-        <input placeholder="wyszukaj..." matInput (keyup)="applyFilter($event)" #input>
-    </mat-form-field>
+    <div style="justify-content: space-between;" class="row-flex">
 
-    <mat-table [dataSource]="dataSource" matSort #sortRef="matSort">
+        <p>
+        </p>
 
-        <ng-container matColumnDef="id">
+        <mat-form-field style="width: 300px;">
+            <input placeholder="wyszukaj..." matInput (keyup)="applyFilter($event)" #input>
+        </mat-form-field>
+
+    </div>
+
+    <mat-table *ngIf="users" [dataSource]="dataSource" matSort #sortRef="matSort">
+
+        <ng-container matColumnDef="userId">
             <mat-header-cell mat-sort-header style="margin-left: 15px;" *matHeaderCellDef mat-sort-header> ID
             </mat-header-cell>
-            <mat-cell *matCellDef="let user"> {{user.id}}</mat-cell>
+            <mat-cell *matCellDef="let user"> {{user.userId}}</mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="firstname">
