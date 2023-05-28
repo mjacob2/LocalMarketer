@@ -8,8 +8,8 @@ import { XDeal } from '../models/XDeal.model';
 export class DealsService {
   constructor(private http: HttpService) {}
 
-  async getAllDeals() {
-    return await this.http.get<XDeal[]>('/deals');
+  async getAllDeals(queryParameters?: string) {
+    return await this.http.get<XDeal[]>(`/deals${queryParameters}`);
   }
 
   async getDealById(id: number) {
