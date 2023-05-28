@@ -67,7 +67,10 @@
         </mat-row>
     </mat-table>
 
-    <mat-paginator></mat-paginator>
+    <mat-paginator (page)="handlePageEvent($event)" [pageSizeOptions]="[10, 20, 50, 100]" [length]="count"
+        [pageSize]="pageSize" [showFirstLastButtons]="true" [pageIndex]="pageIndex">
+    </mat-paginator>
+
 </div>
 
 <button (click)="openAddUserBottomSheet()" class="bottom-right" mat-fab extended color="primary">

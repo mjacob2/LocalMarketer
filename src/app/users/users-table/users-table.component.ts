@@ -3,7 +3,7 @@ import {
   MatBottomSheet,
   MatBottomSheetRef,
 } from '@angular/material/bottom-sheet';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort, MatSortable } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
@@ -11,6 +11,7 @@ import { GetAllUsersResponse } from 'src/app/models/responses/get-all-users.resp
 import { UsersService } from 'src/app/services/users.service';
 import { AddUserComponent } from '../add-user/add-user.component';
 import { XUser } from 'src/app/models/XUser.model';
+import { HttpService } from 'src/app/services/http.service';
 
 @Component({
   selector: 'app-users-table',
@@ -21,7 +22,8 @@ export class UsersTableComponent {
   constructor(
     private router: Router,
     private usersService: UsersService,
-    private bottomSheet: MatBottomSheet
+    private bottomSheet: MatBottomSheet,
+    private http: HttpService
   ) {}
 
   displayedColumns = [
@@ -38,13 +40,23 @@ export class UsersTableComponent {
   dataSource = new MatTableDataSource<XUser>();
   users?: XUser[];
 
+  count?: number;
+  totalPages?: number;
+  pageIndex?: number = 0;
+  pageSize?: number = 20;
+
+  queryParameter: string = '';
+  queryParameterPageSize: string = `&PageSize=${this.pageSize}`;
+
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   async ngOnInit() {
-    this.users = await this.usersService.getAllUsers();
-    this.dataSource.data = this.users;
+    this.queryParameter = '?';
+    await this.reloadData(
+      `${this.queryParameter}${this.queryParameterPageSize}`
+    );
   }
 
   ngAfterViewInit() {
@@ -69,12 +81,34 @@ export class UsersTableComponent {
     );
 
     bottomSheetRef.afterDismissed().subscribe(async () => {
-      this.users = await this.usersService.getAllUsers();
-      this.dataSource.data = this.users;
+      this.queryParameter = '?';
+      await this.reloadData(
+        `${this.queryParameter}${this.queryParameterPageSize}`
+      );
     });
   }
 
   openUsersDetailsPage(id: string) {
     this.router.navigateByUrl(`/users/${id}`);
+  }
+
+  async handlePageEvent(e: PageEvent) {
+    this.pageIndex = e.pageIndex;
+    this.pageSize = e.pageSize;
+
+    const queryParameterPageIndex: string = `&PageIndex=${this.pageIndex}`;
+    this.queryParameterPageSize = `&PageSize=${this.pageSize}`;
+    await this.reloadData(
+      `${this.queryParameter}${queryParameterPageIndex}${this.queryParameterPageSize}`
+    );
+  }
+
+  private async reloadData(queryParameters: string) {
+    this.users = undefined;
+    this.users = await this.usersService.getAllUsers(
+      `${queryParameters}${this.queryParameterPageSize}`
+    );
+    this.count = this.http.count;
+    this.dataSource.data = this.users;
   }
 }

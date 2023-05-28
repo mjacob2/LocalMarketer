@@ -26,8 +26,20 @@ export class AddClientComponent {
   sellerId?: number;
   currentlyLoggedUser: XUser | null | undefined;
 
+  pageIndex?: number = 0;
+  queryParameter: string = '';
+  pageSize?: number = 100;
+
+  queryParameterPageIndex: string = `&PageIndex=${this.pageIndex}`;
+  queryParameterPageSize = `&PageSize=${this.pageSize}`;
+
   async ngOnInit() {
-    this.sellers = await this.httpUsers.getAllSellers();
+    this.queryParameter = '?ShowOnlySellers=true';
+
+    this.sellers = await this.httpUsers.getAllUsers(
+      `${this.queryParameter}${this.queryParameterPageIndex}${this.queryParameterPageSize}`
+    );
+
     this.currentlyLoggedUser = await this.localStorage.getItem<XUser>('user');
     if (this.currentlyLoggedUser?.role == 'Seller') {
       this.sellerId = this.currentlyLoggedUser?.userId;

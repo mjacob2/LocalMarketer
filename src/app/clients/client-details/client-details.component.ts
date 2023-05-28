@@ -26,6 +26,12 @@ export class ClientDetailsComponent {
   allSellers: XUser[] | undefined;
   allLocalMarketers: XUser[] | undefined;
 
+  pageIndex?: number = 0;
+  pageSize?: number = 100;
+  queryParameter: string = '?';
+  queryParameterPageIndex: string = `&PageIndex=${this.pageIndex}`;
+  queryParameterPageSize = `&PageSize=${this.pageSize}`;
+
   constructor(
     private service: ClientsService,
     private route: ActivatedRoute,
@@ -54,7 +60,9 @@ export class ClientDetailsComponent {
     );
     this.userId = userRelatedToClient?.userId;
 
-    this.allUsers = await this.httpUsers.getAllUsers();
+    this.allUsers = await this.httpUsers.getAllUsers(
+      `${this.queryParameter}${this.queryParameterPageIndex}${this.queryParameterPageSize}`
+    );
     this.allSellers = this.allUsers.filter((user) => user.role === 'Seller');
     this.allLocalMarketers = this.allUsers.filter(
       (user) => user.role === 'LocalMarketer'
