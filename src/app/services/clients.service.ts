@@ -8,12 +8,8 @@ import { XClient } from '../models/XClient.model';
 export class ClientsService {
   constructor(private http: HttpService) {}
 
-  async getAllClients() {
-    return await this.http.get<XClient[]>('/clients');
-  }
-
-  async getUnallocatedClients() {
-    return await this.http.get<XClient[]>('/clients?ShowOnlyUnallocaded=true');
+  async getAllClients(queryParameters?: string) {
+    return await this.http.get<XClient[]>(`/clients${queryParameters}`);
   }
 
   async getClientById(id: number) {

@@ -103,7 +103,6 @@ export class TodosTableComponent {
 
     const queryParameterPageIndex: string = `&PageIndex=${this.pageIndex}`;
     this.queryParameterPageSize = `&PageSize=${this.pageSize}`;
-    ///this.queryParameter = `${this.queryParameter}${queryParameterPageIndex}`;
     await this.reloadData(
       `${this.queryParameter}${queryParameterPageIndex}${this.queryParameterPageSize}`
     );

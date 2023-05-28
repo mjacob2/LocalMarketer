@@ -5,9 +5,6 @@ import { XUser } from '../models/XUser.model';
 interface ApiResponse<T> {
   responseData: T;
   error: string | null;
-  // hasNextPage?: boolean;
-  // hasPreviousPage?: boolean;
-  // totalPages?: number;
   count?: number;
 }
 
@@ -47,9 +44,6 @@ export class HttpService {
       throw new Error(`${data.error}`);
     }
 
-    // this.hasNextPage = data.hasNextPage;
-    // this.hasPreviousPage = data.hasPreviousPage;
-    // this.totalPages = data.totalPages;
     this.count = data.count;
 
     return data.responseData;

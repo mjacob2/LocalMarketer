@@ -31,17 +31,12 @@ export class TodoDetailsComponent {
     this.route.params.subscribe(async (params: Params) => {
       this.id = params['id'];
       this.toDo = await this.service.getToDoById(this.id);
-      console.log('todo z bazy:');
-      console.log(this.toDo);
 
       this.isLoading = false;
     });
   }
 
   saveChanges() {
-    console.log('todo do bazy:');
-    console.log(this.toDo);
-
     this.isLoading = true;
 
     this.service

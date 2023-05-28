@@ -7,8 +7,8 @@ import { XToDo } from '../models/XToDo.model';
 export class TodosService {
   constructor(private http: HttpService) {}
 
-  async getAllTodos(queryParameter?: string) {
-    return await this.http.get<XToDo[]>(`/todos${queryParameter}`);
+  async getAllTodos(queryParameters?: string) {
+    return await this.http.get<XToDo[]>(`/todos${queryParameters}`);
   }
 
   async addTodo(todo: XToDo) {
