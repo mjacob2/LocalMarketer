@@ -12,8 +12,8 @@ export class ProfilesService {
     return await this.http.post<XProfile>(`/profiles`, profile);
   }
 
-  async getAllProfiles() {
-    return await this.http.get<XProfile[]>('/profiles');
+  async getAllProfiles(queryParameters?: string) {
+    return await this.http.get<XProfile[]>(`/profiles${queryParameters}`);
   }
 
   async getProfileById(id: number) {
