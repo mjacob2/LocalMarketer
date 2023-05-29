@@ -42,8 +42,13 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline" class="example-full-width">
-        <mat-label>Opis</mat-label>
-        <textarea matInput ngModel name="description" type="text"></textarea>
+        <mat-label>Opis firmy</mat-label>
+        <textarea required maxlength="500" #description
+            placeholder="Abysmy mogli lepiej zrozumieć ten biznes, opowiedz nam w kilku słowach czym zajmuje się ta firma."
+            matInput ngModel name="description" type="text"></textarea>
+        <mat-hint style="color: red;" align="start">Ten opis przeczyta klient w formularzu danych
+            podstawowych!</mat-hint>
+        <mat-hint align="end">{{description.value.length}} / 500</mat-hint>
     </mat-form-field>
 
     <app-error-card *ngIf="errorMessage" errorMessage="{{errorMessage}}"></app-error-card>

@@ -19,6 +19,7 @@ import { ServicesFormComponent } from './my-forms/services-form/services-form.co
 import { ServiceFormViewComponent } from './my-forms/services-form/service-form-view/service-form-view.component';
 import { ProductsFormComponent } from './my-forms/products-form/products-form.component';
 import { ProductFormViewComponent } from './my-forms/products-form/product-form-view/product-form-view.component';
+import { BasicFormComponent } from './my-forms/basic-form/basic-form.component';
 
 const routes: Routes = [
   {
@@ -100,6 +101,11 @@ const routes: Routes = [
         path: 'formProduct/:id',
         component: ProductFormViewComponent,
       },
+      {
+        path: 'forms/basic',
+        component: BasicFormComponent,
+      },
+
       {
         path: 'forms/thx',
         component: FormThxComponent,

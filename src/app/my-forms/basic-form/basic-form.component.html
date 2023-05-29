@@ -1,0 +1,252 @@
+<mat-spinner *ngIf="isLoadingInitial"></mat-spinner>
+<form *ngIf="profile" class="column-flex center" style="max-width: 500px;" #formBasic="ngForm"
+    (ngSubmit)="onSubmit(formBasic.value)">
+
+    <mat-card class="example-card">
+        <mat-card-header>
+            <mat-card-subtitle>Formularz</mat-card-subtitle>
+            <mat-card-title>Dane podstawowe: {{profile.name}}</mat-card-title>
+            <mat-card-subtitle>Ten formularz zawiera podstawowe informacje o Twojej firmie.</mat-card-subtitle>
+        </mat-card-header>
+    </mat-card>
+
+    <mat-card class="example-card center">
+        <mat-card-header>
+            <mat-card-title>Informacje o firmie</mat-card-title>
+            <h1></h1>
+            <mat-card-subtitle></mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+
+            <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Data otwarcia firmy</mat-label>
+                <input required maxlength="50" #openedDate matInput ngModel name="openedDate" type="text"
+                    placeholder="rok / miesiąc">
+            </mat-form-field>
+
+
+            <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Opis firmy</mat-label>
+                <textarea [(ngModel)]="profile.description" required style="min-height: 100px;" maxlength="500"
+                    #description matInput ngModel name="description" type="text"
+                    placeholder="Abysmy mogli lepiej zrozumieć Twój biznes, opowiedz nam w kilku słowach czym zajmuje się Twoja firma."></textarea>
+                <mat-hint align="end">{{description.value.length}} / 500</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Obsługa klienta</mat-label>
+                <mat-select [(ngModel)]="profile.customerService" required matInput ngModel #customerService
+                    name="customerService">
+                    <mat-option *ngFor="let item of customerServices" [value]="item.value">
+                        {{item.viewValue}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Akceptowane metody płatności</mat-label>
+                <input maxlength="200" required name="acceptedPaymentMethods" matInput type="text">
+            </mat-form-field>
+
+        </mat-card-content>
+
+    </mat-card>
+
+
+    <mat-card class="example-card center">
+
+        <mat-card-header>
+            <mat-card-title>Dane kontaktowe</mat-card-title>
+            <h1></h1>
+            <mat-card-subtitle></mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+
+            <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Województwo</mat-label>
+                <input [(ngModel)]="profile.voivodeship" required maxlength="50" matInput ngModel name="voivodeship"
+                    type="text">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Miasto</mat-label>
+                <input [(ngModel)]="profile.city" required maxlength="50" name="city" matInput ngModel type="text">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Adres</mat-label>
+                <input [(ngModel)]="profile.street" required maxlength="50" ngModel name="street" matInput type="text">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Kod pocztowy</mat-label>
+                <input [(ngModel)]="profile.postCode" name="postCode" required maxlength="10" ngModel matInput
+                    type="text">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Telefon kontaktowy dla klientów</mat-label>
+                <input [(ngModel)]="profile.phone" name="phone" required maxlength="10" ngModel matInput type="text">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Link do strony www</mat-label>
+                <input name="websiteUrl" maxlength="1000" ngModel matInput type="text">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Link do umawiania wizyt, np. Booksy</mat-label>
+                <input name="visitsUrl" maxlength="1000" ngModel matInput type="text">
+            </mat-form-field>
+
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card class="example-card center">
+
+        <mat-card-header>
+            <mat-card-title>Standardowe godziny otwarcia</mat-card-title>
+            <h1></h1>
+            <mat-card-subtitle></mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+
+            <div class="row-flex">
+                <p style="margin: auto;">poniedziałek</p>
+                <mat-form-field class="from_to" appearance="outline">
+                    <input placeholder="od" name="mondayFrom" ngModel matInput type="text">
+                </mat-form-field>
+                <p style="margin: auto 10px"> - </p>
+                <mat-form-field class="from_to" appearance="outline">
+                    <input placeholder="do" name="mondayTo" ngModel matInput type="text">
+                </mat-form-field>
+            </div>
+
+            <div class="row-flex">
+                <p style="margin: auto;">wtorek</p>
+                <mat-form-field class="from_to" appearance="outline">
+                    <input placeholder="od" name="tuesdayFrom" ngModel matInput type="text">
+                </mat-form-field>
+                <p style="margin: auto 10px"> - </p>
+                <mat-form-field class="from_to" appearance="outline">
+                    <input placeholder="do" name="tuesdayTo" ngModel matInput type="text">
+                </mat-form-field>
+            </div>
+
+            <div class="row-flex">
+                <p style="margin: auto;">środa</p>
+                <mat-form-field class="from_to" appearance="outline">
+                    <input placeholder="od" name="wednesdayFrom" ngModel matInput type="text">
+                </mat-form-field>
+                <p style="margin: auto 10px"> - </p>
+                <mat-form-field class="from_to" appearance="outline">
+                    <input placeholder="do" name="wednesdayTo" ngModel matInput type="text">
+                </mat-form-field>
+            </div>
+
+            <div class="row-flex">
+                <p style="margin: auto;">czwartek</p>
+                <mat-form-field class="from_to" appearance="outline">
+                    <input placeholder="od" name="thursdayFrom" ngModel matInput type="text">
+                </mat-form-field>
+                <p style="margin: auto 10px"> - </p>
+                <mat-form-field class="from_to" appearance="outline">
+                    <input placeholder="do" name="thursdayTo" ngModel matInput type="text">
+                </mat-form-field>
+            </div>
+
+            <div class="row-flex">
+                <p style="margin: auto;">piątek</p>
+                <mat-form-field class="from_to" appearance="outline">
+                    <input placeholder="od" name="fridayFrom" ngModel matInput type="text">
+                </mat-form-field>
+                <p style="margin: auto 10px"> - </p>
+                <mat-form-field class="from_to" appearance="outline">
+                    <input placeholder="do" name="fridayTo" ngModel matInput type="text">
+                </mat-form-field>
+            </div>
+
+            <div class="row-flex">
+                <p style="margin: auto;">sobota</p>
+                <mat-form-field class="from_to" appearance="outline">
+                    <input placeholder="od" name="saturdayFrom" ngModel matInput type="text">
+                </mat-form-field>
+                <p style="margin: auto 10px"> - </p>
+                <mat-form-field class="from_to" appearance="outline">
+                    <input placeholder="do" name="saturdayTo" ngModel matInput type="text">
+                </mat-form-field>
+            </div>
+
+            <div class="row-flex">
+                <p style="margin: auto;">niedziela</p>
+                <mat-form-field class="from_to" appearance="outline">
+                    <input placeholder="od" name="sundayFrom" ngModel matInput type="text">
+                </mat-form-field>
+                <p style="margin: auto 10px"> - </p>
+                <mat-form-field class="from_to" appearance="outline">
+                    <input placeholder="do" name="sundayTo" ngModel matInput type="text">
+                </mat-form-field>
+            </div>
+
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card class="example-card center">
+
+        <mat-card-header>
+            <mat-card-title>Atrybuty</mat-card-title>
+            <mat-card-subtitle>Atrybuty to specjale meta informacje, dzięki którym algorytm Google lepiej dopasowuje
+                wyniki wyszukiwania. Atrubuty mogą, choć nie muszą wyświetlać się użytkownikom.</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content style="margin-top: 24px;">
+
+            <div class="column-flex">
+
+                <mat-slide-toggle name="atr1" [(ngModel)]="atr1" ngModel>Toaleta dla klientów</mat-slide-toggle>
+                <mat-slide-toggle name="atr2" [(ngModel)]="atr2" ngModel>Toaleta unisex</mat-slide-toggle>
+                <mat-slide-toggle name="atr3" [(ngModel)]="atr3" ngModel>Toaleta dla
+                    niepełnosprawnych</mat-slide-toggle>
+                <mat-slide-toggle name="atr4" [(ngModel)]="atr4" ngModel>Bezpłatne Wi-Fi dla klientów</mat-slide-toggle>
+                <mat-slide-toggle name="atr5" [(ngModel)]="atr5" ngModel>Miejsce przyjazne LGBT+</mat-slide-toggle>
+                <mat-slide-toggle name="atr6" [(ngModel)]="atr6" ngModel>Miejsce przyjazne dla osób
+                    transpłciowych</mat-slide-toggle>
+                <mat-slide-toggle name="atr7" [(ngModel)]="atr7" ngModel>Prezentuje sie jako firma należąca do
+                    kobiety</mat-slide-toggle>
+                <mat-slide-toggle name="atr8" [(ngModel)]="atr8" ngModel>Obsługa zmotoryzowanych</mat-slide-toggle>
+                <mat-slide-toggle name="atr9" [(ngModel)]="atr9" ngModel>Wymagane wcześniejsze umówienie
+                    wizyty</mat-slide-toggle>
+                <mat-slide-toggle name="atr10" [(ngModel)]="atr10" ngModel>Zatrudnia uchodźców</mat-slide-toggle>
+                <mat-slide-toggle name="atr11" [(ngModel)]="atr11" ngModel>Przyjmuje darowizny</mat-slide-toggle>
+                <mat-slide-toggle name="atr12" [(ngModel)]="atr12" ngModel>Potrzebuje wolontariuszy</mat-slide-toggle>
+                <mat-slide-toggle name="atr13" [(ngModel)]="atr13" ngModel>Parking dla
+                    niepełnosprawnych</mat-slide-toggle>
+                <mat-slide-toggle name="atr14" [(ngModel)]="atr14" ngModel>Recykling elektroniki w
+                    obiekcie</mat-slide-toggle>
+                <mat-slide-toggle name="atr15" [(ngModel)]="atr15" ngModel>Miejsce na wózek
+                    inwalidzki</mat-slide-toggle>
+                <mat-slide-toggle name="atr16" [(ngModel)]="atr16" ngModel>Dostępna winda dla osób
+                    niepełnosprawnych</mat-slide-toggle>
+                <mat-slide-toggle name="atr17" [(ngModel)]="atr17" ngModel>Umożliwia recykling
+                    odzieży</mat-slide-toggle>
+
+            </div>
+        </mat-card-content>
+    </mat-card>
+
+    <app-error-card *ngIf="errorMessage" errorMessage="{{errorMessage}}"></app-error-card>
+
+    <mat-card style="margin-top: 5px;" class="example-card center">
+
+        <button mat-raised-button color="primary" type="submit">Wyślij</button>
+
+        <mat-card-footer>
+            <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+        </mat-card-footer>
+    </mat-card>
+
+
+</form>

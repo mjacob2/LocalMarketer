@@ -6,10 +6,11 @@ import { ProfilesService } from 'src/app/services/profiles.service';
 import { ConfirmDeleteDialogComponent } from 'src/app/shared/confirm-delete-dialog/confirm-delete-dialog.component';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { UsersService } from 'src/app/services/users.service';
-import { CustomerService } from 'src/app/models/customer-service.model';
 import { XProfile } from 'src/app/models/XProfile.model';
 import { XUser } from 'src/app/models/XUser.model';
 import { XToDo } from 'src/app/models/XToDo.model';
+import { CustomerService } from 'src/app/models/customer-service.model';
+import { Constants } from 'src/app/constants/customerServices';
 
 @Component({
   selector: 'app-profile-details',
@@ -27,11 +28,7 @@ export class ProfileDetailsComponent {
   loggedUser: XUser | null = {};
   isSeller: boolean = false;
   customerService?: string;
-  customerServices: CustomerService[] = [
-    { value: 'insideOnly', viewValue: 'Tylko na miejscu' },
-    { value: 'awayOnly', viewValue: 'Tylko z dojazdem' },
-    { value: 'insideAndAway', viewValue: 'Na miejscu i z dojazdem' },
-  ];
+  customerServices?: CustomerService[];
 
   constructor(
     private service: ProfilesService,
@@ -41,7 +38,9 @@ export class ProfileDetailsComponent {
     private router: Router,
     private localStorage: LocalStorageService,
     private httpUsers: UsersService
-  ) {}
+  ) {
+    this.customerServices = Constants.customerServices;
+  }
 
   async ngOnInit() {
     this.isLoading = true;

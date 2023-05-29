@@ -58,6 +58,13 @@
                 <input [(ngModel)]="profile.mediaLink" name="mediaLink" matInput>
             </mat-form-field>
 
+            <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Opis firmy</mat-label>
+                <textarea [(ngModel)]="profile.description" required style="min-height: 100px;" maxlength="500"
+                    #description matInput ngModel name="description" type="text"></textarea>
+                <mat-hint align="end">{{description.value.length}} / 500</mat-hint>
+            </mat-form-field>
+
             <p>ID: {{profile.profileId}}</p>
             <p>Utworzono: {{profile.creationDate | date: 'dd-MM-yyyy'}}</p>
 

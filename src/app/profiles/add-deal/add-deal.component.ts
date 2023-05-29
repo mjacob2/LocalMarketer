@@ -45,9 +45,6 @@ export class AddDealComponent {
   async ngOnInit() {
     this.packages = await this.httpPackages.getAllPackages();
 
-    this.sellers = (await this.httpUsers.getAllUsers()).filter(
-      (x) => x.role == 'Seller'
-    );
     this.currentlyLoggedUser = await this.localStorage.getItem<XUser>('user');
     if (this.currentlyLoggedUser?.role == 'Seller') {
       this.sellerId = this.currentlyLoggedUser?.userId;

@@ -18,6 +18,9 @@ import { ProductsFormComponent } from './products-form/products-form.component';
 import { ProductFormViewComponent } from './products-form/product-form-view/product-form-view.component';
 import { NgxImageCompressService } from 'ngx-image-compress';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { BasicFormComponent } from './basic-form/basic-form.component';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 @NgModule({
   declarations: [
@@ -28,6 +31,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     ServiceFormViewComponent,
     ProductsFormComponent,
     ProductFormViewComponent,
+    BasicFormComponent,
   ],
   imports: [
     CommonModule,
@@ -42,6 +46,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatProgressBarModule,
     MatIconModule,
     MatProgressSpinnerModule,
+    MatSelectModule,
+    MatSlideToggleModule,
   ],
   providers: [NgxImageCompressService],
 })

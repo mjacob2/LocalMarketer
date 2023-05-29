@@ -4,6 +4,7 @@ import { AddFormFaqRequestModel } from '../models/add-form-faq-request.model';
 import { GetFormFaqByIdResponseModel } from '../models/get-form-faq-by-id-response.model';
 import { FormService } from '../models/add-form-service-request.model';
 import { FormProduct } from '../models/add-form-product-request.model';
+import { AddFormBasicRequestModel } from '../models/add-form-basic-request.model';
 
 @Injectable({
   providedIn: 'root',
@@ -33,5 +34,9 @@ export class MyFormsService {
 
   async getFormProductById(id: number) {
     return await this.http.get<FormProduct>(`/forms/product/${id}`);
+  }
+
+  async addFormBasic(form: AddFormBasicRequestModel) {
+    return await this.http.post<AddFormBasicRequestModel>(`/forms/basic`, form);
   }
 }

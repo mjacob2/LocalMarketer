@@ -20,6 +20,10 @@ export class ProfilesService {
     return await this.http.get<XProfile>(`/profiles/${id}`);
   }
 
+  async getProfileByIdAnonymous(id: number) {
+    return await this.http.get<XProfile>(`/profiles/anonymous?ProfileId=${id}`);
+  }
+
   async updateProfileById(profile: XProfile) {
     return await this.http.put<XProfile>(
       `/profiles/${profile.profileId}`,
