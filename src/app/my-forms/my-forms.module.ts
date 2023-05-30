@@ -21,6 +21,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { BasicFormComponent } from './basic-form/basic-form.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { BasicFormViewComponent } from './basic-form/basic-form-view/basic-form-view.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 
 @NgModule({
   declarations: [
@@ -32,6 +35,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     ProductsFormComponent,
     ProductFormViewComponent,
     BasicFormComponent,
+    BasicFormViewComponent,
   ],
   imports: [
     CommonModule,
@@ -48,6 +52,8 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatProgressSpinnerModule,
     MatSelectModule,
     MatSlideToggleModule,
+    MatGridListModule,
+    ClipboardModule,
   ],
   providers: [NgxImageCompressService],
 })

@@ -1,0 +1,171 @@
+<div style="margin-left: 36px; padding-bottom: 36px;">
+
+    <h2>formularz Podstawowy dla profilu:</h2>
+    <h1>{{formBasic.profileName}}</h1>
+
+    <h5>Dane, które wypełnił klient w formularzu zaktualizowały odpowiednie pola na profilu w naszym systemie. Natomiast
+        nasze
+        zmiany na profilu nie zmienią już nigdy odpowiedzi klienta.</h5>
+    <mat-divider></mat-divider>
+
+
+    <table>
+        <tr>
+            <td>
+                <h4>Data otwarcia:</h4>
+            </td>
+            <td>
+                {{formBasic.openedDate}}
+            </td>
+        </tr>
+
+
+        <tr>
+            <td>
+                <h4>Opis klienta</h4>
+            </td>
+            <td>
+                {{formBasic.description}}
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <h4>Obsługa Klienta</h4>
+            </td>
+            <td>
+                {{formBasic.customerService}}
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <h4>Metody płatności</h4>
+            </td>
+            <td>
+                {{formBasic.acceptedPaymentMethods}}
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <h4>Województwo</h4>
+            </td>
+            <td>
+                {{formBasic.voivodeship}}
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <h4>Miasto</h4>
+            </td>
+            <td>
+                {{formBasic.city}}
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <h4>Adres</h4>
+            </td>
+            <td>
+                {{formBasic.street}}
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <h4>Kod pocztowy</h4>
+            </td>
+            <td>
+                {{formBasic.postCode}}
+            </td>
+        </tr>
+
+
+        <tr>
+            <td>
+                <h4>Telefon kontaktowy</h4>
+            </td>
+            <td>
+                {{formBasic.phone}}
+            </td>
+        </tr>
+
+
+        <tr>
+            <td>
+                <h4>Adres strony www</h4>
+            </td>
+            <td *ngIf="formBasic.websiteUrl">
+                <div class="column-flex">
+                    <button style="width: 150px;" [cdkCopyToClipboard]="websiteUrlWithUTM">Skopiuj z UTM</button>
+                    {{formBasic.websiteUrl}}
+                </div>
+
+            </td>
+            <td *ngIf="!formBasic.websiteUrl">
+                <p>Stworzyć z gotowego szablonu</p>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <h4>Link do umawiania wizyt</h4>
+            </td>
+            <td>
+                {{formBasic.visitsUrl}}
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <h4>Godziny otwarcia</h4>
+            </td>
+            <td class="column-flex">
+                <p>Poniedziałek {{formBasic.mondayFrom}} - {{formBasic.mondayTo}}</p>
+                <p>Wtorek {{formBasic.tuesdayFrom}} - {{formBasic.mondayTo}}</p>
+                <p>Środa {{formBasic.wednesdayFrom}} - {{formBasic.wednesdayTo}}</p>
+                <p>Czwartek {{formBasic.thursdayFrom}} - {{formBasic.thursdayTo}}</p>
+                <p>Piątek {{formBasic.fridayFrom}} - {{formBasic.fridayTo}}</p>
+                <p>Sobota {{formBasic.saturdayFrom}} - {{formBasic.saturdayFrom}}</p>
+                <p>Niedziela {{formBasic.saturdayTo}} - {{formBasic.saturdayTo}}</p>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <h4>Atrybuty</h4>
+            </td>
+            <td>
+                <p [ngClass]="{'true': formBasic.atr1, 'false': !formBasic.atr1}">Toaleta dla klientów</p>
+                <p [ngClass]="{'true': formBasic.atr2, 'false': !formBasic.atr2}">Toaleta unisex</p>
+                <p [ngClass]="{'true': formBasic.atr3, 'false': !formBasic.atr3}">Toaleta dla niepełnosprawnych</p>
+                <p [ngClass]="{'true': formBasic.atr4, 'false': !formBasic.atr4}">Bezpłatne Wi-Fi dla klientów</p>
+                <p [ngClass]="{'true': formBasic.atr5, 'false': !formBasic.atr5}">Miejsce przyjazne LGBT+</p>
+                <p [ngClass]="{'true': formBasic.atr6, 'false': !formBasic.atr6}">Miejsce przyjazne dla osób
+                    transpłciowych</p>
+                <p [ngClass]="{'true': formBasic.atr7, 'false': !formBasic.atr7}">Prezentuje się jako firma należąca do
+                    kobiety</p>
+                <p [ngClass]="{'true': formBasic.atr8, 'false': !formBasic.atr8}">Obsługa zmotoryzowanych</p>
+                <p [ngClass]="{'true': formBasic.atr9, 'false': !formBasic.atr9}">Wymagane wcześniejsze umówienie wizyty
+                </p>
+                <p [ngClass]="{'true': formBasic.atr10, 'false': !formBasic.atr10}">Zatrudnia uchodźców</p>
+                <p [ngClass]="{'true': formBasic.atr11, 'false': !formBasic.atr11}">Przyjmuje darowizny</p>
+                <p [ngClass]="{'true': formBasic.atr12, 'false': !formBasic.atr12}">Potrzebuje wolontariuszy</p>
+                <p [ngClass]="{'true': formBasic.atr13, 'false': !formBasic.atr13}">Parking dla niepełnosprawnych</p>
+                <p [ngClass]="{'true': formBasic.atr14, 'false': !formBasic.atr14}">Recykling elektroniki w obiekcie</p>
+                <p [ngClass]="{'true': formBasic.atr15, 'false': !formBasic.atr15}">Miejsce na wózek inwalidzki</p>
+                <p [ngClass]="{'true': formBasic.atr16, 'false': !formBasic.atr16}">Dostępna winda dla osób
+                    niepełnosprawnych</p>
+                <p [ngClass]="{'true': formBasic.atr17, 'false': !formBasic.atr17}">Umożliwia recykling odzieży</p>
+
+
+            </td>
+        </tr>
+
+    </table>
+
+
+</div>

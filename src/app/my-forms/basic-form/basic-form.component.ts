@@ -64,12 +64,7 @@ export class BasicFormComponent {
   onSubmit(form: AddFormBasicRequestModel) {
     this.isLoading = true;
 
-    // first try update Profile
-    this.updateProfileWithDataFromForm();
-
-    // then save form
-
-    this.addBasicForm(form);
+    this.updateProfileWithDataFromForm(form);
   }
 
   private addBasicForm(form: AddFormBasicRequestModel) {
@@ -91,13 +86,14 @@ export class BasicFormComponent {
       });
   }
 
-  private updateProfileWithDataFromForm() {
+  private updateProfileWithDataFromForm(form: AddFormBasicRequestModel) {
     console.log(this.profile);
 
     this.profilesService
       .updateProfileById(this.profile!)
       .then(() => {
         this.errorMessage = '';
+        this.addBasicForm(form);
       })
       .catch((error) => {
         this.isLoading = false;

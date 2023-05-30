@@ -39,4 +39,8 @@ export class MyFormsService {
   async addFormBasic(form: AddFormBasicRequestModel) {
     return await this.http.post<AddFormBasicRequestModel>(`/forms/basic`, form);
   }
+
+  async getFormBasicById(id: number) {
+    return await this.http.get<AddFormBasicRequestModel>(`/forms/basic/${id}`);
+  }
 }

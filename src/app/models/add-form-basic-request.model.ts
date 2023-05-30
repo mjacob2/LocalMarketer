@@ -1,6 +1,7 @@
 export class AddFormBasicRequestModel {
   constructor(
     public profileId?: number,
+
     public dealId?: number,
     public openedDate?: string,
     public description?: string,
@@ -16,6 +17,7 @@ export class AddFormBasicRequestModel {
     public mondayFrom?: string,
     public mondayTo?: string,
     public tuesdayFrom?: string,
+    public tuesdayTo?: string,
     public wednesdayFrom?: string,
     public wednesdayTo?: string,
     public thursdayFrom?: string,
@@ -42,6 +44,10 @@ export class AddFormBasicRequestModel {
     public atr14?: boolean,
     public atr15?: boolean,
     public atr16?: boolean,
-    public atr17?: boolean
+    public atr17?: boolean,
+
+    // For response
+    public profileName?: string,
+    public creationDate?: Date
   ) {}
 }
