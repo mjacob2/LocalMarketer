@@ -46,6 +46,8 @@
 
             <mat-card-actions>
                 <button mat-raised-button color="primary" type="submit">Zapisz zmiany</button>
+                <button style="margin-left: 18px;" (click)="openConfirmdResendEmailToClientDialog()" type="button"
+                    mat-raised-button>Ponów onboarding klienta</button>
                 <button (click)="openConfirmdDleteDialog()" type="button" mat-icon-button color="warn">
                     <mat-icon>delete</mat-icon>
                 </button>

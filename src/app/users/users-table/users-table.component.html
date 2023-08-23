@@ -52,6 +52,11 @@
             </mat-cell>
         </ng-container>
 
+        <ng-container matColumnDef="clientsCount">
+            <mat-header-cell *matHeaderCellDef mat-sort-header> Klienci </mat-header-cell>
+            <mat-cell *matCellDef="let user"> {{user.clientsCount}} </mat-cell>
+        </ng-container>
+
         <ng-container matColumnDef="profilesCount">
             <mat-header-cell *matHeaderCellDef mat-sort-header> Profile </mat-header-cell>
             <mat-cell *matCellDef="let user"> {{user.profilesCount}} </mat-cell>

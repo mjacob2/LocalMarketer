@@ -14,6 +14,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   }
 
   .mat-mdc-snack-bar-container{
+    &.warning-snackbar{
+      --mdc-snackbar-container-color: #d76b00;
+      --mat-mdc-snack-bar-button-color: #ffffff;
+      --mdc-snackbar-supporting-text-color: #ffffff;
+    }
+  }
+
+  .mat-mdc-snack-bar-container{
     &.error-snackbar{
       --mdc-snackbar-container-color: #cd3a27;
       --mat-mdc-snack-bar-button-color: #fff;

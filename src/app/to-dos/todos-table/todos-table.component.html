@@ -58,8 +58,11 @@
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-        <mat-row (click)="openToDoDetailsPage(row.toDoId)" *matRowDef="let row; columns: displayedColumns;">
-        </mat-row>
+        <mat-row
+            [ngClass]="{'thisWeekOverdue-row': isThisWeekOverdue(row.dueDate) && !row.isFinished, 'overdue-row': isOverdue(row.dueDate) && !row.isFinished}"
+            (click)="openToDoDetailsPage(row.toDoId)" *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+
     </mat-table>
 
     <mat-paginator (page)="handlePageEvent($event)" [pageSizeOptions]="[10, 20, 50, 100]" [length]="count"

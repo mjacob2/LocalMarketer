@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { XDeal } from 'src/app/models/XDeal.model';
@@ -7,6 +7,7 @@ import { XUser } from 'src/app/models/XUser.model';
 import { DealsService } from 'src/app/services/deals.service';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { ConfirmDeleteDialogComponent } from 'src/app/shared/confirm-delete-dialog/confirm-delete-dialog.component';
+import { ConfirmResendOnboardingClientDialogComponent } from 'src/app/shared/confirm-resend-onboarding-client-dialog/confirm-resend-onboarding-client-dialog.component';
 
 @Component({
   selector: 'app-deal-details',
@@ -64,8 +65,8 @@ export class DealDetailsComponent {
       });
   }
 
-  deleteDeal() {
-    this.service
+  async deleteDeal() {
+    await this.service
       .deleteDealById(this.dealId)
       .then(() => {
         this.errorMessage = '';
@@ -87,5 +88,19 @@ export class DealDetailsComponent {
     dialogRef.componentInstance.onDelete.subscribe(() => {
       this.deleteDeal();
     });
+  }
+
+  openConfirmdResendEmailToClientDialog() {
+    const dialogRef = this.dialog.open(
+      ConfirmResendOnboardingClientDialogComponent,
+      {
+        maxWidth: '500px',
+        data: {
+          dealId: this.deal.dealId,
+          profileId: this.deal.profileId,
+          clientEmail: this.deal.clientEmail,
+        },
+      }
+    );
   }
 }

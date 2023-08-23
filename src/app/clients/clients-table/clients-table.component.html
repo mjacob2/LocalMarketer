@@ -14,8 +14,9 @@
             </mat-button-toggle-group>
         </p>
 
-        <mat-form-field style="width: 300px;">
-            <input placeholder="wyszukaj..." matInput (keyup)="applyFilter($event)" #input>
+        <mat-form-field style="width: 350px;" appearance="outline">
+            <input [(ngModel)]="wordToSearch" placeholder="wyszukaj w bierzącym widoku" matInput>
+            <button (click)="search()" mat-icon-button matSuffix><mat-icon>search</mat-icon></button>
         </mat-form-field>
 
     </div>

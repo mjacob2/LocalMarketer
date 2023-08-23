@@ -65,18 +65,20 @@
         (click)="remove()">Usuń ostatni
         produkt</button>
 
-    <button class="center" *ngIf="numbers.length < 20" (click)="add()" type="button" mat-fab extended>
+    <button style="margin-bottom: 45px;" class="center" *ngIf="numbers.length < 20" (click)="add()" type="button"
+        mat-fab extended>
         <mat-icon>add</mat-icon>
         Następny produkt
     </button>
 
-    <mat-card style="margin-top: 50px;" class="example-card center">
+    <app-error-card *ngIf="errorMessage" errorMessage="{{errorMessage}}"></app-error-card>
 
+    <mat-card style="margin-top: 5px;" class="example-card center">
 
         <button mat-raised-button color="primary" type="submit">Wyślij</button>
 
         <mat-card-footer>
-            <app-error-card *ngIf="errorMessage" errorMessage="{{errorMessage}}"></app-error-card>
+
             <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
         </mat-card-footer>
     </mat-card>

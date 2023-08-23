@@ -41,6 +41,14 @@
         </mat-select>
     </mat-form-field>
 
+    <mat-form-field style="margin-bottom: 24px;" appearance="outline" class="example-full-width">
+        <mat-label>Adres strony www</mat-label>
+        <input matInput ngModel name="websiteUrl" type="text">
+        <mat-hint style="color: red;" align="start">Jesli podasz prawidłowy adres www już teraz, klientowi będzie
+            później
+            łatwiej wypełnić formularz danych podstawowych.</mat-hint>
+    </mat-form-field>
+
     <mat-form-field appearance="outline" class="example-full-width">
         <mat-label>Opis firmy</mat-label>
         <textarea required maxlength="500" #description

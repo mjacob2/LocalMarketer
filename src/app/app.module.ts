@@ -23,6 +23,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { DealsModule } from './deals/deals.module';
 import { MyFormsModule } from './my-forms/my-forms.module';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { ConfirmResendOnboardingClientDialogComponent } from './shared/confirm-resend-onboarding-client-dialog/confirm-resend-onboarding-client-dialog.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,7 @@ import { MyFormsModule } from './my-forms/my-forms.module';
     NoTaskBarLayoutComponent,
     TaskBarLayoutComponent,
     ConfirmDeleteDialogComponent,
+    ConfirmResendOnboardingClientDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,6 +55,7 @@ import { MyFormsModule } from './my-forms/my-forms.module';
     MatDialogModule,
     MatCardModule,
     MatSnackBarModule,
+    MatProgressBarModule,
   ],
   providers: [{ provide: MAT_DATE_LOCALE, useValue: 'pl-PL' }],
   bootstrap: [AppComponent],

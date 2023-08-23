@@ -116,4 +116,17 @@ export class TodosTableComponent {
     this.count = this.http.count;
     this.dataSource.data = this.todos;
   }
+
+  isOverdue(dueDate: Date): boolean {
+    const todayAsTime = new Date().getTime();
+    const dueDateAsTime = new Date(dueDate).getTime();
+    return dueDateAsTime < todayAsTime;
+  }
+
+  isThisWeekOverdue(dueDate: Date): boolean {
+    const todayAsTime = new Date().getTime();
+    const dueDatePlus7DaysAsTime = todayAsTime + 7 * 24 * 60 * 60 * 1000; // Adding 7 days in milliseconds
+    const dueDateAsTime = new Date(dueDate).getTime();
+    return dueDateAsTime < dueDatePlus7DaysAsTime;
+  }
 }

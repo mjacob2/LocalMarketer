@@ -6,13 +6,13 @@
 
     <div *ngFor="let product of products; let i = index">
         <div *ngIf="formProductResponse">
-            <h3>Usługa {{i + 1}}</h3>
+            <h3>Produkt {{i + 1}}</h3>
             <p>Kategoria: {{product.category}}</p>
             <p>Nazwa: {{product.name}}</p>
             <p>Cena: {{product.price}}</p>
             <p>Link: {{product.link}}</p>
             <p>Opis: {{product.description}}</p>
-            <img [src]="'https://localhost:44336/ProductsImages/' + product.imageName" alt="" />
+            <img [src]="'https://localmarketering.azurewebsites.net/ProductsImages/' + product.imageName" alt="" />
         </div>
 
         <mat-divider></mat-divider>

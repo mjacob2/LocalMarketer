@@ -34,6 +34,7 @@ export class UsersTableComponent {
     'phone',
     'role',
     'accesDenied',
+    'clientsCount',
     'profilesCount',
     'toDosCount',
   ];

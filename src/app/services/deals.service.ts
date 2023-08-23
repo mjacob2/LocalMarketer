@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
 import { XDeal } from '../models/XDeal.model';
+import { ResendOnboardingRequest } from '../models/requests/resend-onboarding-to-client.request';
 
 @Injectable({
   providedIn: 'root',
@@ -26,5 +27,12 @@ export class DealsService {
 
   async addDeal(deal: XDeal) {
     return await this.http.post<XDeal>(`/deals`, deal);
+  }
+
+  async resendOnboarding(request: ResendOnboardingRequest) {
+    return await this.http.post<ResendOnboardingRequest>(
+      `/deals/resendOnboarding`,
+      request
+    );
   }
 }

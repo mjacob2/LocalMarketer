@@ -10,6 +10,7 @@ import { UsersService } from 'src/app/services/users.service';
 import { XUser } from 'src/app/models/XUser.model';
 import { XPackage } from 'src/app/models/XPackage.model';
 import { XDeal } from 'src/app/models/XDeal.model';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-add-deal',
@@ -34,6 +35,7 @@ export class AddDealComponent {
     private httpPackages: PackagesService,
     private httpUsers: UsersService,
     private localStorage: LocalStorageService,
+    private snackBar: MatSnackBar,
 
     @Inject(MAT_BOTTOM_SHEET_DATA) public data: any
   ) {
@@ -78,11 +80,27 @@ export class AddDealComponent {
       })
       .catch((error) => {
         this.isLoading = false;
-        this.errorMessage = error.message;
+        if (error.message == 'AutomaticEmailErrorNewDeal') {
+          const snackBarRef = this.snackBar.open(
+            'Umowa została pomyslnie dodana, ale nie udało się wysłać e-mail onboarding do klienta. Sprawdź jego e-mail i ponów wysyłkę. NIE DODAWAJ PONOWNIE TEJ UMOWY!',
+            'Odśwież stronę teraz',
+            {
+              duration: 900000,
+              panelClass: ['warning-snackbar'],
+            }
+          );
+          this._bottomSheetRef.dismiss();
+          snackBarRef.afterDismissed().subscribe(() => {
+            window.location.reload();
+          });
+        } else {
+          this.errorMessage = error.message;
+        }
       });
   }
 
   close() {
     this._bottomSheetRef.dismiss();
+    window.location.reload();
   }
 }

@@ -43,6 +43,8 @@ export class ClientsTableComponent {
   queryParameter: string = '';
   queryParameterPageSize: string = `&PageSize=${this.pageSize}`;
 
+  wordToSearch?: string;
+
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -66,13 +68,9 @@ export class ClientsTableComponent {
     );
   }
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+  search() {
+    console.log(this.wordToSearch);
+    console.log(this.queryParameter);
   }
 
   openAddClientBottomSheet() {
