@@ -12,8 +12,8 @@ interface ApiResponse<T> {
   providedIn: 'root',
 })
 export class HttpService {
-  //baseUrl: string = 'https://localhost:44336';
-  baseUrl: string = 'https://localmarketering.azurewebsites.net/';
+  baseUrl: string = 'https://localhost:7114';
+  //baseUrl: string = 'https://localmarketering.azurewebsites.net/';
 
   constructor(private localStorage: LocalStorageService) {}
 

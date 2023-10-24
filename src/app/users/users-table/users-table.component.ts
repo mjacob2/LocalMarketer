@@ -46,18 +46,12 @@ export class UsersTableComponent {
   pageIndex?: number = 0;
   pageSize?: number = 20;
 
-  queryParameter: string = '';
-  queryParameterPageSize: string = `&PageSize=${this.pageSize}`;
-
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
   async ngOnInit() {
-    this.queryParameter = '?';
-    await this.reloadData(
-      `${this.queryParameter}${this.queryParameterPageSize}`
-    );
+    await this.loadData();
   }
 
   ngAfterViewInit() {
@@ -82,10 +76,7 @@ export class UsersTableComponent {
     );
 
     bottomSheetRef.afterDismissed().subscribe(async () => {
-      this.queryParameter = '?';
-      await this.reloadData(
-        `${this.queryParameter}${this.queryParameterPageSize}`
-      );
+      await this.loadData();
     });
   }
 
@@ -97,17 +88,13 @@ export class UsersTableComponent {
     this.pageIndex = e.pageIndex;
     this.pageSize = e.pageSize;
 
-    const queryParameterPageIndex: string = `&PageIndex=${this.pageIndex}`;
-    this.queryParameterPageSize = `&PageSize=${this.pageSize}`;
-    await this.reloadData(
-      `${this.queryParameter}${queryParameterPageIndex}${this.queryParameterPageSize}`
-    );
+    await this.loadData();
   }
 
-  private async reloadData(queryParameters: string) {
+  private async loadData() {
     this.users = undefined;
     this.users = await this.usersService.getAllUsers(
-      `${queryParameters}${this.queryParameterPageSize}`
+      `?PageIndex=${this.pageIndex}&PageSize=${this.pageSize}`
     );
     this.count = this.http.count;
     this.dataSource.data = this.users;

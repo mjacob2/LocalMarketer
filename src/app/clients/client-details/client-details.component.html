@@ -8,65 +8,82 @@
 
     <mat-card-content>
 
-        <form #clientDetailsForm="ngForm" (ngSubmit)="saveChanges()">
+        <form style="width: 800px;" #clientDetailsForm="ngForm" (ngSubmit)="saveChanges()">
 
-            <mat-form-field appearance="outline">
-                <mat-label>Nazwa</mat-label>
-                <input [(ngModel)]="client.name" name="name" matInput type="text" required>
-            </mat-form-field>
+                <div style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+                    <mat-form-field style="flex: 2;" appearance="outline">
+                        <mat-label>Nazwa</mat-label>
+                        <input [(ngModel)]="client.name" name="name" matInput type="text" required>
+                    </mat-form-field>
+            
+                    <mat-form-field  appearance="outline">
+                        <mat-label>Nr grupy firmowej Google</mat-label>
+                        <input [(ngModel)]="client.googleGroupId" name="googleGroupId" matInput type="text">
+                    </mat-form-field>
+                </div>
 
-            <mat-form-field appearance="outline">
-                <mat-label>Nr grupy firmowej Google</mat-label>
-                <input [(ngModel)]="client.googleGroupId" name="googleGroupId" matInput type="text">
-            </mat-form-field>
+                <div style="display: flex; justify-content: space-between;">
 
-            <mat-form-field appearance="outline">
-                <mat-label>Imię</mat-label>
-                <input [(ngModel)]="client.firstName" name="firstName" matInput type="text" required>
-            </mat-form-field>
+                    <mat-form-field style="flex: 1;" appearance="outline">
+                        <mat-label>Imię</mat-label>
+                        <input [(ngModel)]="client.firstName" name="firstName" matInput type="text" required>
+                    </mat-form-field>
+        
+                    <mat-form-field style="flex: 1.5;" appearance="outline">
+                        <mat-label>Nazwisko</mat-label>
+                        <input [(ngModel)]="client.lastName" name="lastName" matInput type="text" required>
+                    </mat-form-field>
+                </div>
 
-            <mat-form-field appearance="outline">
-                <mat-label>Nazwisko</mat-label>
-                <input [(ngModel)]="client.lastName" name="lastName" matInput type="text" required>
-            </mat-form-field>
+                <div style="display: flex; justify-content: space-between;">
+                
+                    <mat-form-field style="flex: 1;" appearance="outline">
+                        <mat-label>Telefon</mat-label>
+                        <span matPrefix>&nbsp; +48 &nbsp;</span>
+                        <input [(ngModel)]="client.phone" name="phone" matInput required>
+                    </mat-form-field>
 
-            <mat-form-field appearance="outline">
-                <mat-label>Telefon</mat-label>
-                <span matPrefix>&nbsp; +48 &nbsp;</span>
-                <input [(ngModel)]="client.phone" name="phone" matInput required>
-            </mat-form-field>
+                    <mat-form-field style="flex: 2;" appearance="outline">
+                        <mat-label>E-mail</mat-label>
+                        <input [(ngModel)]="client.email" name="email" matInput required>
+                    </mat-form-field>
+                </div>
 
-            <mat-form-field appearance="outline">
-                <mat-label>E-mail</mat-label>
-                <input [(ngModel)]="client.email" name="email" matInput required>
-            </mat-form-field>
+                <div style="display: flex; justify-content: space-between;">
+                
+                    <mat-spinner style="height: 36px;" *ngIf="allUsers.length <= 0"></mat-spinner>
+                    <mat-form-field style="flex: 1;" *ngIf="allUsers.length > 0" appearance="outline"
+                        class="example-full-width">
+                        <mat-label>Sprzedawca</mat-label>
+                        <mat-select [(ngModel)]="sellerId" name="sellerId">
+                            <mat-option *ngFor="let user of allSellers" [value]="user.id">
+                                {{user.lastName}} {{user.firstName}} - {{user.role}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+        
+                    <mat-spinner style="height: 36px;" *ngIf="allUsers.length <= 0"></mat-spinner>
+                    <mat-form-field style="flex: 1;" *ngIf="allUsers.length > 0" appearance="outline"
+                        class="example-full-width">
+                        <mat-label>Local Marketer</mat-label>
+                        <mat-select [(ngModel)]="userId" name="userId">
+                            <mat-option *ngFor="let user of allLocalMarketers" [value]="user.id">
+                                {{user.lastName}} {{user.firstName}} - {{user.role}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between;">
+                    <mat-form-field style="flex: 1;"  appearance="outline">
+                        <mat-label>Opis</mat-label>
+                        <textarea style="height: 100px;" [(ngModel)]="client.description" name="description" matInput></textarea>
+                    </mat-form-field>
+                </div>
 
-            <mat-form-field appearance="outline">
-                <mat-label>Opis</mat-label>
-                <textarea [(ngModel)]="client.description" name="description" matInput></textarea>
-            </mat-form-field>
 
-            <mat-spinner style="height: 36px;" *ngIf="allUsers.length <= 0"></mat-spinner>
-            <mat-form-field style="width: 400px;" *ngIf="allUsers.length > 0" appearance="outline"
-                class="example-full-width">
-                <mat-label>Sprzedawca</mat-label>
-                <mat-select [(ngModel)]="sellerId" name="sellerId">
-                    <mat-option *ngFor="let user of allSellers" [value]="user.userId">
-                        {{user.lastName}} {{user.firstName}} - {{user.role}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
 
-            <mat-spinner style="height: 36px;" *ngIf="allUsers.length <= 0"></mat-spinner>
-            <mat-form-field style="width: 400px;" *ngIf="allUsers.length > 0" appearance="outline"
-                class="example-full-width">
-                <mat-label>Local Marketer</mat-label>
-                <mat-select [(ngModel)]="userId" name="userId">
-                    <mat-option *ngFor="let user of allLocalMarketers" [value]="user.userId">
-                        {{user.lastName}} {{user.firstName}} - {{user.role}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
+
 
             <p>ID: {{clientId}}</p>
             <p>Utworzono: {{client.creationDate | date: 'dd-MM-yyyy'}}</p>

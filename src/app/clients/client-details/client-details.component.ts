@@ -51,19 +51,23 @@ export class ClientDetailsComponent {
     this.client = await this.service.getClientById(this.clientId);
 
     const usersRelatedToClient = this.client.users;
+
     const sellerRelatedToClient = usersRelatedToClient?.find(
       (user) => user.role === 'Seller'
     );
-    this.sellerId = sellerRelatedToClient?.userId;
+
+    this.sellerId = sellerRelatedToClient?.id;
+
     const userRelatedToClient = usersRelatedToClient?.find(
       (user) => user.role !== 'Seller'
     );
-    this.userId = userRelatedToClient?.userId;
+    this.userId = userRelatedToClient?.id;
 
     this.allUsers = await this.httpUsers.getAllUsers(
       `${this.queryParameter}${this.queryParameterPageIndex}${this.queryParameterPageSize}`
     );
     this.allSellers = this.allUsers.filter((user) => user.role === 'Seller');
+    
     this.allLocalMarketers = this.allUsers.filter(
       (user) => user.role === 'LocalMarketer'
     );

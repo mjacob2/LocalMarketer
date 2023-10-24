@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { ClientsService } from 'src/app/services/clients.service';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -9,7 +9,6 @@ import {
   MatBottomSheetRef,
 } from '@angular/material/bottom-sheet';
 import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { XClient } from 'src/app/models/XClient.model';
 import { XUser } from 'src/app/models/XUser.model';
 import { LocalStorageService } from 'src/app/services/local-storage.service';
@@ -33,15 +32,13 @@ export class ClientsTableComponent {
 
   dataSource = new MatTableDataSource<XClient>();
   clients?: XClient[];
-  clientsType?: string;
   currentlyLoggedUser: XUser | null | undefined;
 
   count?: number;
   totalPages?: number;
   pageIndex?: number = 0;
   pageSize?: number = 20;
-  queryParameter: string = '';
-  queryParameterPageSize: string = `&PageSize=${this.pageSize}`;
+  showOnlyUnallocaded?: boolean = false;
 
   wordToSearch?: string;
 
@@ -58,19 +55,13 @@ export class ClientsTableComponent {
   ) {}
 
   async ngOnInit() {
-    this.clientsType = 'all';
-
     this.currentlyLoggedUser = await this.localStorage.getItem<XUser>('user');
-
-    this.queryParameter = '?';
-    await this.reloadData(
-      `${this.queryParameter}${this.queryParameterPageSize}`
-    );
+    await this.loadData();
   }
 
   search() {
-    console.log(this.wordToSearch);
-    console.log(this.queryParameter);
+    //console.log(this.wordToSearch);
+    //console.log(this.queryParameter);
   }
 
   openAddClientBottomSheet() {
@@ -82,10 +73,7 @@ export class ClientsTableComponent {
     );
 
     bottomSheetRef.afterDismissed().subscribe(async () => {
-      this.queryParameter = '?';
-      await this.reloadData(
-        `${this.queryParameter}${this.queryParameterPageSize}`
-      );
+      await this.loadData();
     });
   }
 
@@ -94,32 +82,34 @@ export class ClientsTableComponent {
   }
 
   async getAllClients() {
-    this.queryParameter = '?';
-    await this.reloadData(this.queryParameter);
+    this.showOnlyUnallocaded = false;
+    await this.loadData();
   }
 
   async getClientsWithoutLocalMarketer() {
-    this.queryParameter = '?ShowOnlyUnallocaded=true';
-    await this.reloadData(this.queryParameter);
+    this.showOnlyUnallocaded = true;
+    await this.loadData();
   }
 
   async handlePageEvent(e: PageEvent) {
     this.pageIndex = e.pageIndex;
     this.pageSize = e.pageSize;
-
-    const queryParameterPageIndex: string = `&PageIndex=${this.pageIndex}`;
-    this.queryParameterPageSize = `&PageSize=${this.pageSize}`;
-    await this.reloadData(
-      `${this.queryParameter}${queryParameterPageIndex}${this.queryParameterPageSize}`
-    );
+    await this.loadData();
   }
 
-  private async reloadData(queryParameters: string) {
+  private async loadData() {
     this.clients = undefined;
     this.clients = await this.clientsService.getAllClients(
-      `${queryParameters}${this.queryParameterPageSize}`
+      `?PageIndex=${this.pageIndex}&PageSize=${this.pageSize}&ShowOnlyUnallocaded=${this.showOnlyUnallocaded}`
     );
+    
     this.count = this.http.count;
     this.dataSource.data = this.clients;
   }
+
+   doSomething(a: number): number
+   {
+    return a * a;
+   }
+
 }

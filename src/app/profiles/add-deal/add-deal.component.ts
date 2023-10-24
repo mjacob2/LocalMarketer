@@ -46,10 +46,13 @@ export class AddDealComponent {
 
   async ngOnInit() {
     this.packages = await this.httpPackages.getAllPackages();
+    if(this.packages.length <= 0){
+      this.errorMessage = 'Brak pakietów w bazie!'
+    }
 
     this.currentlyLoggedUser = await this.localStorage.getItem<XUser>('user');
     if (this.currentlyLoggedUser?.role == 'Seller') {
-      this.sellerId = this.currentlyLoggedUser?.userId;
+      this.sellerId = this.currentlyLoggedUser?.id;
     }
   }
 

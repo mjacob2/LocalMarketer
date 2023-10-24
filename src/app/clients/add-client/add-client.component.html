@@ -5,7 +5,7 @@
     <mat-form-field *ngIf="sellers.length > 0" appearance="outline" class="example-full-width">
         <mat-label>Sprzedawca</mat-label>
         <mat-select required [(ngModel)]="sellerId" name="sellerId">
-            <mat-option *ngFor="let user of sellers" [value]="user.userId">
+            <mat-option *ngFor="let user of sellers" [value]="user.id">
                 {{user.lastName}} {{user.firstName}} - {{user.role}}
             </mat-option>
         </mat-select>
@@ -52,7 +52,7 @@
 
     <div class="example-button-row">
         <button mat-raised-button color="primary" type="submit">Dodaj</button>
-        <button type="button" (click)="close()" style="margin-left: 16px;" mat-button>Anuluj</button>
+        <button type="button" (click)="closeBottomSheet()" style="margin-left: 16px;" mat-button>Anuluj</button>
     </div>
 
 </form>

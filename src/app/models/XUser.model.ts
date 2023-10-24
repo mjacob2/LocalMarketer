@@ -1,7 +1,7 @@
 import { XClient } from './XClient.model';
 
 export class XUser {
-  public userId?: number;
+  public id?: number;
   public creationDate?: Date;
   public firstName?: string;
   public lastName?: string;

@@ -7,10 +7,10 @@
         <p>
             <mat-button-toggle-group
                 *ngIf="currentlyLoggedUser?.role == 'Administrator' || currentlyLoggedUser?.role == 'Manager'"
-                [(ngModel)]="clientsType" aria-label="ToDo Style">
-                <mat-button-toggle (click)="getAllClients()" value="all">Wszyscy</mat-button-toggle>
+                aria-label="ToDo Style">
+                <mat-button-toggle checked="true" (click)="getAllClients()" >Wszyscy</mat-button-toggle>
                 <mat-button-toggle (click)="getClientsWithoutLocalMarketer()"
-                    value="unallocated">Nieprzydzielone</mat-button-toggle>
+                    >Nieprzydzielone</mat-button-toggle>
             </mat-button-toggle-group>
         </p>
 

@@ -3,6 +3,7 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { ToDosShowOnly } from 'src/app/constants/ToDosFilter';
 import { XToDo } from 'src/app/models/XToDo.model';
 import { XUser } from 'src/app/models/XUser.model';
 import { HttpService } from 'src/app/services/http.service';
@@ -15,6 +16,7 @@ import { TodosService } from 'src/app/services/todos.service';
   styleUrls: ['./todos-table.component.scss'],
 })
 export class TodosTableComponent {
+
   constructor(
     private router: Router,
     private todosService: TodosService,
@@ -27,23 +29,17 @@ export class TodosTableComponent {
   todos?: XToDo[];
   currentlyLoggedUser: XUser | null | undefined;
 
-  toDosType?: string;
-
   count?: number;
   totalPages?: number;
   pageIndex?: number = 0;
   pageSize?: number = 20;
-
-  queryParameter: string = '';
-  queryParameterPageSize: string = `&PageSize=${this.pageSize}`;
+  showOnly?: string | null;
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
   @ViewChild(MatSort) sort: MatSort = new MatSort();
 
   async ngOnInit() {
-    this.toDosType = 'unfinished';
-
     this.currentlyLoggedUser = await this.localStorage.getItem<XUser>('user');
 
     if (this.currentlyLoggedUser?.role == 'Administrator') {
@@ -58,11 +54,8 @@ export class TodosTableComponent {
     } else {
       this.displayedColumns = ['title', 'profileName', 'dueDate', 'isFinished'];
     }
-
-    this.queryParameter = '?ShowOnlyUnfinished=true';
-    await this.reloadData(
-      `${this.queryParameter}${this.queryParameterPageSize}`
-    );
+    this.showOnly = ToDosShowOnly.Unfinished;
+    await this.loadData();
     //this.sort.sort({ id: 'dueDate', start: 'asc' } as MatSortable);
   }
 
@@ -83,35 +76,30 @@ export class TodosTableComponent {
   }
 
   async getAllToDos() {
-    this.queryParameter = '?';
-    await this.reloadData(this.queryParameter);
+    this.showOnly = null;
+    await this.loadData();
   }
 
   async getUnfinishedToDos() {
-    this.queryParameter = '?ShowOnlyUnfinished=true';
-    await this.reloadData(this.queryParameter);
+    this.showOnly = ToDosShowOnly.Unfinished;
+    await this.loadData();
   }
 
   async getFinishedToDos() {
-    this.queryParameter = '?ShowOnlyFinished=true';
-    await this.reloadData(this.queryParameter);
+    this.showOnly = ToDosShowOnly.Finished;
+    await this.loadData();
   }
 
   async handlePageEvent(e: PageEvent) {
     this.pageIndex = e.pageIndex;
     this.pageSize = e.pageSize;
-
-    const queryParameterPageIndex: string = `&PageIndex=${this.pageIndex}`;
-    this.queryParameterPageSize = `&PageSize=${this.pageSize}`;
-    await this.reloadData(
-      `${this.queryParameter}${queryParameterPageIndex}${this.queryParameterPageSize}`
-    );
+    await this.loadData();
   }
 
-  private async reloadData(queryParameters: string) {
+  private async loadData() {
     this.todos = undefined;
     this.todos = await this.todosService.getAllTodos(
-      `${queryParameters}${this.queryParameterPageSize}`
+      `?PageIndex=${this.pageIndex}&PageSize=${this.pageSize}&ShowOnly=${this.showOnly}`
     );
     this.count = this.http.count;
     this.dataSource.data = this.todos;

@@ -24,29 +24,19 @@ export class AddClientComponent {
   isLoading = false;
   sellers: XUser[] = [];
   sellerId?: number;
-  currentlyLoggedUser: XUser | null | undefined;
 
-  pageIndex?: number = 0;
-  queryParameter: string = '';
-  pageSize?: number = 100;
+  async ngOnInit(): Promise<void> {
+    
+    this.sellers = await this.loadSellers();
 
-  queryParameterPageIndex: string = `&PageIndex=${this.pageIndex}`;
-  queryParameterPageSize = `&PageSize=${this.pageSize}`;
-
-  async ngOnInit() {
-    this.queryParameter = '?ShowOnlySellers=true';
-
-    this.sellers = await this.httpUsers.getAllUsers(
-      `${this.queryParameter}${this.queryParameterPageIndex}${this.queryParameterPageSize}`
-    );
-
-    this.currentlyLoggedUser = await this.localStorage.getItem<XUser>('user');
-    if (this.currentlyLoggedUser?.role == 'Seller') {
-      this.sellerId = this.currentlyLoggedUser?.userId;
+    if (this.sellers.length <= 0) {
+      this.errorMessage = "Brak sprzedawców!";
     }
+
+    await this.assignSellerIdIfLoggedUserRoleIsSeller();
   }
 
-  onSubmit(clientToAdd: XClient) {
+  onSubmit(clientToAdd: XClient): void {
     this.isLoading = true;
 
     this.http
@@ -62,7 +52,22 @@ export class AddClientComponent {
       });
   }
 
-  close() {
+closeBottomSheet(): void {
     this._bottomSheetRef.dismiss();
+  }
+
+  private async assignSellerIdIfLoggedUserRoleIsSeller() {
+    const currentlyLoggedUser = await this.localStorage.getItem<XUser>('user');
+    if (currentlyLoggedUser?.role == 'Seller') {
+      this.sellerId = currentlyLoggedUser?.id;
+    }
+  }
+
+  private async loadSellers(): Promise<XUser[]>{
+    let pageIndex: number = 0;
+    let pageSize: number = 100;
+    return await this.httpUsers.getAllUsers(
+      `?ShowOnlySellers=true&PageIndex=${pageIndex}&PageSize=${pageSize}`
+    );
   }
 }

@@ -4,9 +4,9 @@
     <div style="justify-content: space-between;" class="row-flex">
 
         <p>
-            <mat-button-toggle-group [(ngModel)]="toDosType" aria-label="ToDo Style">
-                <mat-button-toggle (click)="getUnfinishedToDos()" value="unfinished">Do zrobienia</mat-button-toggle>
-                <mat-button-toggle (click)="getFinishedToDos()" value="finished">Zrobione</mat-button-toggle>
+            <mat-button-toggle-group aria-label="ToDo Style">
+                <mat-button-toggle checked="true" (click)="getUnfinishedToDos()">Do zrobienia</mat-button-toggle>
+                <mat-button-toggle (click)="getFinishedToDos()">Zrobione</mat-button-toggle>
                 <mat-button-toggle (click)="getAllToDos()" value="all">Wszystkie</mat-button-toggle>
             </mat-button-toggle-group>
         </p>
